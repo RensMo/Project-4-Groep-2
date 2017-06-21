@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Collections.Generic;
 
 namespace RobotParty
 {
@@ -16,27 +17,27 @@ namespace RobotParty
             Content.RootDirectory = "content";
             level = 0;
         }
-        // inputManager inputmanager;
-        // drawManager drawmanager;
-        // UpdateVisitor updatevisitor;
-        // DrawVisitor drawvisitor;
-        // List<ScreenManager> screenmanagers;
+        IinputManager inputmanager;
+        IDrawManager drawmanager;
+        IupdateVisitor updatevisitor;
+        DrawVisitor drawvisitor;
+        List<ScreenManager> screenmanagers;
 
         protected override void Initialize()
         {
             base.Initialize();
-            this.IsMouseVisible = false;
-            // screenmanagers = new List<ScreenManager>;
-            // screenmanagers.add(new ScreenManager);
-            // inputmanager = new PCInputAdapter;
-            // updatevisitor = new UpdateVisitor(inputmanager);
+            this.IsMouseVisible = true;
+            screenmanagers = new List<ScreenManager>();
+            screenmanagers.Add(new ScreenManager());
+            inputmanager = new PCInputAdapter();
+            updatevisitor = new UpdateVisitor(inputmanager);
         }
 
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            // drawmanager = new MonoGameAdapter(spriteBatch, Content);
-            // drawvisitor = new DrawVisitor(drawmanager);
+            drawmanager = new MonoGameAdapter(spriteBatch, Content);
+            drawvisitor = new DrawVisitor(drawmanager);
         }
 
         protected override void Update(GameTime gameTime)
@@ -44,8 +45,13 @@ namespace RobotParty
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            // screenmanagers[level].Update(updatevisitor, (float)gameTime.ElapsedGameTime.TotalMilliseconds);
+            screenmanagers[level].Update(updatevisitor, (float)gameTime.ElapsedGameTime.TotalMilliseconds);
             base.Update(gameTime);
+        }
+
+        protected override void Draw(GameTime gameTime) {
+            base.Draw(gameTime);
+
         }
     }
 }

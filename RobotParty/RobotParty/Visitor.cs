@@ -10,18 +10,22 @@ namespace RobotParty
 
     interface IinputManager
     {
-        void OnInput();
+        List<string> onInput();
     }
 
-    interface IupdateVisitor
+    public interface IupdateVisitor
     {
         void updateCharacter();
         void updateProjectile();
-        void updateScreenmanager();
+        void updateScreenmanager(ScreenManager screenmanager, float dt);
     }
     class UpdateVisitor : IupdateVisitor
     {
-        int Inputmanager;
+        IinputManager inputmanager;
+
+        public UpdateVisitor(IinputManager inputmanager) {
+            this.inputmanager = inputmanager;
+        }
 
         public void updateCharacter()
         {
@@ -33,29 +37,28 @@ namespace RobotParty
             throw new NotImplementedException();
         }
 
-        public void updateScreenmanager()
+        public void updateScreenmanager(ScreenManager screenmanager, float dt)
         {
-            throw new NotImplementedException();
+            foreach(Ielement el in screenmanager.elements) {
+                el.Update(this);
+            }
         }
     }
 
-    interface Idrawmanager
-    {
-        void drawRectangle();
-        void drawText();
-        void drawImage();
-    }
-
-    interface IdrawVisitor
+    public interface IdrawVisitor
     {
         void drawCharacter(Character Character);
         void drawProjectile(Projectile Projectile);
         void drawScreenManager(ScreenManager ScreenManager);
     }
 
-    class drawvisitor : IdrawVisitor
+    class DrawVisitor : IdrawVisitor
     {
-        int Drawmanager;
+        IDrawManager drawmanager;
+
+        public DrawVisitor(IDrawManager drawmanager) {
+            this.drawmanager = drawmanager;
+        }
 
         public void drawCharacter(Character Character)
         {

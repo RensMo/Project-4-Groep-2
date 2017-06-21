@@ -8,15 +8,15 @@ namespace RobotParty
 {
     public interface Ielement
     {
-        void Draw();
-        void Update();
+        void Draw(IdrawVisitor drawvisitor);
+        void Update(IupdateVisitor updatevisitor);
     }
 
     public class ScreenManager
     {
-        List<Ielement> elements = new List<Ielement>();
+        public List<Ielement> elements = new List<Ielement>();
         //
-        public void Update() { throw new NotImplementedException(); }
+        public void Update(IupdateVisitor visitor, float dt) { visitor.updateScreenmanager(this, dt); }
 
         public void Draw() { throw new NotImplementedException(); }
 
@@ -28,7 +28,7 @@ namespace RobotParty
         public void Create() { throw new NotImplementedException(); }
     }
 
-    public abstract class Character
+    public abstract class Character : Ielement
     {
         Tuple<int, int> position;
         int health;
@@ -43,12 +43,12 @@ namespace RobotParty
 
         public abstract void Shoot();
 
-        public void Draw()
+        public void Draw(IdrawVisitor drawvisitor)
         {
-            // drawvisitor.drawCharacter(this);
+            drawvisitor.drawCharacter(this);
         }
 
-        public abstract void Update();
+        public abstract void Update(IupdateVisitor updatevisitor);
     }
 
     public class MainCharacter : Character
@@ -67,7 +67,7 @@ namespace RobotParty
             throw new NotImplementedException();
         }
 
-        public override void Update()
+        public override void Update(IupdateVisitor updatevisitor)
         {
             throw new NotImplementedException();
         }
@@ -76,5 +76,23 @@ namespace RobotParty
     public class ProjectileFactory
     {
         public void Create() { throw new NotImplementedException(); }
+    }
+
+    public abstract class Projectile : Ielement {
+        Tuple<int, int> position;
+        Tuple<int, int> direction;
+
+        public Projectile(Tuple<int, int> position, Tuple<int, int> direction) {
+            this.position = position;
+            this.direction = direction;
+        }
+
+        public void Draw(IdrawVisitor drawvisitor) {
+            drawvisitor.drawProjectile(this);
+        }
+
+        public void Update(IupdateVisitor updatevisitor) {
+            throw new NotImplementedException();
+        }
     }
 }
