@@ -16,12 +16,19 @@ namespace RobotParty
     public class ScreenManager
     {
         public List<Ielement> elements = new List<Ielement>();
-        //
+        
         public void Update(Ielementvisitor visitor, float dt) { visitor.onScreenmanager(this, dt); }
 
-        public void Draw() { throw new NotImplementedException(); }
+        public void Draw(Ielementvisitor visitor, float dt) { visitor.onScreenmanager(this, dt); }
 
-        public void Create() { throw new NotImplementedException(); }
+        public void Create(int option) {
+            switch (option) {
+                case 0:
+                    elements.Add(new MainCharacter(new Tuple<int, int>(50, 50), 200));
+                    break;
+                    // todo add more characters when finished making those
+            }
+        }
     }
 
     // implement create
@@ -51,8 +58,10 @@ namespace RobotParty
             drawvisitor.onCharacter(this);
         }
 
-        public abstract void Update(Ielementvisitor updatevisitor);
-    }
+        public void Update(Ielementvisitor updatevisitor) {
+                updatevisitor.onCharacter(this);
+            }
+        }
 
     // implement move/shoot/update
     public class MainCharacter : Character
@@ -68,12 +77,7 @@ namespace RobotParty
 
         public override void Shoot()
         {
-            throw new NotImplementedException();
-        }
-
-        public override void Update(Ielementvisitor updatevisitor)
-        {
-            throw new NotImplementedException();
+            
         }
     }
 
@@ -97,7 +101,7 @@ namespace RobotParty
         }
 
         public void Update(Ielementvisitor updatevisitor) {
-            throw new NotImplementedException();
+            updatevisitor.onProjectile(this);
         }
     }
 }

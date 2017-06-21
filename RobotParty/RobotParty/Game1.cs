@@ -20,7 +20,7 @@ namespace RobotParty
         IinputManager inputmanager;
         IDrawManager drawmanager;
         Ielementvisitor updatevisitor;
-        DrawVisitor drawvisitor;
+        Ielementvisitor drawvisitor;
         List<ScreenManager> screenmanagers;
 
         protected override void Initialize()
@@ -29,6 +29,7 @@ namespace RobotParty
             this.IsMouseVisible = true;
             screenmanagers = new List<ScreenManager>();
             screenmanagers.Add(new ScreenManager());
+            screenmanagers[0].Create(0);
             inputmanager = new PCInputAdapter();
             updatevisitor = new UpdateVisitor(inputmanager);
         }
@@ -50,6 +51,11 @@ namespace RobotParty
         }
 
         protected override void Draw(GameTime gameTime) {
+            GraphicsDevice.Clear(Color.CornflowerBlue);
+
+            spriteBatch.Begin();
+            screenmanagers[0].Draw(drawvisitor, 0f);
+            spriteBatch.End();
             base.Draw(gameTime);
 
         }

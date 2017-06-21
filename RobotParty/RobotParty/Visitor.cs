@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using static RobotParty.ScreenManager;
 
 namespace RobotParty
 {
@@ -20,6 +20,12 @@ namespace RobotParty
         void onScreenmanager(ScreenManager screenmanager, float dt);
     }
 
+    public interface elementvisitor {
+        void onCharacter(Character character);
+        void onProjectile(Projectile projectile);
+        void onScreenmanager(ScreenManager screenmanager);
+    }
+
     // implement onchar, onproj
     class UpdateVisitor : Ielementvisitor
     {
@@ -31,7 +37,7 @@ namespace RobotParty
 
         public void onCharacter(Character character)
         {
-            throw new NotImplementedException();
+            Console.WriteLine("onCharacter.update");
         }
 
         public void onProjectile(Projectile projectile)
@@ -58,8 +64,8 @@ namespace RobotParty
 
         public void onCharacter(Character Character)
         {
-            
-
+            var point = new Microsoft.Xna.Framework.Point(50, 50);
+            drawmanager.drawRectangle(point, 10, 10, Colour.White);
         }
 
         public void onProjectile(Projectile Projectile)
@@ -70,7 +76,9 @@ namespace RobotParty
         public void onScreenmanager(ScreenManager ScreenManager, float dt)
         {
 
-            throw new NotImplementedException();
+            foreach (Ielement el in ScreenManager.elements) {
+                el.Draw(this);
+            }
         }
     }
 }
