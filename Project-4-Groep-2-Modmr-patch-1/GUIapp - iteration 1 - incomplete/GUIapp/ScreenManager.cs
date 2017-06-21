@@ -4,14 +4,14 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
-namespace GUIapp {
-    public interface Element {
+namespace Robotparty {
+    public interface Ielement {
         void Draw();
         void Update();
     }
 
     public class ScreenManager {
-        List<Element> elements = new List<Element>();
+        List<Ielement> elements = new List<Ielement>();
         //
         public void Update() { throw new NotImplementedException(); }
 
@@ -25,16 +25,40 @@ namespace GUIapp {
     }
 
     public abstract class Character {
+        Tuple<int, int> position;
+        int health;
+        
+        public Character(Tuple<int, int> position, int health) {
+            this.position = position;
+            this.health = health;
+        }
 
+        public abstract void Move();
 
-        public void Move() { throw new NotImplementedException(); }
+        public abstract void Shoot();
 
-        public void Shoot() { throw new NotImplementedException(); }
+        public void Draw() {
+            // drawvisitor.drawCharacter(this);
+        }
 
-        public void Draw() { throw new NotImplementedException(); }
+        public abstract void Update();
+    }
 
-        public void Update() { throw new NotImplementedException(); }
+    public class MainCharacter : Character {
+        public MainCharacter(Tuple<int, int> position, int health) : base(position, health) {
+        }
 
+        public override void Move() {
+            throw new NotImplementedException();
+        }
+
+        public override void Shoot() {
+            throw new NotImplementedException();
+        }
+
+        public override void Update() {
+            throw new NotImplementedException();
+        }
     }
 
     public class ProjectileFactory {
