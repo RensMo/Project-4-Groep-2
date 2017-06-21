@@ -19,7 +19,7 @@ namespace RobotParty
         }
         IinputManager inputmanager;
         IDrawManager drawmanager;
-        IupdateVisitor updatevisitor;
+        Ielementvisitor updatevisitor;
         DrawVisitor drawvisitor;
         List<ScreenManager> screenmanagers;
 

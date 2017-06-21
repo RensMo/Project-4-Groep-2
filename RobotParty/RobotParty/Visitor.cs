@@ -13,13 +13,15 @@ namespace RobotParty
         List<string> onInput();
     }
 
-    public interface IupdateVisitor
+    public interface Ielementvisitor
     {
-        void updateCharacter();
-        void updateProjectile();
-        void updateScreenmanager(ScreenManager screenmanager, float dt);
+        void onCharacter(Character character);
+        void onProjectile(Projectile projectile);
+        void onScreenmanager(ScreenManager screenmanager, float dt);
     }
-    class UpdateVisitor : IupdateVisitor
+
+    // implement onchar, onproj
+    class UpdateVisitor : Ielementvisitor
     {
         IinputManager inputmanager;
 
@@ -27,17 +29,17 @@ namespace RobotParty
             this.inputmanager = inputmanager;
         }
 
-        public void updateCharacter()
+        public void onCharacter(Character character)
         {
             throw new NotImplementedException();
         }
 
-        public void updateProjectile()
+        public void onProjectile(Projectile projectile)
         {
             throw new NotImplementedException();
         }
 
-        public void updateScreenmanager(ScreenManager screenmanager, float dt)
+        public void onScreenmanager(ScreenManager screenmanager, float dt)
         {
             foreach(Ielement el in screenmanager.elements) {
                 el.Update(this);
@@ -45,14 +47,8 @@ namespace RobotParty
         }
     }
 
-    public interface IdrawVisitor
-    {
-        void drawCharacter(Character Character);
-        void drawProjectile(Projectile Projectile);
-        void drawScreenManager(ScreenManager ScreenManager);
-    }
-
-    class DrawVisitor : IdrawVisitor
+    // implement onchar, onproj, onscreen
+    class DrawVisitor : Ielementvisitor
     {
         IDrawManager drawmanager;
 
@@ -60,18 +56,18 @@ namespace RobotParty
             this.drawmanager = drawmanager;
         }
 
-        public void drawCharacter(Character Character)
+        public void onCharacter(Character Character)
         {
-            throw new NotImplementedException();
+            
 
         }
 
-        public void drawProjectile(Projectile Projectile)
+        public void onProjectile(Projectile Projectile)
         {
             throw new NotImplementedException();
         }
 
-        public void drawScreenManager(ScreenManager ScreenManager)
+        public void onScreenmanager(ScreenManager ScreenManager, float dt)
         {
 
             throw new NotImplementedException();
