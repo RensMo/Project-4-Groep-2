@@ -15,13 +15,15 @@ namespace RobotParty
 
     public interface Ielementvisitor
     {
-        void onCharacter(Character character);
+        void onMainCharacter(Character character);
+        void onEnemyCharacter(EnemyCharacter character);
         void onProjectile(Projectile projectile);
         void onScreenmanager(ScreenManager screenmanager, float dt);
     }
 
     public interface elementvisitor {
-        void onCharacter(Character character);
+        void onMainCharacter(Character character);
+        void onEnemyCharacter(EnemyCharacter character);
         void onProjectile(Projectile projectile);
         void onScreenmanager(ScreenManager screenmanager);
     }
@@ -35,7 +37,7 @@ namespace RobotParty
             this.inputmanager = inputmanager;
         }
 
-        public void onCharacter(Character character)
+        public void onMainCharacter(Character character)
         {
             foreach(var el in inputmanager.onInput()) {
                 if(el == "A") { character.Move("left"); }
@@ -43,6 +45,12 @@ namespace RobotParty
                 if(el == "W") { character.Move("up"); }
                 if(el == "S") { character.Move("down"); }
 
+            }
+        }
+        public void onEnemyCharacter(EnemyCharacter enemy) {
+            foreach(var direction in enemy.GetDirection()) {
+                Console.WriteLine(direction);
+                enemy.Move(direction);
             }
         }
 
@@ -68,10 +76,14 @@ namespace RobotParty
             this.drawmanager = drawmanager;
         }
 
-        public void onCharacter(Character Character)
+        public void onMainCharacter(Character Character)
         {
             var point = new Microsoft.Xna.Framework.Point(Character.position.Item1, Character.position.Item2);
             drawmanager.drawRectangle(point, 10, 10, Colour.White);
+        }
+        public void onEnemyCharacter(EnemyCharacter Character) {
+            var point = new Microsoft.Xna.Framework.Point(Character.position.Item1, Character.position.Item2);
+            drawmanager.drawRectangle(point, 10, 10, Colour.Black);
         }
 
         public void onProjectile(Projectile Projectile)
