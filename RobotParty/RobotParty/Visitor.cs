@@ -37,7 +37,13 @@ namespace RobotParty
 
         public void onCharacter(Character character)
         {
-            Console.WriteLine("onCharacter.update");
+            foreach(var el in inputmanager.onInput()) {
+                if(el == "A") { character.Move("left"); }
+                if(el == "D") { character.Move("right"); }
+                if(el == "W") { character.Move("up"); }
+                if(el == "S") { character.Move("down"); }
+
+            }
         }
 
         public void onProjectile(Projectile projectile)
@@ -64,7 +70,7 @@ namespace RobotParty
 
         public void onCharacter(Character Character)
         {
-            var point = new Microsoft.Xna.Framework.Point(50, 50);
+            var point = new Microsoft.Xna.Framework.Point(Character.position.Item1, Character.position.Item2);
             drawmanager.drawRectangle(point, 10, 10, Colour.White);
         }
 

@@ -40,7 +40,7 @@ namespace RobotParty
     // implement move, shoot, update
     public abstract class Character : Ielement
     {
-        Tuple<int, int> position;
+        public Tuple<int, int> position;
         int health;
 
         public Character(Tuple<int, int> position, int health)
@@ -48,8 +48,6 @@ namespace RobotParty
             this.position = position;
             this.health = health;
         }
-
-        public abstract void Move();
 
         public abstract void Shoot();
 
@@ -61,7 +59,10 @@ namespace RobotParty
         public void Update(Ielementvisitor updatevisitor) {
                 updatevisitor.onCharacter(this);
             }
-        }
+
+        public abstract void Move(string direction);
+
+    }
 
     // implement move/shoot/update
     public class MainCharacter : Character
@@ -70,14 +71,20 @@ namespace RobotParty
         {
         }
 
-        public override void Move()
-        {
-            throw new NotImplementedException();
-        }
-
         public override void Shoot()
         {
             
+        }
+
+        public override void Move(string direction) {
+
+            var posX = position.Item1;
+            var posY = position.Item2;
+
+            if (direction == "right") { position = new Tuple<int, int>(posX + 1, posY); }
+            if (direction == "up") { position = new Tuple<int, int>(posX, posY - 1); }
+            if (direction == "down") { position = new Tuple<int, int>(posX, posY + 1); }
+            if (direction == "left") { position = new Tuple<int, int>(posX - 1, posY); }
         }
     }
 
