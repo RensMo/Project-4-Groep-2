@@ -67,8 +67,46 @@ namespace RobotParty
             foreach (var direction in character.GetDirection()) {
                 character.Move(direction);
             }
+             
+                    switch (character.RandomShot())
+                    {
+                        
+                        case 0:
+                            
+                            newlist.Add(new EnemyBullet(character.position, new Tuple<int, int>(1, 0)));
+                            break;
+                        case 1:
+                              
+                            newlist.Add(new EnemyBullet(character.position, new Tuple<int, int>(1, 1)));
+                            break;
+                        case 2:
+                            
+                            newlist.Add(new EnemyBullet(character.position, new Tuple<int, int>(0, 1)));
+                            break;
+                        case 3:
+                            
+                            newlist.Add(new EnemyBullet(character.position, new Tuple<int, int>(-1, 0)));
+                            break;
+                        case 4:
+                            
+                            newlist.Add(new EnemyBullet(character.position, new Tuple<int, int>(-1, 1)));
+                            break;
+                        case 5:
+                            
+                            newlist.Add(new EnemyBullet(character.position, new Tuple<int, int>(0, -1)));
+                            break;
+                        case 6:
+                            
+                            newlist.Add(new EnemyBullet(character.position, new Tuple<int, int>(-1, -1)));
+                            break;
+                        case 7:
+                            
+                            newlist.Add(new EnemyBullet(character.position, new Tuple<int, int>(1, -1)));
+                            break;
+                    }
+               
 
-            foreach(var el in screenmanager.elements) {
+            foreach (var el in screenmanager.elements) {
                 if(collisioncalculator.Collision(character, el)) {
                     
                     if(el is FriendlyBullet) {
@@ -97,6 +135,12 @@ namespace RobotParty
 
                     }
                     // check if it's an enemy bullet
+                    if(el is EnemyBullet)
+                    {
+                        character.health -= 50;
+                        Console.WriteLine("Hit by bullet");
+                        removelist.Add(el);
+                    }
                 }
             }
 

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Threading.Tasks;
+using System.Timers;
 
 namespace RobotParty
 {
@@ -118,6 +120,15 @@ namespace RobotParty
             updatevisitor.onEnemyCharacter(this, screenmanager);
         }
 
+
+        public int RandomShot()
+        {
+            
+            Random rnd = new Random();
+            int RandomDirection = rnd.Next(0, 8);
+            
+            return RandomDirection;
+        }
         public List<string> GetDirection() {
             var direction = new List<string>();
 
@@ -178,6 +189,13 @@ namespace RobotParty
 
     public class FriendlyBullet : Projectile {
         public FriendlyBullet(Tuple<int, int> position, Tuple<int, int> direction) : base(position, direction) {
+        }
+    }
+
+    public class EnemyBullet : Projectile
+    {
+        public EnemyBullet(Tuple<int, int> position, Tuple<int, int> direction) : base(position, direction)
+        {
         }
     }
 }
