@@ -129,6 +129,37 @@ namespace RobotParty
             }
 
             foreach(var el in inputmanager.onInput()) { 
+            
+                if (el == "UpRight") {
+                    var directionX = 1;
+                    var directionY = -1;
+                    newlist.Add(new FriendlyBullet(new Tuple<int, int>(character.position.Item1 + 28, character.position.Item2 + 28), new Tuple<int, int>(directionX, directionY)));
+                    break;
+                }
+
+                if (el == "UpLeft")
+                {
+                    var directionX = -1;
+                    var directionY = -1;
+                    newlist.Add(new FriendlyBullet(new Tuple<int, int>(character.position.Item1 + 28, character.position.Item2 + 28), new Tuple<int, int>(directionX, directionY)));
+                    break;
+                }
+
+                if (el == "DownLeft")
+                {
+                    var directionX = -1;
+                    var directionY = 1;
+                    newlist.Add(new FriendlyBullet(new Tuple<int, int>(character.position.Item1 + 28, character.position.Item2 + 28), new Tuple<int, int>(directionX, directionY)));
+                    break;
+                }
+
+                if (el == "DownRight")
+                {
+                    var directionX = 1;
+                    var directionY = 1;
+                    newlist.Add(new FriendlyBullet(new Tuple<int, int>(character.position.Item1 + 28, character.position.Item2 + 28), new Tuple<int, int>(directionX, directionY)));
+                    break;
+                } 
                 if (el == "Up") {
                     var directionX = 0;
                     var directionY = -1;
