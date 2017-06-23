@@ -19,6 +19,7 @@ namespace RobotParty
             keyslist = new List<string>();
             var key = Keyboard.GetState();
             key.GetPressedKeys();
+            
             if (key.IsKeyDown(Keys.A))
             {
                 keyslist.Add("A");
@@ -35,6 +36,7 @@ namespace RobotParty
             {
                 keyslist.Add("D");
             }
+
             if (key.IsKeyDown(Keys.Right)) {
                 keyslist.Add("Right");
             }

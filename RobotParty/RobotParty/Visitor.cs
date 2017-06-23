@@ -38,46 +38,40 @@ namespace RobotParty
 
         public void onCharacter(Character character, ScreenManager screenmanager)
         {
+
             foreach(var el in inputmanager.onInput()) {
                 if(el == "A") { character.Move("left"); }
                 if(el == "D") { character.Move("right"); }
                 if(el == "W") { character.Move("up"); }
                 if(el == "S") { character.Move("down"); }
+                     
+            }
+
+            foreach(var el in inputmanager.onInput()) { 
                 if (el == "Up") {
-                    Console.WriteLine("up");
                     var directionX = 0;
                     var directionY = -1;
                     newlist.Add(new FriendlyBullet(character.position, new Tuple<int, int>(directionX, directionY)));
-                    directionX = 0;
-                    directionY = 0;
+                    break;
                 }
                 if (el == "Down") {
-                    Console.WriteLine("down");
-
                     var directionX = 0;
                     var directionY = 1;
                     newlist.Add(new FriendlyBullet(character.position, new Tuple<int, int>(directionX, directionY)));
-                    directionX = 0;
-                    directionY = 0;
+                    break;
                 }
                 if (el == "Right") {
-                    Console.WriteLine("right");
-
                     var directionX = 1;
                     var directionY = 0;
                     newlist.Add(new FriendlyBullet(character.position, new Tuple<int, int>(directionX, directionY)));
-                    directionX = 0;
-                    directionY = 0;
+                    break;
                 }
                 if (el == "Left") {
-                    Console.WriteLine("left");
-
                     var directionX = -1;
                     var directionY = 0;
                     newlist.Add(new FriendlyBullet(character.position, new Tuple<int, int>(directionX, directionY)));
-                    directionX = 0;
-                    directionY = 0;
-                }            
+                    break;
+                }
             }
         }
 
@@ -89,11 +83,16 @@ namespace RobotParty
         {
             foreach(Ielement el in screenmanager.elements) {
                 el.Update(this, dt);
-                Console.WriteLine(el.ToString());
             }
+            int i = 0;
             foreach(Ielement el in newlist) {
+
                 screenmanager.addElement(el);
+                Console.WriteLine(i.ToString());
+                i += 1;
             }
+            newlist = new List<Ielement>();
+            
         }
 
         

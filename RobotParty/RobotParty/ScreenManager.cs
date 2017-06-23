@@ -83,10 +83,10 @@ namespace RobotParty
             var posX = position.Item1;
             var posY = position.Item2;
 
-            if (direction == "right") { position = new Tuple<int, int>(posX + 1, posY); }
-            if (direction == "up") { position = new Tuple<int, int>(posX, posY - 1); }
-            if (direction == "down") { position = new Tuple<int, int>(posX, posY + 1); }
-            if (direction == "left") { position = new Tuple<int, int>(posX - 1, posY); }
+            if (direction == "right") { position = new Tuple<int, int>(posX + 2, posY); }
+            if (direction == "up") { position = new Tuple<int, int>(posX, posY - 2); }
+            if (direction == "down") { position = new Tuple<int, int>(posX, posY + 2); }
+            if (direction == "left") { position = new Tuple<int, int>(posX - 2, posY); }
         }
     }
 
@@ -111,7 +111,6 @@ namespace RobotParty
 
         public void Update(Ielementvisitor updatevisitor, float dt) {
             updatevisitor.onProjectile(this, dt);
-            Console.WriteLine("hi");
         }
     }
 
