@@ -37,19 +37,60 @@ namespace RobotParty
                 keyslist.Add("D");
             }
 
-            if (key.IsKeyDown(Keys.Right)) {
-                keyslist.Add("Right");
-            }
-            if (key.IsKeyDown(Keys.Left)) {
-                keyslist.Add("Left");
-            }
-            if (key.IsKeyDown(Keys.Up)) {
-                keyslist.Add("Up");
-            }
-            if (key.IsKeyDown(Keys.Down)) {
-                keyslist.Add("Down");
+            
+             if (key.IsKeyDown(Keys.Right)) {
+                if (key.IsKeyDown(Keys.Up))
+                {
+                    keyslist.Add("UpRight");
+                }
+                else if (key.IsKeyDown(Keys.Down))
+                {
+                    keyslist.Add("DownRight");
+                }
+                else { keyslist.Add("Right");
+                }
             }
 
+            if (key.IsKeyDown(Keys.Left)) {
+                if (key.IsKeyDown(Keys.Up))
+                {
+                    keyslist.Add("UpLeft");
+                }
+                else if (key.IsKeyDown(Keys.Down))
+                {
+                    keyslist.Add("DownLeft");
+                }
+                else
+                { keyslist.Add("Left");
+                }
+            }
+
+            if (key.IsKeyDown(Keys.Up)) {
+                if (key.IsKeyDown(Keys.Right)){
+                    keyslist.Add("UpRight");
+                }
+                else if (key.IsKeyDown(Keys.Left))
+                {
+                    keyslist.Add("UpLeft");
+                }
+                else { keyslist.Add("Up"); }
+            }
+
+            if (key.IsKeyDown(Keys.Down))
+            {
+                if (key.IsKeyDown(Keys.Right))
+                {
+                    keyslist.Add("DownRight");
+                }
+                else if (key.IsKeyDown(Keys.Left))
+                {
+                    keyslist.Add("DownLeft");
+                }
+                else
+                {
+                    keyslist.Add("Down");
+                }
+            }
             return keyslist;
 
         }
