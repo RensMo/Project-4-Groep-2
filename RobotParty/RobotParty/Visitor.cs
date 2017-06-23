@@ -41,6 +41,37 @@ namespace RobotParty
                 }
             }
 
+            else if(element1 is MainCharacter && element2 is EnemyBullet) {
+                el1X += 25;
+                el1Y += 25;
+                el2X += 2;
+                el2Y += 2;
+                if (el2X > el1X) {
+                    if (el2X < (el1X + 10)) {
+                        if (el2Y > el1Y) {
+                            if (el2Y < (el1Y + 20)) {
+                                collision = true;
+                            }
+                        }
+                    }
+                }
+            }
+
+            else if(element1 is MainCharacter && element2 is PickUpCharacter) {
+                el1Y += 25;
+                el1X += 20;
+                if (el2X > el1X) {
+                    if (el2X < (el1X + 10)) {
+                        if (el2Y > el1Y) {
+                            if (el2Y < (el1Y + 10)) {
+                                collision = true;
+                                Console.WriteLine("main/pickup");
+                            }
+                        }
+                    }
+                }
+            }
+
             //if(element1 is Character && element2 is Character) {
             //    if (el2X > el1X) {
             //        if (el2X < (el1X + 10)) {
@@ -93,44 +124,44 @@ namespace RobotParty
         }
 
         public void onEnemyCharacter(EnemyCharacter character, ScreenManager screenmanager, float dt) {
+            Tuple<int, int> characterpos = new Tuple<int, int>(character.getPos().Item1 + 25, character.getPos().Item2 + 25);
+
             foreach (var direction in character.GetDirection()) {
-                Console.WriteLine(direction);
                 character.Move(direction, dt);
             }
             switch (character.RandomShot())
             {
-
                 case 0:
 
-                    newlist.Add(new EnemyBullet(character.position, new Tuple<int, int>(1, 0),screenmanager));
+                    newlist.Add(new EnemyBullet(characterpos, new Tuple<int, int>(1, 0),screenmanager));
                     break;
                 case 1:
 
-                    newlist.Add(new EnemyBullet(character.position, new Tuple<int, int>(1, 1),screenmanager));
+                    newlist.Add(new EnemyBullet(characterpos, new Tuple<int, int>(1, 1),screenmanager));
                     break;
                 case 2:
 
-                    newlist.Add(new EnemyBullet(character.position, new Tuple<int, int>(0, 1),screenmanager));
+                    newlist.Add(new EnemyBullet(characterpos, new Tuple<int, int>(0, 1),screenmanager));
                     break;
                 case 3:
 
-                    newlist.Add(new EnemyBullet(character.position, new Tuple<int, int>(-1, 0),screenmanager));
+                    newlist.Add(new EnemyBullet(characterpos, new Tuple<int, int>(-1, 0),screenmanager));
                     break;
                 case 4:
 
-                    newlist.Add(new EnemyBullet(character.position, new Tuple<int, int>(-1, 1),screenmanager));
+                    newlist.Add(new EnemyBullet(characterpos, new Tuple<int, int>(-1, 1),screenmanager));
                     break;
                 case 5:
 
-                    newlist.Add(new EnemyBullet(character.position, new Tuple<int, int>(0, -1),screenmanager));
+                    newlist.Add(new EnemyBullet(characterpos, new Tuple<int, int>(0, -1),screenmanager));
                     break;
                 case 6:
 
-                    newlist.Add(new EnemyBullet(character.position, new Tuple<int, int>(-1, -1),screenmanager));
+                    newlist.Add(new EnemyBullet(characterpos, new Tuple<int, int>(-1, -1),screenmanager));
                     break;
                 case 7:
 
-                    newlist.Add(new EnemyBullet(character.position, new Tuple<int, int>(1, -1),screenmanager));
+                    newlist.Add(new EnemyBullet(characterpos, new Tuple<int, int>(1, -1),screenmanager));
                     break;
             }
         }
@@ -151,6 +182,7 @@ namespace RobotParty
                     if(el is PickUpCharacter) {
                         character.health = 500;
                         removelist.Add(el);
+                        screenmanager.score += 100;
                     }
                     // check if it's an enemy bullet
                     if (el is EnemyBullet)
@@ -243,12 +275,10 @@ namespace RobotParty
 
         public void onProjectile(Projectile projectile, ScreenManager screenmanager, float dt) {
             projectile.position = new Tuple<int, int>(projectile.position.Item1 + projectile.direction.Item1, projectile.position.Item2 + projectile.direction.Item2);
-            foreach(var el in screenmanager.elements) {
-                if (el is EnemyCharacter) { 
+            foreach (var el in screenmanager.elements) {
+                if (el is EnemyCharacter) {
                     if (collisioncalculator.Collision(el, projectile)) {
-                   
                         removelist.Add(el);
-                        Console.WriteLine("enemy in list");
                     }
                 }
             }
@@ -273,8 +303,6 @@ namespace RobotParty
             while (x < removelist.Count()) {
                 screenmanager.elements.Remove(removelist[x]);
                 x += 1;
-                Console.WriteLine("enemy removed");
-
             }
             removelist = new List<Ielement>();
             newlist = new List<Ielement>();
@@ -294,8 +322,6 @@ namespace RobotParty
         public void onEnemyCharacter(EnemyCharacter character, ScreenManager screenmanager, float dt) {
             var point = new Microsoft.Xna.Framework.Point(character.position.Item1, character.position.Item2);
             drawmanager.drawEnemy(point, 60, 60, Colour.Black);
-            var point1 = new Microsoft.Xna.Framework.Point(point.X + 25, point.Y + 25);
-            drawmanager.drawRectangle(point1, 10, 20, Colour.White);
         }
 
         public void onMainCharacter(MainCharacter Character, ScreenManager screenmanager, float dt)
