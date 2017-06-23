@@ -19,6 +19,7 @@ namespace RobotParty
         void onProjectile(Projectile projectile, float dt);
         void onScreenmanager(ScreenManager screenmanager, float dt);
         void onEnemyCharacter(EnemyCharacter character, ScreenManager screenmanager);
+        void onPickUpCharacter(PickUpCharacter character, ScreenManager screenmanager);
     }
 
     // implement onchar, onproj
@@ -77,6 +78,10 @@ namespace RobotParty
             }
         }
 
+        public void onPickUpCharacter(PickUpCharacter character, ScreenManager screenmanager) {
+            //Nothing to update. Stays at same spot.
+        }
+
         public void onProjectile(Projectile projectile, float dt) {
             projectile.position = new Tuple<int, int>(projectile.position.Item1 + projectile.direction.Item1, projectile.position.Item2 + projectile.direction.Item2);
         }
@@ -120,16 +125,20 @@ namespace RobotParty
             drawmanager.drawRectangle(point, 10, 10, Colour.White);
         }
 
+        public void onPickUpCharacter(PickUpCharacter Character, ScreenManager screenmanager) {
+            var point = new Microsoft.Xna.Framework.Point(Character.position.Item1, Character.position.Item2);
+            drawmanager.drawRectangle(point, 10, 10, Colour.Pink);
+        }
+
         public void onProjectile(Projectile Projectile, float dt)
         {
-                var point = new Microsoft.Xna.Framework.Point(Projectile.position.Item1, Projectile.position.Item2);
-                drawmanager.drawRectangle(point, 5, 5, Colour.White);
+            var point = new Microsoft.Xna.Framework.Point(Projectile.position.Item1, Projectile.position.Item2);
+            drawmanager.drawRectangle(point, 5, 5, Colour.White);
             
         }
 
         public void onScreenmanager(ScreenManager ScreenManager, float dt)
         {
-
             foreach (Ielement el in ScreenManager.elements) {
                 el.Draw(this, dt);
             }

@@ -28,8 +28,9 @@ namespace RobotParty
         public void Create(int option) {
             switch (option) {
                 case 0:
-                    elements.Add(mainCharacter);
                     elements.Add(new EnemyCharacter(new Tuple<int, int>(10, 10), 50, 1, mainCharacter, this));
+                    elements.Add(new PickUpCharacter(new Tuple<int, int>(300, 300), 0, 0, this));
+                    elements.Add(mainCharacter);
                     break;
                     // todo add more characters when finished making those
             }
@@ -125,6 +126,20 @@ namespace RobotParty
             if (main_posX - enemy_posX < 0) { direction.Add("left"); }
             else if (main_posX - enemy_posX > 0) { direction.Add("right"); }
             return direction;
+        }
+    }
+
+    //Pick-up character
+    public class PickUpCharacter : Character {
+        public PickUpCharacter(Tuple<int, int> position, int health, int speed, ScreenManager screenmanager) : base(position, health, speed, screenmanager) {
+        }
+
+        public override void Draw(Ielementvisitor drawvisitor, float dt) {
+            drawvisitor.onPickUpCharacter(this, screenmanager);
+        }
+
+        public override void Update(Ielementvisitor updatevisitor, float dt) {
+            updatevisitor.onPickUpCharacter(this, screenmanager);
         }
     }
 

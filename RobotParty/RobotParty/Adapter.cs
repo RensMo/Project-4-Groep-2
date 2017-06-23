@@ -62,7 +62,7 @@ namespace RobotParty
         void drawImage();
     }
 
-    public enum Colour { White, Black, Blue };
+    public enum Colour { White, Black, Blue, Pink };
 
     public class MonoGameAdapter : IDrawManager {
         SpriteBatch sprite_batch;
@@ -86,6 +86,8 @@ namespace RobotParty
                     return Microsoft.Xna.Framework.Color.White;
                 case Colour.Blue:
                     return Microsoft.Xna.Framework.Color.Blue;
+                case Colour.Pink:
+                    return Microsoft.Xna.Framework.Color.Pink;
                 default:
                     return Microsoft.Xna.Framework.Color.Black;
             }
