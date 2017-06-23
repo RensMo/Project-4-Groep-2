@@ -37,8 +37,8 @@ namespace RobotParty
                 keyslist.Add("D");
             }
 
-            
-             if (key.IsKeyDown(Keys.Right)) {
+            if (key.IsKeyDown(Keys.Right))
+            {
                 if (key.IsKeyDown(Keys.Up))
                 {
                     keyslist.Add("UpRight");
@@ -47,11 +47,14 @@ namespace RobotParty
                 {
                     keyslist.Add("DownRight");
                 }
-                else { keyslist.Add("Right");
+                else
+                {
+                    keyslist.Add("Right");
                 }
             }
 
-            if (key.IsKeyDown(Keys.Left)) {
+            if (key.IsKeyDown(Keys.Left))
+            {
                 if (key.IsKeyDown(Keys.Up))
                 {
                     keyslist.Add("UpLeft");
@@ -61,12 +64,15 @@ namespace RobotParty
                     keyslist.Add("DownLeft");
                 }
                 else
-                { keyslist.Add("Left");
+                {
+                    keyslist.Add("Left");
                 }
             }
 
-            if (key.IsKeyDown(Keys.Up)) {
-                if (key.IsKeyDown(Keys.Right)){
+            if (key.IsKeyDown(Keys.Up))
+            {
+                if (key.IsKeyDown(Keys.Right))
+                {
                     keyslist.Add("UpRight");
                 }
                 else if (key.IsKeyDown(Keys.Left))
@@ -91,6 +97,7 @@ namespace RobotParty
                     keyslist.Add("Down");
                 }
             }
+
             return keyslist;
 
         }

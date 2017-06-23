@@ -17,6 +17,7 @@ namespace RobotParty
     public class ScreenManager {
         public List<Ielement> elements = new List<Ielement>();
         MainCharacter mainCharacter;
+        public int score = 0;
 
         public ScreenManager() {
             mainCharacter = new MainCharacter(new Tuple<int, int>(100, 100), 200, 1,  this);
@@ -114,7 +115,14 @@ namespace RobotParty
         public override void Update(Ielementvisitor updatevisitor, float dt) {
             updatevisitor.onEnemyCharacter(this, screenmanager);
         }
+        public int RandomShot()
+        {
 
+            Random rnd = new Random();
+            int RandomDirection = rnd.Next(0, 8);
+
+            return RandomDirection;
+        }
         public List<string> GetDirection() {
             var direction = new List<string>();
 
@@ -177,6 +185,12 @@ namespace RobotParty
 
     public class FriendlyBullet : Projectile {
         public FriendlyBullet(Tuple<int, int> position, Tuple<int, int> direction, ScreenManager screenmanager) : base(position, direction, screenmanager) {
+        }
+    }
+    public class EnemyBullet : Projectile
+    {
+        public EnemyBullet(Tuple<int, int> position, Tuple<int, int> direction,ScreenManager screenmanager) : base(position, direction,screenmanager)
+        {
         }
     }
 }

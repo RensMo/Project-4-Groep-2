@@ -4,6 +4,8 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
-    <File>C:/Users/Rens/Documents/HR/HR1617/OP4/Project App/Project-4-Groep-2/RobotParty/RobotParty/Content/white_pixel.png</File>
+    <File>C:/Users/Dani/Desktop/Project 4/Nieuwe map/RobotParty/RobotParty/Content/white_pixel.png</File>
+    <File>C:/Users/Dani/Desktop/Project 4/Nieuwe map/RobotParty/RobotParty/Content/MainCharacter.png</File>
+    <File>C:/Users/Dani/Desktop/Project 4/Nieuwe map/RobotParty/RobotParty/Content/EnemyCharacter.png</File>
   </SourceFiles>
 </SourceFileCollection>

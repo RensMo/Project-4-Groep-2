@@ -96,6 +96,42 @@ namespace RobotParty
             foreach (var direction in character.GetDirection()) {
                 character.Move(direction);
             }
+            switch (character.RandomShot())
+            {
+
+                case 0:
+
+                    newlist.Add(new EnemyBullet(character.position, new Tuple<int, int>(1, 0),screenmanager));
+                    break;
+                case 1:
+
+                    newlist.Add(new EnemyBullet(character.position, new Tuple<int, int>(1, 1),screenmanager));
+                    break;
+                case 2:
+
+                    newlist.Add(new EnemyBullet(character.position, new Tuple<int, int>(0, 1),screenmanager));
+                    break;
+                case 3:
+
+                    newlist.Add(new EnemyBullet(character.position, new Tuple<int, int>(-1, 0),screenmanager));
+                    break;
+                case 4:
+
+                    newlist.Add(new EnemyBullet(character.position, new Tuple<int, int>(-1, 1),screenmanager));
+                    break;
+                case 5:
+
+                    newlist.Add(new EnemyBullet(character.position, new Tuple<int, int>(0, -1),screenmanager));
+                    break;
+                case 6:
+
+                    newlist.Add(new EnemyBullet(character.position, new Tuple<int, int>(-1, -1),screenmanager));
+                    break;
+                case 7:
+
+                    newlist.Add(new EnemyBullet(character.position, new Tuple<int, int>(1, -1),screenmanager));
+                    break;
+            }
         }
 
         public void onMainCharacter(MainCharacter character, ScreenManager screenmanager)
@@ -116,6 +152,12 @@ namespace RobotParty
                         removelist.Add(el);
                     }
                     // check if it's an enemy bullet
+                    if (el is EnemyBullet)
+                    {
+                        character.health -= 50;
+                        Console.WriteLine("Hit by bullet");
+                        removelist.Add(el);
+                    }
                 }
 
             }
@@ -128,12 +170,14 @@ namespace RobotParty
                      
             }
 
-            foreach(var el in inputmanager.onInput()) { 
-            
-                if (el == "UpRight") {
+            foreach (var el in inputmanager.onInput())
+            {
+
+                if (el == "UpRight")
+                {
                     var directionX = 1;
                     var directionY = -1;
-                    newlist.Add(new FriendlyBullet(new Tuple<int, int>(character.position.Item1 + 28, character.position.Item2 + 28), new Tuple<int, int>(directionX, directionY)));
+                    newlist.Add(new FriendlyBullet(new Tuple<int, int>(character.position.Item1 + 28, character.position.Item2 + 28), new Tuple<int, int>(directionX, directionY), screenmanager));
                     break;
                 }
 
@@ -141,7 +185,7 @@ namespace RobotParty
                 {
                     var directionX = -1;
                     var directionY = -1;
-                    newlist.Add(new FriendlyBullet(new Tuple<int, int>(character.position.Item1 + 28, character.position.Item2 + 28), new Tuple<int, int>(directionX, directionY)));
+                    newlist.Add(new FriendlyBullet(new Tuple<int, int>(character.position.Item1 + 28, character.position.Item2 + 28), new Tuple<int, int>(directionX, directionY), screenmanager));
                     break;
                 }
 
@@ -149,7 +193,7 @@ namespace RobotParty
                 {
                     var directionX = -1;
                     var directionY = 1;
-                    newlist.Add(new FriendlyBullet(new Tuple<int, int>(character.position.Item1 + 28, character.position.Item2 + 28), new Tuple<int, int>(directionX, directionY)));
+                    newlist.Add(new FriendlyBullet(new Tuple<int, int>(character.position.Item1 + 28, character.position.Item2 + 28), new Tuple<int, int>(directionX, directionY), screenmanager));
                     break;
                 }
 
@@ -157,28 +201,32 @@ namespace RobotParty
                 {
                     var directionX = 1;
                     var directionY = 1;
-                    newlist.Add(new FriendlyBullet(new Tuple<int, int>(character.position.Item1 + 28, character.position.Item2 + 28), new Tuple<int, int>(directionX, directionY)));
+                    newlist.Add(new FriendlyBullet(new Tuple<int, int>(character.position.Item1 + 28, character.position.Item2 + 28), new Tuple<int, int>(directionX, directionY), screenmanager));
                     break;
-                } 
-                if (el == "Up") {
+                }
+                if (el == "Up")
+                {
                     var directionX = 0;
                     var directionY = -1;
                     newlist.Add(new FriendlyBullet(new Tuple<int, int>(character.position.Item1 + 28, character.position.Item2 + 28), new Tuple<int, int>(directionX, directionY), screenmanager));
                     break;
                 }
-                if (el == "Down") {
+                if (el == "Down")
+                {
                     var directionX = 0;
                     var directionY = 1;
                     newlist.Add(new FriendlyBullet(new Tuple<int, int>(character.position.Item1 + 28, character.position.Item2 + 28), new Tuple<int, int>(directionX, directionY), screenmanager));
                     break;
                 }
-                if (el == "Right") {
+                if (el == "Right")
+                {
                     var directionX = 1;
                     var directionY = 0;
                     newlist.Add(new FriendlyBullet(new Tuple<int, int>(character.position.Item1 + 28, character.position.Item2 + 28), new Tuple<int, int>(directionX, directionY), screenmanager));
                     break;
                 }
-                if (el == "Left") {
+                if (el == "Left")
+                {
                     var directionX = -1;
                     var directionY = 0;
                     newlist.Add(new FriendlyBullet(new Tuple<int, int>(character.position.Item1 + 28, character.position.Item2 + 28), new Tuple<int, int>(directionX, directionY), screenmanager));
@@ -251,8 +299,11 @@ namespace RobotParty
 
         public void onMainCharacter(MainCharacter Character, ScreenManager screenmanager)
         {
+            var ScorePoint = new Microsoft.Xna.Framework.Point(375, 0);
             var point = new Microsoft.Xna.Framework.Point(Character.position.Item1, Character.position.Item2);
             drawmanager.drawMainCharacter(point, 60, 60, Colour.White);
+            drawmanager.drawText("Score:" + screenmanager.score.ToString(), ScorePoint, 5, Colour.Black);
+
         }
 
         public void onPickUpCharacter(PickUpCharacter Character, ScreenManager screenmanager) {
