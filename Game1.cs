@@ -88,8 +88,6 @@ namespace Game4
             spriteBatch.Begin();
             
 
-            string cs = @"server=185.114.157.171;userid=specific_groep2;
-            password=inf1cgroep2;database=specific_project4";
 
 
 
