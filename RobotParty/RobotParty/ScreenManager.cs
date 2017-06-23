@@ -10,12 +10,14 @@ namespace RobotParty
     {
         void Draw(Ielementvisitor drawvisitor, float dt);
         void Update(Ielementvisitor updatevisitor, float dt);
+        Tuple<int, int> getPos();
     }
 
     // implement draw, create
     public class ScreenManager {
         public List<Ielement> elements = new List<Ielement>();
         MainCharacter mainCharacter;
+        public int score = 0;
 
         public ScreenManager() {
             mainCharacter = new MainCharacter(new Tuple<int, int>(100, 100), 200, 100,  this);
@@ -32,9 +34,9 @@ namespace RobotParty
                 // 2. At least one PickupCharacter
                 // 3. One MainCharacter
                 case 0:
-                    elements.Add(new EnemyCharacter(new Tuple<int, int>(10, 10), 50, 30, mainCharacter, this));
-                    elements.Add(new PickUpCharacter(new Tuple<int, int>(300, 300), 0, 0, this));
                     elements.Add(mainCharacter);
+                    elements.Add(new EnemyCharacter(new Tuple<int, int>(10, 10), 50, 30, mainCharacter, this));
+                    elements.Add(new PickUpCharacter(new Tuple<int, int>(300, 300), 50, 1, this));
                     break;
                     // todo add more characters when finished making those
             }
@@ -51,7 +53,7 @@ namespace RobotParty
     public abstract class Character : Ielement
     {
         public Tuple<int, int> position;
-        int health;
+        public int health;
         public ScreenManager screenmanager;
         int speed;
 
@@ -62,6 +64,8 @@ namespace RobotParty
             this.screenmanager = screenmanager;
             this.speed = speed;
         }
+
+        public Tuple<int,int> getPos() { return position; }
 
         public abstract void Draw(Ielementvisitor drawvisitor, float dt);
         
@@ -104,6 +108,7 @@ namespace RobotParty
         ScreenManager screenmanager;
         public EnemyCharacter(Tuple<int, int> position, int health, int speed, MainCharacter mainCharacter, ScreenManager screenmanager) : base(position, health, speed, screenmanager) {
             this.mainCharacter = mainCharacter;
+            this.screenmanager = screenmanager;
         }
 
         public override void Draw(Ielementvisitor drawvisitor, float dt) {
@@ -113,7 +118,14 @@ namespace RobotParty
         public override void Update(Ielementvisitor updatevisitor, float dt) {
             updatevisitor.onEnemyCharacter(this, screenmanager, dt);
         }
+        public int RandomShot()
+        {
 
+            Random rnd = new Random();
+            int RandomDirection = rnd.Next(0, 8);
+
+            return RandomDirection;
+        }
         public List<string> GetDirection() {
             var direction = new List<string>();
 
@@ -155,23 +167,33 @@ namespace RobotParty
     public abstract class Projectile : Ielement {
         public Tuple<int, int> position;
         public Tuple<int, int> direction;
+        ScreenManager screenmanager;
 
-        public Projectile(Tuple<int, int> position, Tuple<int, int> direction) {
+        public Projectile(Tuple<int, int> position, Tuple<int, int> direction, ScreenManager screenmanager) {
             this.position = position;
             this.direction = direction;
+            this.screenmanager = screenmanager;
         }
 
+        public Tuple<int, int> getPos() { return position; }
+
         public void Draw(Ielementvisitor drawvisitor, float dt) {
-            drawvisitor.onProjectile(this, dt);
+            drawvisitor.onProjectile(this, screenmanager, dt);
         }
 
         public void Update(Ielementvisitor updatevisitor, float dt) {
-            updatevisitor.onProjectile(this, dt);
+            updatevisitor.onProjectile(this, screenmanager, dt);
         }
     }
 
     public class FriendlyBullet : Projectile {
-        public FriendlyBullet(Tuple<int, int> position, Tuple<int, int> direction) : base(position, direction) {
+        public FriendlyBullet(Tuple<int, int> position, Tuple<int, int> direction, ScreenManager screenmanager) : base(position, direction, screenmanager) {
+        }
+    }
+    public class EnemyBullet : Projectile
+    {
+        public EnemyBullet(Tuple<int, int> position, Tuple<int, int> direction,ScreenManager screenmanager) : base(position, direction,screenmanager)
+        {
         }
     }
 }

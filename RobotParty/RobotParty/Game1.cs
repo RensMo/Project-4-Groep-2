@@ -22,6 +22,7 @@ namespace RobotParty
         Ielementvisitor updatevisitor;
         Ielementvisitor drawvisitor;
         List<ScreenManager> screenmanagers;
+        IonCollision collisioncalculator;
 
         protected override void Initialize()
         {
@@ -31,7 +32,8 @@ namespace RobotParty
             screenmanagers.Add(new ScreenManager());
             screenmanagers[0].Create(0);
             inputmanager = new PCInputAdapter();
-            updatevisitor = new UpdateVisitor(inputmanager);
+            collisioncalculator = new onCollision();
+            updatevisitor = new UpdateVisitor(inputmanager, collisioncalculator);
         }
 
         protected override void LoadContent()

@@ -37,17 +37,65 @@ namespace RobotParty
                 keyslist.Add("D");
             }
 
-            if (key.IsKeyDown(Keys.Right)) {
-                keyslist.Add("Right");
+            if (key.IsKeyDown(Keys.Right))
+            {
+                if (key.IsKeyDown(Keys.Up))
+                {
+                    keyslist.Add("UpRight");
+                }
+                else if (key.IsKeyDown(Keys.Down))
+                {
+                    keyslist.Add("DownRight");
+                }
+                else
+                {
+                    keyslist.Add("Right");
+                }
             }
-            if (key.IsKeyDown(Keys.Left)) {
-                keyslist.Add("Left");
+
+            if (key.IsKeyDown(Keys.Left))
+            {
+                if (key.IsKeyDown(Keys.Up))
+                {
+                    keyslist.Add("UpLeft");
+                }
+                else if (key.IsKeyDown(Keys.Down))
+                {
+                    keyslist.Add("DownLeft");
+                }
+                else
+                {
+                    keyslist.Add("Left");
+                }
             }
-            if (key.IsKeyDown(Keys.Up)) {
-                keyslist.Add("Up");
+
+            if (key.IsKeyDown(Keys.Up))
+            {
+                if (key.IsKeyDown(Keys.Right))
+                {
+                    keyslist.Add("UpRight");
+                }
+                else if (key.IsKeyDown(Keys.Left))
+                {
+                    keyslist.Add("UpLeft");
+                }
+                else { keyslist.Add("Up"); }
             }
-            if (key.IsKeyDown(Keys.Down)) {
-                keyslist.Add("Down");
+
+            if (key.IsKeyDown(Keys.Down))
+            {
+                if (key.IsKeyDown(Keys.Right))
+                {
+                    keyslist.Add("DownRight");
+                }
+                else if (key.IsKeyDown(Keys.Left))
+                {
+                    keyslist.Add("DownLeft");
+                }
+                else
+                {
+                    keyslist.Add("Down");
+                }
             }
 
             return keyslist;
@@ -60,6 +108,8 @@ namespace RobotParty
         void drawRectangle(Point top_left_coordinate, float width, float height, Colour color);
         void drawText(string text, Point top_left_coordinate, int size, Colour color);
         void drawImage();
+        void drawMainCharacter(Point top_left_coordinate, float width, float height, Colour color);
+        void drawEnemy(Point top_left_coordinate, float width, float height, Colour color);
     }
 
     public enum Colour { White, Black, Blue, Pink };
@@ -67,7 +117,8 @@ namespace RobotParty
     public class MonoGameAdapter : IDrawManager {
         SpriteBatch sprite_batch;
         ContentManager content_manager;
-
+        Texture2D spriteMC;
+        Texture2D spriteEC;
         Texture2D white_pixel;
         SpriteFont default_font;
         Game game;
@@ -76,6 +127,8 @@ namespace RobotParty
             this.content_manager = content_manager;
             white_pixel = content_manager.Load<Texture2D>("white_pixel");
             default_font = content_manager.Load<SpriteFont>("arial");
+            spriteMC = content_manager.Load<Texture2D>("MainCharacter");
+            spriteEC = content_manager.Load<Texture2D>("EnemyCharacter");
         }
 
         private Microsoft.Xna.Framework.Color convert_color(Colour color) {
@@ -99,7 +152,15 @@ namespace RobotParty
         public void drawText(string text, Point top_left_coordinate, int size, Colour color) {
             sprite_batch.DrawString(default_font, text, new Vector2(top_left_coordinate.X, top_left_coordinate.Y), convert_color(color));
         }
-        
+
+        public void drawMainCharacter(Point top_left_coordinate, float width, float height, Colour color) {
+            sprite_batch.Draw(spriteMC, new Rectangle((int)top_left_coordinate.X, (int)top_left_coordinate.Y, (int)width, (int)height), convert_color(color));
+        }
+
+        public void drawEnemy(Point top_left_coordinate, float width, float height, Colour color) {
+            sprite_batch.Draw(spriteEC, new Rectangle((int)top_left_coordinate.X, (int)top_left_coordinate.Y, (int)width, (int)height), convert_color(color));
+        }
+
         // implement drawImage
         public void drawImage() {
             throw new NotImplementedException();
