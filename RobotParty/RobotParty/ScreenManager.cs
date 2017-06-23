@@ -18,7 +18,7 @@ namespace RobotParty
         MainCharacter mainCharacter;
 
         public ScreenManager() {
-            mainCharacter = new MainCharacter(new Tuple<int, int>(100, 100), 200, 1,  this);
+            mainCharacter = new MainCharacter(new Tuple<int, int>(100, 100), 200, 100,  this);
         }
 
         public void Update(Ielementvisitor visitor, float dt) { visitor.onScreenmanager(this, dt); }
@@ -27,8 +27,12 @@ namespace RobotParty
 
         public void Create(int option) {
             switch (option) {
+                // Each case/level: 
+                // 1. Multiple EnemyCharacters.
+                // 2. At least one PickupCharacter
+                // 3. One MainCharacter
                 case 0:
-                    elements.Add(new EnemyCharacter(new Tuple<int, int>(10, 10), 50, 1, mainCharacter, this));
+                    elements.Add(new EnemyCharacter(new Tuple<int, int>(10, 10), 50, 30, mainCharacter, this));
                     elements.Add(new PickUpCharacter(new Tuple<int, int>(300, 300), 0, 0, this));
                     elements.Add(mainCharacter);
                     break;
@@ -61,18 +65,17 @@ namespace RobotParty
 
         public abstract void Draw(Ielementvisitor drawvisitor, float dt);
         
-
         public abstract void Update(Ielementvisitor updatevisitor, float dt);
 
-        public void Move(string direction) {
+        public void Move(string direction, float dt) {
 
             var posX = position.Item1;
             var posY = position.Item2;
 
-            if (direction == "right") { position = new Tuple<int, int>(posX + 2, posY); }
-            if (direction == "up") { position = new Tuple<int, int>(posX, posY - 2); }
-            if (direction == "down") { position = new Tuple<int, int>(posX, posY + 2); }
-            if (direction == "left") { position = new Tuple<int, int>(posX - 2, posY); }
+            if (direction == "right") { position = new Tuple<int, int>((int)Math.Round((posX + speed * dt / 1000)), posY); }
+            if (direction == "up") { position = new Tuple<int, int>(posX, (int)Math.Round(posY - speed * dt / 1000)); }
+            if (direction == "down") { position = new Tuple<int, int>(posX, (int)Math.Round(posY + speed * dt / 1000)); }
+            if (direction == "left") { position = new Tuple<int, int>((int)Math.Round(posX - speed * dt / 1000), posY); }
         }
 
     }
@@ -87,11 +90,11 @@ namespace RobotParty
         }
 
         public override void Draw(Ielementvisitor drawvisitor, float dt) {
-            drawvisitor.onMainCharacter(this, screenmanager);
+            drawvisitor.onMainCharacter(this, screenmanager, dt);
         }
 
         public override void Update(Ielementvisitor updatevisitor, float dt) {
-            updatevisitor.onMainCharacter(this, screenmanager);
+            updatevisitor.onMainCharacter(this, screenmanager, dt);
         }
     }
 
@@ -104,11 +107,11 @@ namespace RobotParty
         }
 
         public override void Draw(Ielementvisitor drawvisitor, float dt) {
-            drawvisitor.onEnemyCharacter(this, screenmanager);
+            drawvisitor.onEnemyCharacter(this, screenmanager, dt);
         }
 
         public override void Update(Ielementvisitor updatevisitor, float dt) {
-            updatevisitor.onEnemyCharacter(this, screenmanager);
+            updatevisitor.onEnemyCharacter(this, screenmanager, dt);
         }
 
         public List<string> GetDirection() {
@@ -135,11 +138,11 @@ namespace RobotParty
         }
 
         public override void Draw(Ielementvisitor drawvisitor, float dt) {
-            drawvisitor.onPickUpCharacter(this, screenmanager);
+            drawvisitor.onPickUpCharacter(this, screenmanager, dt);
         }
 
         public override void Update(Ielementvisitor updatevisitor, float dt) {
-            updatevisitor.onPickUpCharacter(this, screenmanager);
+            updatevisitor.onPickUpCharacter(this, screenmanager, dt);
         }
     }
 

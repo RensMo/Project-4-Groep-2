@@ -15,11 +15,11 @@ namespace RobotParty
 
     public interface Ielementvisitor
     {
-        void onMainCharacter(MainCharacter character, ScreenManager screenmanager);
+        void onMainCharacter(MainCharacter character, ScreenManager screenmanager, float dt);
         void onProjectile(Projectile projectile, float dt);
         void onScreenmanager(ScreenManager screenmanager, float dt);
-        void onEnemyCharacter(EnemyCharacter character, ScreenManager screenmanager);
-        void onPickUpCharacter(PickUpCharacter character, ScreenManager screenmanager);
+        void onEnemyCharacter(EnemyCharacter character, ScreenManager screenmanager, float dt);
+        void onPickUpCharacter(PickUpCharacter character, ScreenManager screenmanager, float dt);
     }
 
     // implement onchar, onproj
@@ -32,21 +32,21 @@ namespace RobotParty
             this.inputmanager = inputmanager;
         }
 
-        public void onEnemyCharacter(EnemyCharacter character, ScreenManager screenmanager) {
+        public void onEnemyCharacter(EnemyCharacter character, ScreenManager screenmanager, float dt) {
             foreach (var direction in character.GetDirection()) {
                 Console.WriteLine(direction);
-                character.Move(direction);
+                character.Move(direction, dt);
             }
         }
 
-        public void onMainCharacter(MainCharacter character, ScreenManager screenmanager)
+        public void onMainCharacter(MainCharacter character, ScreenManager screenmanager, float dt)
         {
 
             foreach(var el in inputmanager.onInput()) {
-                if(el == "A") { character.Move("left"); }
-                if(el == "D") { character.Move("right"); }
-                if(el == "W") { character.Move("up"); }
-                if(el == "S") { character.Move("down"); }
+                if(el == "A") { character.Move("left", dt); }
+                if(el == "D") { character.Move("right", dt); }
+                if(el == "W") { character.Move("up", dt); }
+                if(el == "S") { character.Move("down", dt); }
                      
             }
 
@@ -78,7 +78,7 @@ namespace RobotParty
             }
         }
 
-        public void onPickUpCharacter(PickUpCharacter character, ScreenManager screenmanager) {
+        public void onPickUpCharacter(PickUpCharacter character, ScreenManager screenmanager, float dt) {
             //Nothing to update. Stays at same spot.
         }
 
@@ -114,18 +114,18 @@ namespace RobotParty
             this.drawmanager = drawmanager;
         }
 
-        public void onEnemyCharacter(EnemyCharacter character, ScreenManager screenmanager) {
+        public void onEnemyCharacter(EnemyCharacter character, ScreenManager screenmanager, float dt) {
             var point = new Microsoft.Xna.Framework.Point(character.position.Item1, character.position.Item2);
             drawmanager.drawRectangle(point, 10, 10, Colour.Black);
         }
 
-        public void onMainCharacter(MainCharacter Character, ScreenManager screenmanager)
+        public void onMainCharacter(MainCharacter Character, ScreenManager screenmanager, float dt)
         {
             var point = new Microsoft.Xna.Framework.Point(Character.position.Item1, Character.position.Item2);
             drawmanager.drawRectangle(point, 10, 10, Colour.White);
         }
 
-        public void onPickUpCharacter(PickUpCharacter Character, ScreenManager screenmanager) {
+        public void onPickUpCharacter(PickUpCharacter Character, ScreenManager screenmanager, float dt) {
             var point = new Microsoft.Xna.Framework.Point(Character.position.Item1, Character.position.Item2);
             drawmanager.drawRectangle(point, 10, 10, Colour.Pink);
         }
