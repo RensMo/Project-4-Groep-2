@@ -31,7 +31,7 @@ namespace RobotParty
                 case 0:
                     elements.Add(mainCharacter);
                     elements.Add(new EnemyCharacter(new Tuple<int, int>(10, 10), 50, 1, mainCharacter, this));
-                    elements.Add(new PickUpCharacter(new Tuple<int, int>(10, 10), 50, 1, this));
+                    elements.Add(new PickUpCharacter(new Tuple<int, int>(300, 300), 50, 1, this));
                     break;
                     // todo add more characters when finished making those
             }
@@ -72,10 +72,10 @@ namespace RobotParty
             var posX = position.Item1;
             var posY = position.Item2;
 
-            if (direction == "right") { position = new Tuple<int, int>(posX + 2, posY); }
-            if (direction == "up") { position = new Tuple<int, int>(posX, posY - 2); }
-            if (direction == "down") { position = new Tuple<int, int>(posX, posY + 2); }
-            if (direction == "left") { position = new Tuple<int, int>(posX - 2, posY); }
+            if (direction == "right") { position = new Tuple<int, int>(posX + 1, posY); }
+            if (direction == "up") { position = new Tuple<int, int>(posX, posY - 1); }
+            if (direction == "down") { position = new Tuple<int, int>(posX, posY + 1); }
+            if (direction == "left") { position = new Tuple<int, int>(posX - 1, posY); }
         }
 
     }
@@ -156,25 +156,27 @@ namespace RobotParty
     public abstract class Projectile : Ielement {
         public Tuple<int, int> position;
         public Tuple<int, int> direction;
+        ScreenManager screenmanager;
 
-        public Projectile(Tuple<int, int> position, Tuple<int, int> direction) {
+        public Projectile(Tuple<int, int> position, Tuple<int, int> direction, ScreenManager screenmanager) {
             this.position = position;
             this.direction = direction;
+            this.screenmanager = screenmanager;
         }
 
         public Tuple<int, int> getPos() { return position; }
 
         public void Draw(Ielementvisitor drawvisitor, float dt) {
-            drawvisitor.onProjectile(this, dt);
+            drawvisitor.onProjectile(this, screenmanager, dt);
         }
 
         public void Update(Ielementvisitor updatevisitor, float dt) {
-            updatevisitor.onProjectile(this, dt);
+            updatevisitor.onProjectile(this, screenmanager, dt);
         }
     }
 
     public class FriendlyBullet : Projectile {
-        public FriendlyBullet(Tuple<int, int> position, Tuple<int, int> direction) : base(position, direction) {
+        public FriendlyBullet(Tuple<int, int> position, Tuple<int, int> direction, ScreenManager screenmanager) : base(position, direction, screenmanager) {
         }
     }
 }
