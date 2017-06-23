@@ -16,7 +16,7 @@ namespace RobotParty
     public class ScreenManager
     {
         public List<Ielement> elements = new List<Ielement>();
-        MainCharacter mainCharacter = new MainCharacter(new Tuple<int, int>(50, 50), 200, 1);
+        MainCharacter mainCharacter = new MainCharacter(new Tuple<int, int>(100, 100), 200, 1);
 
         public void Update(Ielementvisitor visitor, float dt) { visitor.onScreenmanager(this, dt); }
 
