@@ -25,9 +25,9 @@ namespace RobotParty
             el2X = element2.getPos().Item1;
             el2Y = element2.getPos().Item2;
 
-            if(element1 is Character && element2 is Projectile) {
+            if(element1 is EnemyCharacter && element2 is FriendlyBullet) {
                 el1Y += 25;
-                el1X += 25;
+                el1X += 20;
                 el2X += 2;
                 el2Y += 2;
                 if (el2X > el1X){
