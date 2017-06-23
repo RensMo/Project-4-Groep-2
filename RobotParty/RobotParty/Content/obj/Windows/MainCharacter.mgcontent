@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>C:/Users/rober/OneDrive/Documenten/GitHub/Project-4-Groep-2-master/RobotParty/RobotParty/Content/white_pixel.png</SourceFile>
-  <SourceTime>2017-05-31T02:01:06+02:00</SourceTime>
-  <DestFile>C:/Users/rober/OneDrive/Documenten/GitHub/Project-4-Groep-2-master/RobotParty/RobotParty/Content/bin/Windows/white_pixel.xnb</DestFile>
-  <DestTime>2017-06-21T13:54:05.0159961+02:00</DestTime>
+  <SourceFile>C:/Users/rober/OneDrive/Documenten/GitHub/Project-4-Groep-2-master/RobotParty/RobotParty/Content/MainCharacter.png</SourceFile>
+  <SourceTime>2017-06-23T10:53:25.9794749+02:00</SourceTime>
+  <DestFile>C:/Users/rober/OneDrive/Documenten/GitHub/Project-4-Groep-2-master/RobotParty/RobotParty/Content/bin/Windows/MainCharacter.xnb</DestFile>
+  <DestTime>2017-06-23T10:57:19.3998196+02:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2017-03-01T16:05:36+01:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

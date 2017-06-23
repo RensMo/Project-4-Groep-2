@@ -10,6 +10,7 @@ namespace RobotParty
     {
         void Draw(Ielementvisitor drawvisitor, float dt);
         void Update(Ielementvisitor updatevisitor, float dt);
+        Tuple<int, int> getPos();
     }
 
     // implement draw, create
@@ -28,9 +29,9 @@ namespace RobotParty
         public void Create(int option) {
             switch (option) {
                 case 0:
-                    elements.Add(new EnemyCharacter(new Tuple<int, int>(10, 10), 50, 1, mainCharacter, this));
-                    elements.Add(new PickUpCharacter(new Tuple<int, int>(300, 300), 0, 0, this));
                     elements.Add(mainCharacter);
+                    elements.Add(new EnemyCharacter(new Tuple<int, int>(10, 10), 50, 1, mainCharacter, this));
+                    elements.Add(new PickUpCharacter(new Tuple<int, int>(10, 10), 50, 1, this));
                     break;
                     // todo add more characters when finished making those
             }
@@ -47,7 +48,7 @@ namespace RobotParty
     public abstract class Character : Ielement
     {
         public Tuple<int, int> position;
-        int health;
+        public int health;
         public ScreenManager screenmanager;
         int speed;
 
@@ -58,6 +59,8 @@ namespace RobotParty
             this.screenmanager = screenmanager;
             this.speed = speed;
         }
+
+        public Tuple<int,int> getPos() { return position; }
 
         public abstract void Draw(Ielementvisitor drawvisitor, float dt);
         
@@ -101,6 +104,7 @@ namespace RobotParty
         ScreenManager screenmanager;
         public EnemyCharacter(Tuple<int, int> position, int health, int speed, MainCharacter mainCharacter, ScreenManager screenmanager) : base(position, health, speed, screenmanager) {
             this.mainCharacter = mainCharacter;
+            this.screenmanager = screenmanager;
         }
 
         public override void Draw(Ielementvisitor drawvisitor, float dt) {
@@ -157,6 +161,8 @@ namespace RobotParty
             this.position = position;
             this.direction = direction;
         }
+
+        public Tuple<int, int> getPos() { return position; }
 
         public void Draw(Ielementvisitor drawvisitor, float dt) {
             drawvisitor.onProjectile(this, dt);
