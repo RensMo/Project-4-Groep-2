@@ -10,6 +10,7 @@ namespace RobotParty
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         int level;
+        
 
         public Game1()
         {
@@ -22,6 +23,7 @@ namespace RobotParty
         Ielementvisitor updatevisitor;
         Ielementvisitor drawvisitor;
         List<ScreenManager> screenmanagers;
+        IonCollision collisioncalculator;
 
         protected override void Initialize()
         {
@@ -30,9 +32,9 @@ namespace RobotParty
             screenmanagers = new List<ScreenManager>();
             screenmanagers.Add(new ScreenManager());
             screenmanagers[0].Create(0);
-            screenmanagers[0].CreateProjectile();
             inputmanager = new PCInputAdapter();
-            updatevisitor = new UpdateVisitor(inputmanager);
+            collisioncalculator = new onCollision();
+            updatevisitor = new UpdateVisitor(inputmanager, collisioncalculator);
         }
 
         protected override void LoadContent()

@@ -19,6 +19,7 @@ namespace RobotParty
             keyslist = new List<string>();
             var key = Keyboard.GetState();
             key.GetPressedKeys();
+            
             if (key.IsKeyDown(Keys.A))
             {
                 keyslist.Add("A");
@@ -35,25 +36,20 @@ namespace RobotParty
             {
                 keyslist.Add("D");
             }
-            if (key.IsKeyDown(Keys.Right))
-            {
+
+            if (key.IsKeyDown(Keys.Right)) {
                 keyslist.Add("Right");
             }
-            if (key.IsKeyDown(Keys.Left))
-            {
+            if (key.IsKeyDown(Keys.Left)) {
                 keyslist.Add("Left");
             }
-            if (key.IsKeyDown(Keys.Up))
-            {
+            if (key.IsKeyDown(Keys.Up)) {
                 keyslist.Add("Up");
             }
-            if (key.IsKeyDown(Keys.Down))
-            {
+            if (key.IsKeyDown(Keys.Down)) {
                 keyslist.Add("Down");
             }
-            if (key.IsKeyDown(Keys.Space)){
-                keyslist.Add("Space");
-            }
+
             return keyslist;
 
         }
@@ -64,14 +60,17 @@ namespace RobotParty
         void drawRectangle(Point top_left_coordinate, float width, float height, Colour color);
         void drawText(string text, Point top_left_coordinate, int size, Colour color);
         void drawImage();
+        void drawMainCharacter(Point top_left_coordinate, float width, float height, Colour color);
+        void drawEnemy(Point top_left_coordinate, float width, float height, Colour color);
     }
 
-    public enum Colour { White, Black, Blue };
+    public enum Colour { White, Black, Blue, Pink };
 
     public class MonoGameAdapter : IDrawManager {
         SpriteBatch sprite_batch;
         ContentManager content_manager;
-
+        Texture2D spriteMC;
+        Texture2D spriteEC;
         Texture2D white_pixel;
         SpriteFont default_font;
         Game game;
@@ -80,6 +79,8 @@ namespace RobotParty
             this.content_manager = content_manager;
             white_pixel = content_manager.Load<Texture2D>("white_pixel");
             default_font = content_manager.Load<SpriteFont>("arial");
+            spriteMC = content_manager.Load<Texture2D>("MainCharacter");
+            spriteEC = content_manager.Load<Texture2D>("EnemyCharacter");
         }
 
         private Microsoft.Xna.Framework.Color convert_color(Colour color) {
@@ -90,6 +91,8 @@ namespace RobotParty
                     return Microsoft.Xna.Framework.Color.White;
                 case Colour.Blue:
                     return Microsoft.Xna.Framework.Color.Blue;
+                case Colour.Pink:
+                    return Microsoft.Xna.Framework.Color.Pink;
                 default:
                     return Microsoft.Xna.Framework.Color.Black;
             }
@@ -101,7 +104,15 @@ namespace RobotParty
         public void drawText(string text, Point top_left_coordinate, int size, Colour color) {
             sprite_batch.DrawString(default_font, text, new Vector2(top_left_coordinate.X, top_left_coordinate.Y), convert_color(color));
         }
-        
+
+        public void drawMainCharacter(Point top_left_coordinate, float width, float height, Colour color) {
+            sprite_batch.Draw(spriteMC, new Rectangle((int)top_left_coordinate.X, (int)top_left_coordinate.Y, (int)width, (int)height), convert_color(color));
+        }
+
+        public void drawEnemy(Point top_left_coordinate, float width, float height, Colour color) {
+            sprite_batch.Draw(spriteEC, new Rectangle((int)top_left_coordinate.X, (int)top_left_coordinate.Y, (int)width, (int)height), convert_color(color));
+        }
+
         // implement drawImage
         public void drawImage() {
             throw new NotImplementedException();
