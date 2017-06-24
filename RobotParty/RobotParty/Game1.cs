@@ -49,7 +49,9 @@ namespace RobotParty
                 Exit();
 
             screenmanagers[level].Update(updatevisitor, (float)gameTime.ElapsedGameTime.TotalMilliseconds);
+            
             base.Update(gameTime);
+            
         }
 
         protected override void Draw(GameTime gameTime) {

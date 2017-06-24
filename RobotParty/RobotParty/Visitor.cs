@@ -116,59 +116,71 @@ namespace RobotParty
         IonCollision collisioncalculator;
         List<Ielement> newlist = new List<Ielement>();
         List<Ielement> removelist = new List<Ielement>();
+        float EnemyTimeCounter = 0.0f;
+        float FriendlyTimeCounter = 0.0f;
+        float lastEnemyBullet;
+        float lastFriendlyBullet;
 
         public UpdateVisitor(IinputManager inputmanager, IonCollision collisioncalculator) {
             this.inputmanager = inputmanager;
             this.collisioncalculator = collisioncalculator;
-
         }
 
         public void onEnemyCharacter(EnemyCharacter character, ScreenManager screenmanager, float dt) {
+
             Tuple<int, int> characterpos = new Tuple<int, int>(character.getPos().Item1 + 25, character.getPos().Item2 + 25);
 
             foreach (var direction in character.GetDirection()) {
                 character.Move(direction, dt);
             }
-            switch (character.RandomShot())
-            {
-                case 0:
 
-                    newlist.Add(new EnemyBullet(characterpos, new Tuple<int, int>(1, 0),screenmanager));
-                    break;
-                case 1:
 
-                    newlist.Add(new EnemyBullet(characterpos, new Tuple<int, int>(1, 1),screenmanager));
-                    break;
-                case 2:
+            
+            EnemyTimeCounter += dt;
+            if (EnemyTimeCounter > 1000.0f) {
+                EnemyTimeCounter = 0.0f;
+                //Console.WriteLine(dt.ToString());
+                switch (character.RandomShot()) {
 
-                    newlist.Add(new EnemyBullet(characterpos, new Tuple<int, int>(0, 1),screenmanager));
-                    break;
-                case 3:
+                    case 0:
+                        newlist.Add(new EnemyBullet(characterpos, new Tuple<int, int>(1, 0), screenmanager));
+                        break;
+                    case 1:
 
-                    newlist.Add(new EnemyBullet(characterpos, new Tuple<int, int>(-1, 0),screenmanager));
-                    break;
-                case 4:
+                        newlist.Add(new EnemyBullet(characterpos, new Tuple<int, int>(1, 1), screenmanager));
+                        break;
+                    case 2:
 
-                    newlist.Add(new EnemyBullet(characterpos, new Tuple<int, int>(-1, 1),screenmanager));
-                    break;
-                case 5:
+                        newlist.Add(new EnemyBullet(characterpos, new Tuple<int, int>(0, 1), screenmanager));
+                        break;
+                    case 3:
 
-                    newlist.Add(new EnemyBullet(characterpos, new Tuple<int, int>(0, -1),screenmanager));
-                    break;
-                case 6:
+                        newlist.Add(new EnemyBullet(characterpos, new Tuple<int, int>(-1, 0), screenmanager));
+                        break;
+                    case 4:
 
-                    newlist.Add(new EnemyBullet(characterpos, new Tuple<int, int>(-1, -1),screenmanager));
-                    break;
-                case 7:
+                        newlist.Add(new EnemyBullet(characterpos, new Tuple<int, int>(-1, 1), screenmanager));
+                        break;
+                    case 5:
 
-                    newlist.Add(new EnemyBullet(characterpos, new Tuple<int, int>(1, -1),screenmanager));
-                    break;
+                        newlist.Add(new EnemyBullet(characterpos, new Tuple<int, int>(0, -1), screenmanager));
+                        break;
+                    case 6:
+
+                        newlist.Add(new EnemyBullet(characterpos, new Tuple<int, int>(-1, -1), screenmanager));
+                        break;
+                    case 7:
+
+                        newlist.Add(new EnemyBullet(characterpos, new Tuple<int, int>(1, -1), screenmanager));
+                        break;
+                }
             }
+            
         }
 
         public void onMainCharacter(MainCharacter character, ScreenManager screenmanager, float dt)
         {
-
+            
             if(character.health < 0) {
                 Console.WriteLine("you lose");
             }
@@ -188,7 +200,6 @@ namespace RobotParty
                     if (el is EnemyBullet)
                     {
                         character.health -= 50;
-                        Console.WriteLine("Hit by bullet");
                         removelist.Add(el);
                     }
                 }
@@ -203,67 +214,62 @@ namespace RobotParty
                      
             }
 
-            foreach (var el in inputmanager.onInput())
-            {
+            FriendlyTimeCounter += dt;
+            if(FriendlyTimeCounter > 100.0f) {
+                FriendlyTimeCounter = 0.0f;
+                foreach (var el in inputmanager.onInput()) {
 
-                if (el == "UpRight")
-                {
-                    var directionX = 1;
-                    var directionY = -1;
-                    newlist.Add(new FriendlyBullet(new Tuple<int, int>(character.position.Item1 + 28, character.position.Item2 + 28), new Tuple<int, int>(directionX, directionY), screenmanager));
-                    break;
-                }
+                    if (el == "UpRight") {
+                        var directionX = 1;
+                        var directionY = -1;
+                        newlist.Add(new FriendlyBullet(new Tuple<int, int>(character.position.Item1 + 28, character.position.Item2 + 28), new Tuple<int, int>(directionX, directionY), screenmanager));
+                        break;
+                    }
 
-                if (el == "UpLeft")
-                {
-                    var directionX = -1;
-                    var directionY = -1;
-                    newlist.Add(new FriendlyBullet(new Tuple<int, int>(character.position.Item1 + 28, character.position.Item2 + 28), new Tuple<int, int>(directionX, directionY), screenmanager));
-                    break;
-                }
+                    if (el == "UpLeft") {
+                        var directionX = -1;
+                        var directionY = -1;
+                        newlist.Add(new FriendlyBullet(new Tuple<int, int>(character.position.Item1 + 28, character.position.Item2 + 28), new Tuple<int, int>(directionX, directionY), screenmanager));
+                        break;
+                    }
 
-                if (el == "DownLeft")
-                {
-                    var directionX = -1;
-                    var directionY = 1;
-                    newlist.Add(new FriendlyBullet(new Tuple<int, int>(character.position.Item1 + 28, character.position.Item2 + 28), new Tuple<int, int>(directionX, directionY), screenmanager));
-                    break;
-                }
+                    if (el == "DownLeft") {
+                        var directionX = -1;
+                        var directionY = 1;
+                        newlist.Add(new FriendlyBullet(new Tuple<int, int>(character.position.Item1 + 28, character.position.Item2 + 28), new Tuple<int, int>(directionX, directionY), screenmanager));
+                        break;
+                    }
 
-                if (el == "DownRight")
-                {
-                    var directionX = 1;
-                    var directionY = 1;
-                    newlist.Add(new FriendlyBullet(new Tuple<int, int>(character.position.Item1 + 28, character.position.Item2 + 28), new Tuple<int, int>(directionX, directionY), screenmanager));
-                    break;
-                }
-                if (el == "Up")
-                {
-                    var directionX = 0;
-                    var directionY = -1;
-                    newlist.Add(new FriendlyBullet(new Tuple<int, int>(character.position.Item1 + 28, character.position.Item2 + 28), new Tuple<int, int>(directionX, directionY), screenmanager));
-                    break;
-                }
-                if (el == "Down")
-                {
-                    var directionX = 0;
-                    var directionY = 1;
-                    newlist.Add(new FriendlyBullet(new Tuple<int, int>(character.position.Item1 + 28, character.position.Item2 + 28), new Tuple<int, int>(directionX, directionY), screenmanager));
-                    break;
-                }
-                if (el == "Right")
-                {
-                    var directionX = 1;
-                    var directionY = 0;
-                    newlist.Add(new FriendlyBullet(new Tuple<int, int>(character.position.Item1 + 28, character.position.Item2 + 28), new Tuple<int, int>(directionX, directionY), screenmanager));
-                    break;
-                }
-                if (el == "Left")
-                {
-                    var directionX = -1;
-                    var directionY = 0;
-                    newlist.Add(new FriendlyBullet(new Tuple<int, int>(character.position.Item1 + 28, character.position.Item2 + 28), new Tuple<int, int>(directionX, directionY), screenmanager));
-                    break;
+                    if (el == "DownRight") {
+                        var directionX = 1;
+                        var directionY = 1;
+                        newlist.Add(new FriendlyBullet(new Tuple<int, int>(character.position.Item1 + 28, character.position.Item2 + 28), new Tuple<int, int>(directionX, directionY), screenmanager));
+                        break;
+                    }
+                    if (el == "Up") {
+                        var directionX = 0;
+                        var directionY = -1;
+                        newlist.Add(new FriendlyBullet(new Tuple<int, int>(character.position.Item1 + 28, character.position.Item2 + 28), new Tuple<int, int>(directionX, directionY), screenmanager));
+                        break;
+                    }
+                    if (el == "Down") {
+                        var directionX = 0;
+                        var directionY = 1;
+                        newlist.Add(new FriendlyBullet(new Tuple<int, int>(character.position.Item1 + 28, character.position.Item2 + 28), new Tuple<int, int>(directionX, directionY), screenmanager));
+                        break;
+                    }
+                    if (el == "Right") {
+                        var directionX = 1;
+                        var directionY = 0;
+                        newlist.Add(new FriendlyBullet(new Tuple<int, int>(character.position.Item1 + 28, character.position.Item2 + 28), new Tuple<int, int>(directionX, directionY), screenmanager));
+                        break;
+                    }
+                    if (el == "Left") {
+                        var directionX = -1;
+                        var directionY = 0;
+                        newlist.Add(new FriendlyBullet(new Tuple<int, int>(character.position.Item1 + 28, character.position.Item2 + 28), new Tuple<int, int>(directionX, directionY), screenmanager));
+                        break;
+                    }
                 }
             }
         }
