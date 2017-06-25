@@ -37,6 +37,7 @@ namespace RobotParty
                     elements.Add(mainCharacter);
                     elements.Add(new EnemyCharacter(new Tuple<int, int>(10, 10), 50, 30, mainCharacter, this));
                     elements.Add(new PickUpCharacter(new Tuple<int, int>(300, 300), 50, 1, this));
+                    elements.Add(new VillainCharacter(new Tuple<int, int>(400, 300), 50, 1, this));
                     break;
                     // todo add more characters when finished making those
             }
@@ -105,10 +106,10 @@ namespace RobotParty
     //Enemy character
     public class EnemyCharacter : Character {
         MainCharacter mainCharacter;
-        ScreenManager screenmanager;
+       // ScreenManager screenmanager;
         public EnemyCharacter(Tuple<int, int> position, int health, int speed, MainCharacter mainCharacter, ScreenManager screenmanager) : base(position, health, speed, screenmanager) {
             this.mainCharacter = mainCharacter;
-            this.screenmanager = screenmanager;
+           // this.screenmanager = screenmanager;
         }
 
         public override void Draw(Ielementvisitor drawvisitor, float dt) {
@@ -156,6 +157,39 @@ namespace RobotParty
         public override void Update(Ielementvisitor updatevisitor, float dt) {
             updatevisitor.onPickUpCharacter(this, screenmanager, dt);
         }
+    }
+
+    public class VillainCharacter : Character
+    {
+
+        int index = 1;
+
+        public VillainCharacter(Tuple<int, int> position, int health, int speed, ScreenManager screenmanager) : base(position, health, speed, screenmanager)
+        {
+        }
+
+        public override void Draw(Ielementvisitor drawvisitor, float dt)
+        {
+            drawvisitor.onVillainCharacter(this, screenmanager, dt, index);
+        }
+
+        public override void Update(Ielementvisitor updatevisitor, float dt)
+        {
+
+            updatevisitor.onVillainCharacter(this, screenmanager, dt, index);
+        }
+        public void IndexSet(int i)
+        {
+            this.index = i;
+        }
+
+        public void IndexPlus(int i)
+        {
+            this.index += i;
+        }
+
+        
+
     }
 
     public class ProjectileFactory

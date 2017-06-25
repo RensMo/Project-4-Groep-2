@@ -107,6 +107,7 @@ namespace RobotParty
         void onScreenmanager(ScreenManager screenmanager, float dt);
         void onEnemyCharacter(EnemyCharacter character, ScreenManager screenmanager, float dt);
         void onPickUpCharacter(PickUpCharacter character, ScreenManager screenmanager, float dt);
+        void onVillainCharacter(VillainCharacter character, ScreenManager screenmanager, float dt, int index);
     }
 
     // implement onchar, onproj
@@ -279,6 +280,49 @@ namespace RobotParty
 
         }
 
+        public void onVillainCharacter(VillainCharacter character, ScreenManager screenmanager, float dt, int index)
+        {
+            //Nothing to update. Stays at same spot.
+            // Random rnd = new Random();
+            // int index = rnd.Next(1, 4);
+
+            
+           if (index >= 1 && index <= 100) {
+                character.position = new Tuple<int, int>(character.position.Item1 + 1, character.position.Item2);
+                
+                character.IndexPlus(1);
+               // if (indextwo == 10) {  }
+                
+            }
+           else if (index >= 101 && index <= 200)
+            {
+                character.position = new Tuple<int, int>(character.position.Item1, character.position.Item2 - 1);
+                
+                character.IndexPlus(1);
+               // if (indextwo == 20) {  }
+            }
+           else if (index >= 201 && index <= 300)
+            {
+                character.position = new Tuple<int, int>(character.position.Item1 - 1, character.position.Item2);
+                
+                character.IndexPlus(1);
+               // if (indextwo == 30) {  }
+            }
+           else if (index >= 301 && index <= 400)
+            {
+                character.position = new Tuple<int, int>(character.position.Item1, character.position.Item2 + 1);
+                
+
+                character.IndexPlus(1);
+            }
+
+           else if (index>= 401 && index <= 500)
+            {
+                character.IndexSet(1);
+            }
+            
+        }
+
         public void onProjectile(Projectile projectile, ScreenManager screenmanager, float dt) {
             projectile.position = new Tuple<int, int>(projectile.position.Item1 + projectile.direction.Item1, projectile.position.Item2 + projectile.direction.Item2);
             foreach (var el in screenmanager.elements) {
@@ -314,6 +358,8 @@ namespace RobotParty
             newlist = new List<Ielement>();
             
         }
+
+        
     }
 
     // implement onchar, onproj, onscreen
@@ -327,7 +373,7 @@ namespace RobotParty
 
         public void onEnemyCharacter(EnemyCharacter character, ScreenManager screenmanager, float dt) {
             var point = new Microsoft.Xna.Framework.Point(character.position.Item1, character.position.Item2);
-            drawmanager.drawEnemy(point, 60, 60, Colour.Black);
+            drawmanager.drawEnemy(point, 60, 60, Colour.White);
         }
 
         public void onMainCharacter(MainCharacter Character, ScreenManager screenmanager, float dt)
@@ -344,6 +390,8 @@ namespace RobotParty
             drawmanager.drawRectangle(point, 10, 10, Colour.Pink);
         }
 
+        
+
         public void onProjectile(Projectile Projectile, ScreenManager screenmanager, float dt)
         {
                 var point = new Microsoft.Xna.Framework.Point(Projectile.position.Item1, Projectile.position.Item2);
@@ -357,6 +405,12 @@ namespace RobotParty
             foreach (Ielement el in ScreenManager.elements) {
                 el.Draw(this, dt);
             }
+        }
+
+        public void onVillainCharacter(VillainCharacter character, ScreenManager screenmanager, float dt, int index)
+        {
+            var point = new Microsoft.Xna.Framework.Point(character.position.Item1, character.position.Item2);
+            drawmanager.drawEnemy(point, 60, 60, Colour.White);
         }
     }
 }
