@@ -26,15 +26,32 @@ namespace RobotParty
             el2Y = element2.getPos().Item2;
 
             if(element1 is EnemyCharacter && element2 is FriendlyBullet) {
-                el1Y += 25;
+                el1Y += 20;
                 el1X += 20;
                 el2X += 2;
                 el2Y += 2;
                 if (el2X > el1X){
-                    if (el2X < (el1X + 10)) {
+                    if (el2X < (el1X + 15)) {
                         if (el2Y > el1Y) {
-                            if (el2Y < (el1Y + 20)) {
+                            if (el2Y < (el1Y + 25)) {
                                 collision = true;
+                                Console.WriteLine("enemychar");
+                            }
+                        }
+                    }
+                }
+            }
+            else if (element1 is VillainCharacter && element2 is FriendlyBullet) {
+                el1Y += 20;
+                el1X += 20;
+                el2X += 2;
+                el2Y += 2;
+                if (el2X > el1X) {
+                    if (el2X < (el1X + 15)) {
+                        if (el2Y > el1Y) {
+                            if (el2Y < (el1Y + 25)) {
+                                collision = true;
+                                Console.WriteLine("villainchar");
                             }
                         }
                     }
@@ -58,14 +75,47 @@ namespace RobotParty
             }
 
             else if(element1 is MainCharacter && element2 is PickUpCharacter) {
-                el1Y += 25;
+                el1Y += 20;
                 el1X += 20;
                 if (el2X > el1X) {
-                    if (el2X < (el1X + 10)) {
+                    if (el2X < (el1X + 15)) {
                         if (el2Y > el1Y) {
-                            if (el2Y < (el1Y + 10)) {
+                            if (el2Y < (el1Y + 15)) {
                                 collision = true;
                                 Console.WriteLine("main/pickup");
+                            }
+                        }
+                    }
+                }
+            }
+            else if (element1 is MainCharacter && element2 is EnemyCharacter) {
+                el1Y += 20;
+                el1X += 20;
+                el2X += 25;
+                el2Y += 25;
+                if (el2X > el1X) {
+                    if (el2X < (el1X + 15)) {
+                        if (el2Y > el1Y) {
+                            if (el2Y < (el1Y + 25)) {
+                                collision = true;
+                                Console.WriteLine("main/enemy");
+                            }
+                        }
+                    }
+                }
+            }
+
+            else if (element1 is MainCharacter && element2 is VillainCharacter) {
+                el1Y += 20;
+                el1X += 20;
+                el2X += 25;
+                el2Y += 25;
+                if (el2X > el1X) {
+                    if (el2X < (el1X + 15)) {
+                        if (el2Y > el1Y) {
+                            if (el2Y < (el1Y + 25)) {
+                                collision = true;
+                                Console.WriteLine("main/villain");
                             }
                         }
                     }
@@ -118,7 +168,7 @@ namespace RobotParty
         List<Ielement> newlist = new List<Ielement>();
         List<Ielement> removelist = new List<Ielement>();
         float EnemyTimeCounter = 0.0f;
-        float FriendlyTimeCounter = 0.0f;
+        float FriendlyTimeCounter = 1000.0f;
         float lastEnemyBullet;
         float lastFriendlyBullet;
 
@@ -190,7 +240,11 @@ namespace RobotParty
                 if(collisioncalculator.Collision(character, el)) {
                     // check if it's an enemy character
                     if(el is EnemyCharacter) {
-                        character.health -= 50;
+                        removelist.Add(character);
+                    }
+
+                    if(el is VillainCharacter) {
+                        removelist.Add(character);
                     }
                     if(el is PickUpCharacter) {
                         character.health = 500;
@@ -216,59 +270,60 @@ namespace RobotParty
             }
 
             FriendlyTimeCounter += dt;
-            if(FriendlyTimeCounter > 100.0f) {
+            if(FriendlyTimeCounter > 500.0f) {
                 FriendlyTimeCounter = 0.0f;
                 foreach (var el in inputmanager.onInput()) {
 
                     if (el == "UpRight") {
+
                         var directionX = 1;
                         var directionY = -1;
-                        newlist.Add(new FriendlyBullet(new Tuple<int, int>(character.position.Item1 + 28, character.position.Item2 + 28), new Tuple<int, int>(directionX, directionY), screenmanager));
+                        newlist.Add(new FriendlyBullet(new Tuple<int, int>(character.position.Item1 + 28, character.position.Item2 + 28), new Tuple<int, int>((int)(Math.Round(directionX + 1000 * dt / 1000)), (int)(Math.Round(directionY - 1000 * dt / 1000))), screenmanager));
                         break;
                     }
 
                     if (el == "UpLeft") {
                         var directionX = -1;
                         var directionY = -1;
-                        newlist.Add(new FriendlyBullet(new Tuple<int, int>(character.position.Item1 + 28, character.position.Item2 + 28), new Tuple<int, int>(directionX, directionY), screenmanager));
+                        newlist.Add(new FriendlyBullet(new Tuple<int, int>(character.position.Item1 + 28, character.position.Item2 + 28), new Tuple<int, int>((int)(Math.Round(directionX - 1000 * dt / 1000)), (int)(Math.Round(directionY - 1000 * dt / 1000))), screenmanager));
                         break;
                     }
 
                     if (el == "DownLeft") {
                         var directionX = -1;
                         var directionY = 1;
-                        newlist.Add(new FriendlyBullet(new Tuple<int, int>(character.position.Item1 + 28, character.position.Item2 + 28), new Tuple<int, int>(directionX, directionY), screenmanager));
+                        newlist.Add(new FriendlyBullet(new Tuple<int, int>(character.position.Item1 + 28, character.position.Item2 + 28), new Tuple<int, int>((int)(Math.Round(directionX - 1000 * dt / 1000)), (int)(Math.Round(directionY + 1000 * dt / 1000))), screenmanager));
                         break;
                     }
 
                     if (el == "DownRight") {
                         var directionX = 1;
                         var directionY = 1;
-                        newlist.Add(new FriendlyBullet(new Tuple<int, int>(character.position.Item1 + 28, character.position.Item2 + 28), new Tuple<int, int>(directionX, directionY), screenmanager));
+                        newlist.Add(new FriendlyBullet(new Tuple<int, int>(character.position.Item1 + 28, character.position.Item2 + 28), new Tuple<int, int>((int)(Math.Round(directionX + 1000 * dt / 1000)), (int)(Math.Round(directionY + 1000 * dt / 1000))), screenmanager));
                         break;
                     }
                     if (el == "Up") {
                         var directionX = 0;
                         var directionY = -1;
-                        newlist.Add(new FriendlyBullet(new Tuple<int, int>(character.position.Item1 + 28, character.position.Item2 + 28), new Tuple<int, int>(directionX, directionY), screenmanager));
+                        newlist.Add(new FriendlyBullet(new Tuple<int, int>(character.position.Item1 + 28, character.position.Item2 + 28), new Tuple<int, int>((int)(Math.Round(directionX * dt / 1000)), (int)(Math.Round(directionY - 1000 * dt / 1000))), screenmanager));
                         break;
                     }
                     if (el == "Down") {
                         var directionX = 0;
                         var directionY = 1;
-                        newlist.Add(new FriendlyBullet(new Tuple<int, int>(character.position.Item1 + 28, character.position.Item2 + 28), new Tuple<int, int>(directionX, directionY), screenmanager));
+                        newlist.Add(new FriendlyBullet(new Tuple<int, int>(character.position.Item1 + 28, character.position.Item2 + 28), new Tuple<int, int>((int)(Math.Round(directionX * dt / 1000)), (int)(Math.Round(directionY + 1000 * dt / 1000))), screenmanager));
                         break;
                     }
                     if (el == "Right") {
                         var directionX = 1;
                         var directionY = 0;
-                        newlist.Add(new FriendlyBullet(new Tuple<int, int>(character.position.Item1 + 28, character.position.Item2 + 28), new Tuple<int, int>(directionX, directionY), screenmanager));
+                        newlist.Add(new FriendlyBullet(new Tuple<int, int>(character.position.Item1 + 28, character.position.Item2 + 28), new Tuple<int, int>((int)(Math.Round(directionX + 1000 * dt / 1000)), (int)(Math.Round(directionY * dt / 1000))), screenmanager));
                         break;
                     }
                     if (el == "Left") {
                         var directionX = -1;
                         var directionY = 0;
-                        newlist.Add(new FriendlyBullet(new Tuple<int, int>(character.position.Item1 + 28, character.position.Item2 + 28), new Tuple<int, int>(directionX, directionY), screenmanager));
+                        newlist.Add(new FriendlyBullet(new Tuple<int, int>(character.position.Item1 + 28, character.position.Item2 + 28), new Tuple<int, int>((int)(Math.Round(directionX - 1000 * dt / 1000)), (int)(Math.Round(directionY * dt / 1000))), screenmanager));
                         break;
                     }
                 }
@@ -326,9 +381,21 @@ namespace RobotParty
         public void onProjectile(Projectile projectile, ScreenManager screenmanager, float dt) {
             projectile.position = new Tuple<int, int>(projectile.position.Item1 + projectile.direction.Item1, projectile.position.Item2 + projectile.direction.Item2);
             foreach (var el in screenmanager.elements) {
-                if (el is EnemyCharacter) {
-                    if (collisioncalculator.Collision(el, projectile)) {
+                //if (el is EnemyCharacter) {
+                //    if (collisioncalculator.Collision(el, projectile)) {
+                //        removelist.Add(el);
+                //    }
+                //}
+                if(el is VillainCharacter) {
+                    if(collisioncalculator.Collision(el, projectile)) {
                         removelist.Add(el);
+                        break;
+                    }
+                }
+                if(el is EnemyCharacter) {
+                    if(collisioncalculator.Collision(el, projectile)) {
+                        removelist.Add(el);
+                        break;
                     }
                 }
             }
