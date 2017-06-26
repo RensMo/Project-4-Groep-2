@@ -9,7 +9,7 @@ namespace RobotParty
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        int level;
+        public int level;
 
         public Game1()
         {
@@ -21,16 +21,15 @@ namespace RobotParty
         IDrawManager drawmanager;
         Ielementvisitor updatevisitor;
         Ielementvisitor drawvisitor;
-        List<ScreenManager> screenmanagers;
+        ScreenManager screenmanager;
         IonCollision collisioncalculator;
 
         protected override void Initialize()
         {
             base.Initialize();
             this.IsMouseVisible = true;
-            screenmanagers = new List<ScreenManager>();
-            screenmanagers.Add(new ScreenManager());
-            screenmanagers[0].Create(0);
+            screenmanager = new ScreenManager();
+            screenmanager.Create(0);
             inputmanager = new PCInputAdapter();
             collisioncalculator = new onCollision();
             updatevisitor = new UpdateVisitor(inputmanager, collisioncalculator);
@@ -48,7 +47,7 @@ namespace RobotParty
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            screenmanagers[level].Update(updatevisitor, (float)gameTime.ElapsedGameTime.TotalMilliseconds);
+            screenmanager.Update(updatevisitor, (float)gameTime.ElapsedGameTime.TotalMilliseconds);
             
             base.Update(gameTime);
             
@@ -58,7 +57,7 @@ namespace RobotParty
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             spriteBatch.Begin();
-            screenmanagers[0].Draw(drawvisitor, 0f);
+            screenmanager.Draw(drawvisitor, 0f);
             spriteBatch.End();
             base.Draw(gameTime);
 

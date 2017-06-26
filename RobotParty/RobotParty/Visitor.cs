@@ -18,14 +18,16 @@ namespace RobotParty
         int el1Y;
         int el2X;
         int el2Y;
+        
 
         public bool Collision(Ielement element1, Ielement element2) {
             el1X = element1.getPos().Item1;
             el1Y = element1.getPos().Item2;
             el2X = element2.getPos().Item1;
             el2Y = element2.getPos().Item2;
+            collision = false;
 
-            if(element1 is EnemyCharacter && element2 is FriendlyBullet) {
+            if (element1 is EnemyCharacter && element2 is FriendlyBullet) {
                 el1Y += 20;
                 el1X += 20;
                 el2X += 2;
@@ -36,6 +38,7 @@ namespace RobotParty
                             if (el2Y < (el1Y + 25)) {
                                 collision = true;
                                 Console.WriteLine("enemychar");
+                                
                             }
                         }
                     }
@@ -52,6 +55,7 @@ namespace RobotParty
                             if (el2Y < (el1Y + 25)) {
                                 collision = true;
                                 Console.WriteLine("villainchar");
+                                
                             }
                         }
                     }
@@ -68,6 +72,7 @@ namespace RobotParty
                         if (el2Y > el1Y) {
                             if (el2Y < (el1Y + 20)) {
                                 collision = true;
+                                
                             }
                         }
                     }
@@ -83,6 +88,7 @@ namespace RobotParty
                             if (el2Y < (el1Y + 15)) {
                                 collision = true;
                                 Console.WriteLine("main/pickup");
+                                
                             }
                         }
                     }
@@ -99,6 +105,7 @@ namespace RobotParty
                             if (el2Y < (el1Y + 25)) {
                                 collision = true;
                                 Console.WriteLine("main/enemy");
+                                
                             }
                         }
                     }
@@ -116,6 +123,7 @@ namespace RobotParty
                             if (el2Y < (el1Y + 25)) {
                                 collision = true;
                                 Console.WriteLine("main/villain");
+                                
                             }
                         }
                     }
@@ -140,6 +148,7 @@ namespace RobotParty
             //}
             else {
                 collision = false;
+                
             }
             return collision;
         }
@@ -171,6 +180,9 @@ namespace RobotParty
         float FriendlyTimeCounter = 1000.0f;
         float lastEnemyBullet;
         float lastFriendlyBullet;
+        bool pickupchar = true;
+        int level = 0;
+        
 
         public UpdateVisitor(IinputManager inputmanager, IonCollision collisioncalculator) {
             this.inputmanager = inputmanager;
@@ -236,32 +248,93 @@ namespace RobotParty
                 Console.WriteLine("you lose");
             }
 
-            foreach(var el in screenmanager.elements) {
-                if(collisioncalculator.Collision(character, el)) {
-                    // check if it's an enemy character
-                    if(el is EnemyCharacter) {
-                        removelist.Add(character);
-                    }
+            foreach (var el in screenmanager.elements)
+            {
+                //    if (collisioncalculator.Collision(character, el))
+                //    {
+                //        //check if it's an enemy character
+                //        if (el is EnemyCharacter)
+                //        {
+                //            removelist.Add(character);
+                //            Console.WriteLine("coll enemy");
+                //            break;
+                //        }
 
-                    if(el is VillainCharacter) {
-                        removelist.Add(character);
-                    }
-                    if(el is PickUpCharacter) {
-                        character.health = 500;
-                        removelist.Add(el);
-                        screenmanager.score += 100;
-                    }
-                    // check if it's an enemy bullet
-                    if (el is EnemyBullet)
+                //        else if (el is VillainCharacter)
+                //        {
+                //            removelist.Add(character);
+                //            Console.WriteLine("coll villain");
+
+                //            break;
+                //        }
+                //        else if (el is PickUpCharacter)
+                //        {
+                //            character.health = 500;
+                //            removelist.Add(el);
+                //            screenmanager.score += 100;
+                //            break;
+                //        }
+                //        // check if it's an enemy bullet
+                //        if (el is EnemyBullet)
+                //        {
+                //            character.health -= 50;
+                //            removelist.Add(el);
+                //            break;
+                //        }
+                //    }
+                //}
+
+                if (el is EnemyBullet)
+                {
+
+                    if (collisioncalculator.Collision(character, el))
                     {
+                        
                         character.health -= 50;
                         removelist.Add(el);
+                        break;
                     }
                 }
 
+                else if (el is EnemyCharacter)
+                {
+
+                    if (collisioncalculator.Collision(character, el))
+                    {
+                        removelist.Add(character);
+                        Console.WriteLine("coll enemy");
+                        break;
+                    }
+                }
+
+                else if (el is VillainCharacter)
+                {
+
+                    if (collisioncalculator.Collision(character, el))
+                    {
+                        removelist.Add(character);
+                        Console.WriteLine("coll villain");
+                        break;
+                    }
+                }
+
+                else if (el is PickUpCharacter)
+                {
+
+                    if (collisioncalculator.Collision(character, el))
+                    {
+                        removelist.Add(el);
+                        screenmanager.score += 100;
+                        Console.WriteLine("coll pickup character");
+                        break;
+                    }
+                }
             }
 
-            foreach(var el in inputmanager.onInput()) {
+
+
+
+                foreach (var el in inputmanager.onInput()) {
                 if(el == "A") { character.Move("left", dt); }
                 if(el == "D") { character.Move("right", dt); }
                 if(el == "W") { character.Move("up", dt); }
@@ -330,6 +403,7 @@ namespace RobotParty
             }
         }
 
+
         public void onPickUpCharacter(PickUpCharacter character, ScreenManager screenmanager, float dt) {
             //Nothing to update. Stays at same spot.
 
@@ -381,20 +455,17 @@ namespace RobotParty
         public void onProjectile(Projectile projectile, ScreenManager screenmanager, float dt) {
             projectile.position = new Tuple<int, int>(projectile.position.Item1 + projectile.direction.Item1, projectile.position.Item2 + projectile.direction.Item2);
             foreach (var el in screenmanager.elements) {
-                //if (el is EnemyCharacter) {
-                //    if (collisioncalculator.Collision(el, projectile)) {
-                //        removelist.Add(el);
-                //    }
-                //}
                 if(el is VillainCharacter) {
                     if(collisioncalculator.Collision(el, projectile)) {
+                        screenmanager.score += 5;
                         removelist.Add(el);
                         break;
                     }
                 }
-                if(el is EnemyCharacter) {
+                else if (el is EnemyCharacter) {
                     if(collisioncalculator.Collision(el, projectile)) {
-                        removelist.Add(el);
+                        screenmanager.score += 15;
+                        removelist.Add(el);                        
                         break;
                     }
                 }
@@ -403,12 +474,33 @@ namespace RobotParty
 
         public void onScreenmanager(ScreenManager screenmanager, float dt)
         {
+            pickupchar = false;
             foreach(Ielement el in screenmanager.elements) {
                 if(el.getPos().Item1 < 0 || el.getPos().Item2 < 0 || el.getPos().Item1 > 800 || el.getPos().Item2 > 500) {
-                    removelist.Add(el);
+                    if(el is Projectile) { removelist.Add(el); }
                 }
+                if (el is Character) {
+                    // check for borders
+                    var pos = el.getPos();
+                    if (pos.Item1 < - 20) { el.setPos(new Tuple<int, int>(- 20, pos.Item2)); }
+                    if (pos.Item1 > 760) { el.setPos(new Tuple<int, int>(760, pos.Item2)); }
+                    if (pos.Item2 < - 15) { el.setPos(new Tuple<int, int>(pos.Item1, - 15)); }
+                    if (pos.Item2 > 435) { el.setPos(new Tuple<int, int>(pos.Item1, 435)); }
+                }
+
+
+                if (el is PickUpCharacter) {
+                    pickupchar = true;
+                }
+
                 el.Update(this, dt);
             }
+            // change level logic
+            if(pickupchar == false) {
+                level += 1;
+                screenmanager.Create(level);
+            }
+
             int i = 0;
             foreach(Ielement el in newlist) {
 
@@ -418,6 +510,7 @@ namespace RobotParty
 
             int x = 0;
             while (x < removelist.Count()) {
+                Console.WriteLine(removelist[x].ToString());
                 screenmanager.elements.Remove(removelist[x]);
                 x += 1;
             }
@@ -445,10 +538,10 @@ namespace RobotParty
 
         public void onMainCharacter(MainCharacter Character, ScreenManager screenmanager, float dt)
         {
-            var ScorePoint = new Microsoft.Xna.Framework.Point(375, 0);
+            
             var point = new Microsoft.Xna.Framework.Point(Character.position.Item1, Character.position.Item2);
             drawmanager.drawMainCharacter(point, 60, 60, Colour.White);
-            drawmanager.drawText("Score:" + screenmanager.score.ToString(), ScorePoint, 5, Colour.Black);
+            
 
         }
 
@@ -468,7 +561,8 @@ namespace RobotParty
 
         public void onScreenmanager(ScreenManager ScreenManager, float dt)
         {
-
+            var ScorePoint = new Microsoft.Xna.Framework.Point(375, 0);
+            drawmanager.drawText("Score:" + ScreenManager.score.ToString(), ScorePoint, 5, Colour.Black);
             foreach (Ielement el in ScreenManager.elements) {
                 el.Draw(this, dt);
             }

@@ -11,6 +11,7 @@ namespace RobotParty
         void Draw(Ielementvisitor drawvisitor, float dt);
         void Update(Ielementvisitor updatevisitor, float dt);
         Tuple<int, int> getPos();
+        void setPos(Tuple<int, int> newpos);
     }
 
     // implement draw, create
@@ -34,10 +35,15 @@ namespace RobotParty
                 // 2. At least one PickupCharacter
                 // 3. One MainCharacter
                 case 0:
-                    elements.Add(mainCharacter);
                     elements.Add(new EnemyCharacter(new Tuple<int, int>(10, 10), 50, 30, mainCharacter, this));
-                    elements.Add(new PickUpCharacter(new Tuple<int, int>(300, 300), 50, 1, this));
                     elements.Add(new VillainCharacter(new Tuple<int, int>(400, 300), 50, 1, this));
+                    elements.Add(new PickUpCharacter(new Tuple<int, int>(300, 300), 50, 1, this));
+                    elements.Add(mainCharacter);
+                    break;
+                case 1:
+                    elements = new List<Ielement>();
+                    elements.Add(new PickUpCharacter(new Tuple<int, int>(100, 300), 50, 1, this));
+                    elements.Add(mainCharacter);
                     break;
                     // todo add more characters when finished making those
             }
@@ -67,6 +73,7 @@ namespace RobotParty
         }
 
         public Tuple<int,int> getPos() { return position; }
+        public void setPos(Tuple<int, int> newpos) { position = newpos; }
 
         public abstract void Draw(Ielementvisitor drawvisitor, float dt);
         
@@ -210,6 +217,7 @@ namespace RobotParty
         }
 
         public Tuple<int, int> getPos() { return position; }
+        public void setPos(Tuple<int, int> newpos) { position = newpos; }
 
         public void Draw(Ielementvisitor drawvisitor, float dt) {
             drawvisitor.onProjectile(this, screenmanager, dt);
