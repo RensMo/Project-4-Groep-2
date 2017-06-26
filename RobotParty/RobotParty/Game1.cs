@@ -2,8 +2,6 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
-using System.Threading.Tasks;
-
 
 namespace RobotParty
 {
@@ -12,7 +10,6 @@ namespace RobotParty
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         int level;
-        
 
         public Game1()
         {
@@ -52,7 +49,9 @@ namespace RobotParty
                 Exit();
 
             screenmanagers[level].Update(updatevisitor, (float)gameTime.ElapsedGameTime.TotalMilliseconds);
+            
             base.Update(gameTime);
+            
         }
 
         protected override void Draw(GameTime gameTime) {
@@ -64,6 +63,5 @@ namespace RobotParty
             base.Draw(gameTime);
 
         }
-       
     }
 }

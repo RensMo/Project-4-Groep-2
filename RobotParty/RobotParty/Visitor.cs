@@ -25,9 +25,69 @@ namespace RobotParty
             el2X = element2.getPos().Item1;
             el2Y = element2.getPos().Item2;
 
-            if(el1X >= el2X && el1Y >= el2Y && el1X <= el2X + 10 && el1Y <= el2Y + 10) {
-                collision = true;
+            if(element1 is EnemyCharacter && element2 is FriendlyBullet) {
+                el1Y += 25;
+                el1X += 20;
+                el2X += 2;
+                el2Y += 2;
+                if (el2X > el1X){
+                    if (el2X < (el1X + 10)) {
+                        if (el2Y > el1Y) {
+                            if (el2Y < (el1Y + 20)) {
+                                collision = true;
+                            }
+                        }
+                    }
+                }
             }
+
+            else if(element1 is MainCharacter && element2 is EnemyBullet) {
+                el1X += 25;
+                el1Y += 25;
+                el2X += 2;
+                el2Y += 2;
+                if (el2X > el1X) {
+                    if (el2X < (el1X + 10)) {
+                        if (el2Y > el1Y) {
+                            if (el2Y < (el1Y + 20)) {
+                                collision = true;
+                            }
+                        }
+                    }
+                }
+            }
+
+            else if(element1 is MainCharacter && element2 is PickUpCharacter) {
+                el1Y += 25;
+                el1X += 20;
+                if (el2X > el1X) {
+                    if (el2X < (el1X + 10)) {
+                        if (el2Y > el1Y) {
+                            if (el2Y < (el1Y + 10)) {
+                                collision = true;
+                                Console.WriteLine("main/pickup");
+                            }
+                        }
+                    }
+                }
+            }
+
+            //if(element1 is Character && element2 is Character) {
+            //    if (el2X > el1X) {
+            //        if (el2X < (el1X + 10)) {
+            //            if (el2Y > el1Y) {
+            //                if (el2Y < (el1Y + 20)) {
+            //                    collision = true;
+            //                }
+            //            }
+            //        }
+            //    }
+            //}
+            // if projectile.X > character.X && projectile.X < Character.X + 60 && projectile.Y > Character.Y && projectile.Y < character.Y - 60
+
+            //if(el1X >= el2X && el1Y >= el2Y && el1X <= el2X + 10 && el1Y <= el2Y + 10) {
+            //    collision = true;
+            //}
             else {
                 collision = false;
             }
@@ -42,11 +102,12 @@ namespace RobotParty
 
     public interface Ielementvisitor
     {
-        void onMainCharacter(MainCharacter character, ScreenManager screenmanager);
-        void onProjectile(Projectile projectile, float dt);
+        void onMainCharacter(MainCharacter character, ScreenManager screenmanager, float dt);
+        void onProjectile(Projectile projectile, ScreenManager screenmanager, float dt);
         void onScreenmanager(ScreenManager screenmanager, float dt);
-        void onEnemyCharacter(EnemyCharacter character, ScreenManager screenmanager);
-        void onPickUpCharacter(PickUpCharacter character, ScreenManager screenmanager);
+        void onEnemyCharacter(EnemyCharacter character, ScreenManager screenmanager, float dt);
+        void onPickUpCharacter(PickUpCharacter character, ScreenManager screenmanager, float dt);
+        void onVillainCharacter(VillainCharacter character, ScreenManager screenmanager, float dt, int index);
     }
 
     // implement onchar, onproj
@@ -56,72 +117,71 @@ namespace RobotParty
         IonCollision collisioncalculator;
         List<Ielement> newlist = new List<Ielement>();
         List<Ielement> removelist = new List<Ielement>();
+        float EnemyTimeCounter = 0.0f;
+        float FriendlyTimeCounter = 0.0f;
+        float lastEnemyBullet;
+        float lastFriendlyBullet;
 
         public UpdateVisitor(IinputManager inputmanager, IonCollision collisioncalculator) {
             this.inputmanager = inputmanager;
             this.collisioncalculator = collisioncalculator;
-
         }
 
-        public void onEnemyCharacter(EnemyCharacter character, ScreenManager screenmanager) {
-            foreach (var direction in character.GetDirection()) {
-                character.Move(direction);
-            }
-             
-                    switch (character.RandomShot())
-                    {
-                        
-                        case 0:
-                            
-                            newlist.Add(new EnemyBullet(character.position, new Tuple<int, int>(1, 0)));
-                            break;
-                        case 1:
-                              
-                            newlist.Add(new EnemyBullet(character.position, new Tuple<int, int>(1, 1)));
-                            break;
-                        case 2:
-                            
-                            newlist.Add(new EnemyBullet(character.position, new Tuple<int, int>(0, 1)));
-                            break;
-                        case 3:
-                            
-                            newlist.Add(new EnemyBullet(character.position, new Tuple<int, int>(-1, 0)));
-                            break;
-                        case 4:
-                            
-                            newlist.Add(new EnemyBullet(character.position, new Tuple<int, int>(-1, 1)));
-                            break;
-                        case 5:
-                            
-                            newlist.Add(new EnemyBullet(character.position, new Tuple<int, int>(0, -1)));
-                            break;
-                        case 6:
-                            
-                            newlist.Add(new EnemyBullet(character.position, new Tuple<int, int>(-1, -1)));
-                            break;
-                        case 7:
-                            
-                            newlist.Add(new EnemyBullet(character.position, new Tuple<int, int>(1, -1)));
-                            break;
-                    }
-               
+        public void onEnemyCharacter(EnemyCharacter character, ScreenManager screenmanager, float dt) {
 
-            foreach (var el in screenmanager.elements) {
-                if(collisioncalculator.Collision(character, el)) {
-                    
-                    if(el is FriendlyBullet) {
-                        screenmanager.score += 5;
-                        removelist.Add(character);
-                        
-                        Console.WriteLine("removeEnemy;");
-                    }
+            Tuple<int, int> characterpos = new Tuple<int, int>(character.getPos().Item1 + 25, character.getPos().Item2 + 25);
+
+            foreach (var direction in character.GetDirection()) {
+                character.Move(direction, dt);
+            }
+
+
+            
+            EnemyTimeCounter += dt;
+            if (EnemyTimeCounter > 1000.0f) {
+                EnemyTimeCounter = 0.0f;
+                //Console.WriteLine(dt.ToString());
+                switch (character.RandomShot()) {
+
+                    case 0:
+                        newlist.Add(new EnemyBullet(characterpos, new Tuple<int, int>(1, 0), screenmanager));
+                        break;
+                    case 1:
+
+                        newlist.Add(new EnemyBullet(characterpos, new Tuple<int, int>(1, 1), screenmanager));
+                        break;
+                    case 2:
+
+                        newlist.Add(new EnemyBullet(characterpos, new Tuple<int, int>(0, 1), screenmanager));
+                        break;
+                    case 3:
+
+                        newlist.Add(new EnemyBullet(characterpos, new Tuple<int, int>(-1, 0), screenmanager));
+                        break;
+                    case 4:
+
+                        newlist.Add(new EnemyBullet(characterpos, new Tuple<int, int>(-1, 1), screenmanager));
+                        break;
+                    case 5:
+
+                        newlist.Add(new EnemyBullet(characterpos, new Tuple<int, int>(0, -1), screenmanager));
+                        break;
+                    case 6:
+
+                        newlist.Add(new EnemyBullet(characterpos, new Tuple<int, int>(-1, -1), screenmanager));
+                        break;
+                    case 7:
+
+                        newlist.Add(new EnemyBullet(characterpos, new Tuple<int, int>(1, -1), screenmanager));
+                        break;
                 }
             }
+            
         }
 
-        public void onMainCharacter(MainCharacter character, ScreenManager screenmanager)
+        public void onMainCharacter(MainCharacter character, ScreenManager screenmanager, float dt)
         {
-
+            
             if(character.health < 0) {
                 Console.WriteLine("you lose");
             }
@@ -131,61 +191,148 @@ namespace RobotParty
                     // check if it's an enemy character
                     if(el is EnemyCharacter) {
                         character.health -= 50;
-                        
-
+                    }
+                    if(el is PickUpCharacter) {
+                        character.health = 500;
+                        removelist.Add(el);
+                        screenmanager.score += 100;
                     }
                     // check if it's an enemy bullet
-                    if(el is EnemyBullet)
+                    if (el is EnemyBullet)
                     {
                         character.health -= 50;
-                        Console.WriteLine("Hit by bullet");
                         removelist.Add(el);
                     }
                 }
+
             }
 
             foreach(var el in inputmanager.onInput()) {
-                if(el == "A") { character.Move("left"); }
-                if(el == "D") { character.Move("right"); }
-                if(el == "W") { character.Move("up"); }
-                if(el == "S") { character.Move("down"); }
+                if(el == "A") { character.Move("left", dt); }
+                if(el == "D") { character.Move("right", dt); }
+                if(el == "W") { character.Move("up", dt); }
+                if(el == "S") { character.Move("down", dt); }
                      
             }
 
-            foreach(var el in inputmanager.onInput()) { 
-                if (el == "Up") {
-                    var directionX = 0;
-                    var directionY = -1;
-                    newlist.Add(new FriendlyBullet(new Tuple<int, int>(character.position.Item1 + 28, character.position.Item2 + 28), new Tuple<int, int>(directionX, directionY)));
-                    break;
-                }
-                if (el == "Down") {
-                    var directionX = 0;
-                    var directionY = 1;
-                    newlist.Add(new FriendlyBullet(new Tuple<int, int>(character.position.Item1 + 28, character.position.Item2 + 28), new Tuple<int, int>(directionX, directionY)));
-                    break;
-                }
-                if (el == "Right") {
-                    var directionX = 1;
-                    var directionY = 0;
-                    newlist.Add(new FriendlyBullet(new Tuple<int, int>(character.position.Item1 + 28, character.position.Item2 + 28), new Tuple<int, int>(directionX, directionY)));
-                    break;
-                }
-                if (el == "Left") {
-                    var directionX = -1;
-                    var directionY = 0;
-                    newlist.Add(new FriendlyBullet(new Tuple<int, int>(character.position.Item1 + 28, character.position.Item2 + 28), new Tuple<int, int>(directionX, directionY)));
-                    break;
+            FriendlyTimeCounter += dt;
+            if(FriendlyTimeCounter > 100.0f) {
+                FriendlyTimeCounter = 0.0f;
+                foreach (var el in inputmanager.onInput()) {
+
+                    if (el == "UpRight") {
+                        var directionX = 1;
+                        var directionY = -1;
+                        newlist.Add(new FriendlyBullet(new Tuple<int, int>(character.position.Item1 + 28, character.position.Item2 + 28), new Tuple<int, int>(directionX, directionY), screenmanager));
+                        break;
+                    }
+
+                    if (el == "UpLeft") {
+                        var directionX = -1;
+                        var directionY = -1;
+                        newlist.Add(new FriendlyBullet(new Tuple<int, int>(character.position.Item1 + 28, character.position.Item2 + 28), new Tuple<int, int>(directionX, directionY), screenmanager));
+                        break;
+                    }
+
+                    if (el == "DownLeft") {
+                        var directionX = -1;
+                        var directionY = 1;
+                        newlist.Add(new FriendlyBullet(new Tuple<int, int>(character.position.Item1 + 28, character.position.Item2 + 28), new Tuple<int, int>(directionX, directionY), screenmanager));
+                        break;
+                    }
+
+                    if (el == "DownRight") {
+                        var directionX = 1;
+                        var directionY = 1;
+                        newlist.Add(new FriendlyBullet(new Tuple<int, int>(character.position.Item1 + 28, character.position.Item2 + 28), new Tuple<int, int>(directionX, directionY), screenmanager));
+                        break;
+                    }
+                    if (el == "Up") {
+                        var directionX = 0;
+                        var directionY = -1;
+                        newlist.Add(new FriendlyBullet(new Tuple<int, int>(character.position.Item1 + 28, character.position.Item2 + 28), new Tuple<int, int>(directionX, directionY), screenmanager));
+                        break;
+                    }
+                    if (el == "Down") {
+                        var directionX = 0;
+                        var directionY = 1;
+                        newlist.Add(new FriendlyBullet(new Tuple<int, int>(character.position.Item1 + 28, character.position.Item2 + 28), new Tuple<int, int>(directionX, directionY), screenmanager));
+                        break;
+                    }
+                    if (el == "Right") {
+                        var directionX = 1;
+                        var directionY = 0;
+                        newlist.Add(new FriendlyBullet(new Tuple<int, int>(character.position.Item1 + 28, character.position.Item2 + 28), new Tuple<int, int>(directionX, directionY), screenmanager));
+                        break;
+                    }
+                    if (el == "Left") {
+                        var directionX = -1;
+                        var directionY = 0;
+                        newlist.Add(new FriendlyBullet(new Tuple<int, int>(character.position.Item1 + 28, character.position.Item2 + 28), new Tuple<int, int>(directionX, directionY), screenmanager));
+                        break;
+                    }
                 }
             }
         }
 
-        public void onPickUpCharacter(PickUpCharacter character, ScreenManager screenmanager) {
+        public void onPickUpCharacter(PickUpCharacter character, ScreenManager screenmanager, float dt) {
             //Nothing to update. Stays at same spot.
+
         }
 
-        public void onProjectile(Projectile projectile, float dt) {
+        public void onVillainCharacter(VillainCharacter character, ScreenManager screenmanager, float dt, int index)
+        {
+          
+            // Random rnd = new Random();
+            // int index = rnd.Next(1, 4);
+
+            
+           if (index >= 1 && index <= 100) {
+                character.position = new Tuple<int, int>(character.position.Item1 + 1, character.position.Item2);
+                
+                character.IndexPlus(1);
+               // if (indextwo == 10) {  }
+                
+            }
+           else if (index >= 101 && index <= 200)
+            {
+                character.position = new Tuple<int, int>(character.position.Item1, character.position.Item2 - 1);
+                
+                character.IndexPlus(1);
+               // if (indextwo == 20) {  }
+            }
+           else if (index >= 201 && index <= 300)
+            {
+                character.position = new Tuple<int, int>(character.position.Item1 - 1, character.position.Item2);
+                
+                character.IndexPlus(1);
+               // if (indextwo == 30) {  }
+            }
+           else if (index >= 301 && index <= 400)
+            {
+                character.position = new Tuple<int, int>(character.position.Item1, character.position.Item2 + 1);
+                
+
+                character.IndexPlus(1);
+            }
+
+           else if (index>= 401 && index <= 500)
+            {
+                character.IndexSet(1);
+            }
+            
+        }
+
+        public void onProjectile(Projectile projectile, ScreenManager screenmanager, float dt) {
             projectile.position = new Tuple<int, int>(projectile.position.Item1 + projectile.direction.Item1, projectile.position.Item2 + projectile.direction.Item2);
+            foreach (var el in screenmanager.elements) {
+                if (el is EnemyCharacter) {
+                    if (collisioncalculator.Collision(el, projectile)) {
+                        removelist.Add(el);
+                        screenmanager.score += 5;
+                    }
+                }
+            }
         }
 
         public void onScreenmanager(ScreenManager screenmanager, float dt)
@@ -200,7 +347,6 @@ namespace RobotParty
             foreach(Ielement el in newlist) {
 
                 screenmanager.elements.Add(el);
-                Console.WriteLine(i.ToString());
                 i += 1;
             }
 
@@ -213,6 +359,8 @@ namespace RobotParty
             newlist = new List<Ielement>();
             
         }
+
+        
     }
 
     // implement onchar, onproj, onscreen
@@ -224,25 +372,28 @@ namespace RobotParty
             this.drawmanager = drawmanager;
         }
 
-        public void onEnemyCharacter(EnemyCharacter character, ScreenManager screenmanager) {
+        public void onEnemyCharacter(EnemyCharacter character, ScreenManager screenmanager, float dt) {
             var point = new Microsoft.Xna.Framework.Point(character.position.Item1, character.position.Item2);
-            drawmanager.drawEnemy(point, 60, 60, Colour.Black);
+            drawmanager.drawEnemy(point, 60, 60, Colour.White);
         }
 
-        public void onMainCharacter(MainCharacter Character, ScreenManager screenmanager)
+        public void onMainCharacter(MainCharacter Character, ScreenManager screenmanager, float dt)
         {
-            var ScorePoint = new Microsoft.Xna.Framework.Point(375, 0);
+           
             var point = new Microsoft.Xna.Framework.Point(Character.position.Item1, Character.position.Item2);
             drawmanager.drawMainCharacter(point, 60, 60, Colour.White);
-            drawmanager.drawText("Score:" + screenmanager.score.ToString(), ScorePoint, 5, Colour.Black);
+            
+
         }
 
-        public void onPickUpCharacter(PickUpCharacter Character, ScreenManager screenmanager) {
+        public void onPickUpCharacter(PickUpCharacter Character, ScreenManager screenmanager, float dt) {
             var point = new Microsoft.Xna.Framework.Point(Character.position.Item1, Character.position.Item2);
             drawmanager.drawRectangle(point, 10, 10, Colour.Pink);
         }
 
-        public void onProjectile(Projectile Projectile, float dt)
+        
+
+        public void onProjectile(Projectile Projectile, ScreenManager screenmanager, float dt)
         {
                 var point = new Microsoft.Xna.Framework.Point(Projectile.position.Item1, Projectile.position.Item2);
                 drawmanager.drawRectangle(point, 4, 4, Colour.White);
@@ -251,10 +402,20 @@ namespace RobotParty
 
         public void onScreenmanager(ScreenManager ScreenManager, float dt)
         {
+            //Create point for score location on screen
+            var ScorePoint = new Microsoft.Xna.Framework.Point(375, 0);
+            //Draw the score on the screen
+            drawmanager.drawText("Score:" + ScreenManager.score.ToString(), ScorePoint, 5, Colour.Black);
 
             foreach (Ielement el in ScreenManager.elements) {
                 el.Draw(this, dt);
             }
+        }
+
+        public void onVillainCharacter(VillainCharacter character, ScreenManager screenmanager, float dt, int index)
+        {
+            var point = new Microsoft.Xna.Framework.Point(character.position.Item1, character.position.Item2);
+            drawmanager.drawEnemy(point, 60, 60, Colour.White);
         }
     }
 }
