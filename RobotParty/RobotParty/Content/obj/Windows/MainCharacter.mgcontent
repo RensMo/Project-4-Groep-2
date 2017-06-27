@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>C:/Users/rober/OneDrive/Documenten/GitHub/Project-4-Groep-2-master/RobotParty/RobotParty/Content/MainCharacter.png</SourceFile>
-  <SourceTime>2017-06-26T07:34:48+02:00</SourceTime>
-  <DestFile>C:/Users/rober/OneDrive/Documenten/GitHub/Project-4-Groep-2-master/RobotParty/RobotParty/Content/bin/Windows/MainCharacter.xnb</DestFile>
-  <DestTime>2017-06-27T09:07:31.8400395+02:00</DestTime>
+  <SourceFile>C:/Users/Dani/Desktop/Project 4/RobotParty/RobotParty/Content/MainCharacter.png</SourceFile>
+  <SourceTime>2017-06-23T11:13:11.888935+02:00</SourceTime>
+  <DestFile>C:/Users/Dani/Desktop/Project 4/RobotParty/RobotParty/Content/bin/Windows/MainCharacter.xnb</DestFile>
+  <DestTime>2017-06-27T14:41:57.244932+02:00</DestTime>
   <Importer>TextureImporter</Importer>
-  <ImporterTime>2017-06-22T20:38:56+02:00</ImporterTime>
+  <ImporterTime>2017-03-01T16:05:36+01:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
-  <ProcessorTime>2017-06-22T20:38:56+02:00</ProcessorTime>
+  <ProcessorTime>2017-03-01T16:05:36+01:00</ProcessorTime>
   <Parameters>
     <Key>ColorKeyColor</Key>
     <Value>255,0,255,255</Value>

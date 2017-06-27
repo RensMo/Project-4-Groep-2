@@ -152,7 +152,7 @@ namespace RobotParty
     {
         void onMainCharacter(MainCharacter character, ScreenManager screenmanager, float dt);
         void onProjectile(Projectile projectile, ScreenManager screenmanager, float dt);
-        void onScreenmanager(ScreenManager screenmanager, float dt);
+        void onScreenmanager(ScreenManager screenmanager, float dt, MainCharacter MainCharacter);
         void onEnemyCharacter(EnemyCharacter character, ScreenManager screenmanager, float dt);
         void onPickUpCharacter(PickUpCharacter character, ScreenManager screenmanager, float dt);
         void onVillainCharacter(VillainCharacter character, ScreenManager screenmanager, float dt, int index);
@@ -173,7 +173,12 @@ namespace RobotParty
         bool pickupchar = true;
         int level = 0;
         bool database = true;
-        
+        bool GetTop5 = true;
+        int score;
+        int scoreindex = 1;
+
+
+
 
         public UpdateVisitor(IinputManager inputmanager, IonCollision collisioncalculator) {
             this.inputmanager = inputmanager;
@@ -238,6 +243,7 @@ namespace RobotParty
             
             if(character.health < 0) {
                 Console.WriteLine("you lose");
+                removelist.Add(character);
             }
 
             foreach (var el in screenmanager.elements)
@@ -432,7 +438,7 @@ namespace RobotParty
         }
         // foreach element in the list, update. foreach element in list of new elements, add them, foreach element in list of removed element, remove them.
         // also check if elements are out of the borders. 
-        public void onScreenmanager(ScreenManager screenmanager, float dt)
+        public void onScreenmanager(ScreenManager screenmanager, float dt, MainCharacter MainCharacter)
         {
             pickupchar = false;
             bool mainchar = false;
@@ -466,14 +472,29 @@ namespace RobotParty
                 screenmanager.Create(level);
             }
             // end of the game logic
-            if(mainchar == false) {
-                if (database) {
+            if (mainchar == false)
+            {
+                if (screenmanager.lives != 0)
+                {
+                    screenmanager.lives -= 1;
+                    MainCharacter.health = 200;
+                    screenmanager.Create(level);
+                    
+
+
+                }
+
+                else
+            {
+                if (database)
+                {
                     // set up a database connection and add a score
                     string cs = @"server=185.114.157.171;userid=specific_groep2;password=123kaan;database=specific_project4";
                     MySqlConnection con = null;
                     MySqlDataReader rdr = null;
 
-                    try {
+                    try
+                    {
                         con = new MySqlConnection(cs);
                         con.Open();
 
@@ -483,16 +504,20 @@ namespace RobotParty
 
                         cmd.ExecuteNonQuery();
                     }
-                    catch (MySqlException ex) {
+                    catch (MySqlException ex)
+                    {
                         Console.WriteLine("Error: {0}", ex.ToString());
 
                     }
-                    finally {
-                        if (rdr != null) {
+                    finally
+                    {
+                        if (rdr != null)
+                        {
                             rdr.Close();
                         }
 
-                        if (con != null) {
+                        if (con != null)
+                        {
                             con.Close();
                         }
                         database = false;
@@ -500,9 +525,57 @@ namespace RobotParty
                     }
                 }
 
-                level = 10;
+
+                    if (GetTop5)
+                    {
+                        // set up a database connection and add a score
+                        string cs = @"server=185.114.157.171;userid=specific_groep2;password=123kaan;database=specific_project4";
+                        MySqlConnection con = null;
+                        MySqlDataReader rdr = null;
+
+                        try
+                        {
+                            con = new MySqlConnection(cs);
+                            con.Open();
+
+                            string stm = "SELECT * FROM score ORDER BY score DESC LIMIT 5";
+                            MySqlCommand cmd = new MySqlCommand(stm, con);
+                            rdr = cmd.ExecuteReader();
+                            while (rdr.Read())
+                            {
+                                score = rdr.GetInt32("score");
+                                screenmanager.Top5Score.Add(new text(new Tuple<int, int>(350, 220 + (scoreindex * 20)), screenmanager,"Score "+ scoreindex.ToString()+ ":  "+ score.ToString()));
+                                scoreindex += 1;
+                            }
+                            cmd.ExecuteNonQuery();
+                        }
+                        catch (MySqlException ex)
+                        {
+                            Console.WriteLine("Error: {0}", ex.ToString());
+
+                        }
+                        finally
+                        {
+                            if (rdr != null)
+                            {
+                                rdr.Close();
+                            }
+
+                            if (con != null)
+                            {
+                                con.Close();
+                            }
+                            GetTop5 = false;
+
+                        }
+                    }
+                    level = 10;
                 screenmanager.Create(level);
+                    
+                   
             }
+            }
+            
 
             int i = 0;
             foreach(Ielement el in newlist) {
@@ -564,10 +637,16 @@ namespace RobotParty
             
         }
 
-        public void onScreenmanager(ScreenManager ScreenManager, float dt)
+        public void onScreenmanager(ScreenManager ScreenManager, float dt,MainCharacter MainCharacter)
         {
+            var LivesPoint = new Microsoft.Xna.Framework.Point(0, 0);
             var ScorePoint = new Microsoft.Xna.Framework.Point(375, 0);
             drawmanager.drawText("Score:" + ScreenManager.score.ToString(), ScorePoint, 5, Colour.Black);
+            drawmanager.drawText("Lives left:" + ScreenManager.lives.ToString(), LivesPoint, 5, Colour.Black);
+            foreach(text text in ScreenManager.Top5Score)
+            {
+                text.Draw(this, dt);
+            }
             foreach (Ielement el in ScreenManager.elements) {
                 el.Draw(this, dt);
             }

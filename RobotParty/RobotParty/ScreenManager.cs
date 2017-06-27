@@ -22,14 +22,16 @@ namespace RobotParty
         public List<Ielement> elements = new List<Ielement>();
         MainCharacter mainCharacter;
         public int score = 0;
+        public int lives = 3;
+        public List<text> Top5Score = new List<text>();
 
         public ScreenManager() {
             mainCharacter = new MainCharacter(new Tuple<int, int>(100, 100), 200, 100,  this);
         }
 
-        public void Update(Ielementvisitor visitor, float dt) { visitor.onScreenmanager(this, dt); }
+        public void Update(Ielementvisitor visitor, float dt) { visitor.onScreenmanager(this, dt,mainCharacter); }
 
-        public void Draw(Ielementvisitor visitor, float dt) { visitor.onScreenmanager(this, dt); }
+        public void Draw(Ielementvisitor visitor, float dt) { visitor.onScreenmanager(this, dt,mainCharacter); }
 
         public void Create(int option) {
             switch (option) {
@@ -38,6 +40,7 @@ namespace RobotParty
                 // 2. At least one PickupCharacter
                 // 3. One MainCharacter
                 case 0:
+                    elements = new List<Ielement>();
                     elements.Add(new EnemyCharacter(new Tuple<int, int>(100, 10), 50, 30, mainCharacter, this));
                     elements.Add(new EnemyCharacter(new Tuple<int, int>(10, 100), 50, 30, mainCharacter, this));
                     elements.Add(new EnemyCharacter(new Tuple<int, int>(50, 10), 50, 30, mainCharacter, this));
