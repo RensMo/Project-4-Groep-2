@@ -35,8 +35,9 @@ namespace RobotParty
                 // 2. At least one PickupCharacter
                 // 3. One MainCharacter
                 case 0:
-                    elements.Add(new EnemyCharacter(new Tuple<int, int>(10, 10), 50, 30, mainCharacter, this));
-                    elements.Add(new VillainCharacter(new Tuple<int, int>(400, 300), 50, 1, this));
+                    //elements.Add(new FollowEnemyCharacter(new Tuple<int, int>(10, 10), 50, 30, this, mainCharacter));
+                    elements.Add(new CircleEnemyCharacter(new Tuple<int, int>(300, 300), 50, 30, this, 100));
+                    //elements.Add(new VillainCharacter(new Tuple<int, int>(400, 300), 50, 1, this));
                     elements.Add(new PickUpCharacter(new Tuple<int, int>(300, 300), 50, 1, this));
                     elements.Add(mainCharacter);
                     break;
@@ -111,30 +112,44 @@ namespace RobotParty
     }
 
     //Enemy character
-    public class EnemyCharacter : Character {
-        MainCharacter mainCharacter;
-       // ScreenManager screenmanager;
-        public EnemyCharacter(Tuple<int, int> position, int health, int speed, MainCharacter mainCharacter, ScreenManager screenmanager) : base(position, health, speed, screenmanager) {
-            this.mainCharacter = mainCharacter;
-           // this.screenmanager = screenmanager;
+    public abstract class EnemyCharacter : Character
+    {
+        public EnemyCharacter(Tuple<int, int> position, int health, int speed, ScreenManager screenmanager) : base(position, health, speed, screenmanager)
+        {
         }
 
-        public override void Draw(Ielementvisitor drawvisitor, float dt) {
-            drawvisitor.onEnemyCharacter(this, screenmanager, dt);
-        }
-
-        public override void Update(Ielementvisitor updatevisitor, float dt) {
-            updatevisitor.onEnemyCharacter(this, screenmanager, dt);
-        }
         public int RandomShot()
         {
-
             Random rnd = new Random();
             int RandomDirection = rnd.Next(0, 8);
 
             return RandomDirection;
         }
-        public List<string> GetDirection() {
+
+        public override void Draw(Ielementvisitor drawvisitor, float dt)
+        {
+            drawvisitor.onEnemyCharacter(this, screenmanager, dt);
+        }
+
+        public override void Update(Ielementvisitor updatevisitor, float dt)
+        {
+            updatevisitor.onEnemyCharacter(this, screenmanager, dt);
+        }
+
+        public abstract List<string> GetDirection();
+    }
+
+    public class FollowEnemyCharacter : EnemyCharacter
+    {
+        MainCharacter mainCharacter;
+
+        public FollowEnemyCharacter(Tuple<int, int> position, int health, int speed, ScreenManager screenmanager, MainCharacter mainCharacter) : base(position, health, speed, screenmanager)
+        {
+            this.mainCharacter = mainCharacter;
+        }
+
+        public override List<string> GetDirection()
+        {
             var direction = new List<string>();
 
             var main_posX = mainCharacter.position.Item1;
@@ -148,6 +163,71 @@ namespace RobotParty
 
             if (main_posX - enemy_posX < 0) { direction.Add("left"); }
             else if (main_posX - enemy_posX > 0) { direction.Add("right"); }
+            return direction;
+        }
+
+    }
+
+    public class CircleEnemyCharacter : EnemyCharacter
+    {
+        int speed;
+        int radius;
+        Tuple<int, int> position_0; //initial position
+        Tuple<int, int> circleStep;
+        int step;
+
+        public CircleEnemyCharacter(Tuple<int, int> position, int health, int speed, ScreenManager screenmanager, int radius) : base(position, health, speed, screenmanager)
+        {
+            this.radius = radius;
+            this.speed = speed;
+
+            position_0 = new Tuple<int,int>(position.Item1 - radius, position.Item2);
+            step = 1;
+            circleStep = GetTarget();
+
+        }
+
+        private Tuple<int, int> GetTarget() {
+            Tuple<int, int> target;
+            
+            var x_0 = position_0.Item1;
+            var y_0 = position_0.Item2;
+            
+            var x_1 = radius * Math.Cos(2* Math.PI / 360 * step) + x_0;
+            var y_1 = radius * Math.Sin(2 * Math.PI / 360 * step) + y_0;
+
+            target = new Tuple<int, int>((int)Math.Round(x_1), (int)Math.Round(y_1));
+            if (step == 360) step = 0;
+            step++;
+            return target;
+        }
+
+        public override List<string> GetDirection()
+        {
+            var direction = new List<string>();
+            //Console.WriteLine("---");
+            //Console.WriteLine("Position: " + position);
+            if (circleStep.Item1 == position.Item1 && circleStep.Item2 == position.Item2) {
+                circleStep = GetTarget();
+                Console.WriteLine("Target: " + circleStep);
+            }
+            
+
+            var positionX = position.Item1;
+            var positionY = position.Item2;
+
+            var targetX = circleStep.Item1;
+            var targetY = circleStep.Item2;
+
+            if (positionX > targetX) { direction.Add("left"); }
+            else if (positionX < targetX) { direction.Add("right"); }
+
+            if (positionY > targetY) { direction.Add("up"); }
+            else if (positionY < targetY) { direction.Add("down"); }
+
+            Console.WriteLine("Direction: ");
+            foreach (var shit in direction) { Console.WriteLine(shit); };          
+
             return direction;
         }
     }

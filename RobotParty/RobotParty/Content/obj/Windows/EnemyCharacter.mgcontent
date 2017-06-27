@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>C:/Users/Dani/Desktop/Nieuwe error versie/RobotParty/RobotParty/Content/EnemyCharacter.png</SourceFile>
-  <SourceTime>2017-06-25T06:10:50+02:00</SourceTime>
-  <DestFile>C:/Users/Dani/Desktop/Nieuwe error versie/RobotParty/RobotParty/Content/bin/Windows/EnemyCharacter.xnb</DestFile>
-  <DestTime>2017-06-26T15:07:36.9131761+02:00</DestTime>
+  <SourceFile>C:/Users/Rens/Documents/HR/HR1617/OP4/Project App/Project-4-Groep-2/RobotParty/RobotParty/Content/EnemyCharacter.png</SourceFile>
+  <SourceTime>2017-06-26T09:07:58.730224+02:00</SourceTime>
+  <DestFile>C:/Users/Rens/Documents/HR/HR1617/OP4/Project App/Project-4-Groep-2/RobotParty/RobotParty/Content/bin/Windows/EnemyCharacter.xnb</DestFile>
+  <DestTime>2017-06-27T10:39:30.7315305+02:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2017-03-01T16:05:36+01:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
