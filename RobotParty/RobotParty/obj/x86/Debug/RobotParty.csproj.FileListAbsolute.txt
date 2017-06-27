@@ -105,3 +105,37 @@ C:\Users\Dani\Desktop\Nieuwe error versie\RobotParty\RobotParty\bin\Windows\x86\
 C:\Users\Dani\Desktop\Nieuwe error versie\RobotParty\RobotParty\obj\x86\Debug\RobotParty.csprojResolveAssemblyReference.cache
 C:\Users\Dani\Desktop\Nieuwe error versie\RobotParty\RobotParty\obj\x86\Debug\RobotParty.exe
 C:\Users\Dani\Desktop\Nieuwe error versie\RobotParty\RobotParty\obj\x86\Debug\RobotParty.pdb
+C:\Users\rober\OneDrive\Documenten\GitHub\Project-4-Groep-2-master\RobotParty\RobotParty\obj\x86\Debug\RobotParty.csprojResolveAssemblyReference.cache
+C:\Users\rober\OneDrive\Documenten\GitHub\Project-4-Groep-2-master\RobotParty\RobotParty\bin\Windows\x86\Debug\RobotParty.exe.config
+C:\Users\rober\OneDrive\Documenten\GitHub\Project-4-Groep-2-master\RobotParty\RobotParty\bin\Windows\x86\Debug\MySql.Data.dll
+C:\Users\Dani\Desktop\Project 4\RobotParty\RobotParty\bin\Windows\x86\Debug\Content\Arial.xnb
+C:\Users\Dani\Desktop\Project 4\RobotParty\RobotParty\bin\Windows\x86\Debug\Content\EnemyCharacter.xnb
+C:\Users\Dani\Desktop\Project 4\RobotParty\RobotParty\bin\Windows\x86\Debug\Content\MainCharacter.xnb
+C:\Users\Dani\Desktop\Project 4\RobotParty\RobotParty\bin\Windows\x86\Debug\Content\white_pixel.xnb
+C:\Users\Dani\Desktop\Project 4\RobotParty\RobotParty\bin\Windows\x86\Debug\RobotParty.exe.config
+C:\Users\Dani\Desktop\Project 4\RobotParty\RobotParty\bin\Windows\x86\Debug\RobotParty.exe
+C:\Users\Dani\Desktop\Project 4\RobotParty\RobotParty\bin\Windows\x86\Debug\RobotParty.pdb
+C:\Users\Dani\Desktop\Project 4\RobotParty\RobotParty\bin\Windows\x86\Debug\MonoGame.Framework.dll
+C:\Users\Dani\Desktop\Project 4\RobotParty\RobotParty\bin\Windows\x86\Debug\MySql.Data.dll
+C:\Users\Dani\Desktop\Project 4\RobotParty\RobotParty\bin\Windows\x86\Debug\SharpDX.MediaFoundation.dll
+C:\Users\Dani\Desktop\Project 4\RobotParty\RobotParty\bin\Windows\x86\Debug\SharpDX.dll
+C:\Users\Dani\Desktop\Project 4\RobotParty\RobotParty\bin\Windows\x86\Debug\SharpDX.XAudio2.dll
+C:\Users\Dani\Desktop\Project 4\RobotParty\RobotParty\bin\Windows\x86\Debug\SharpDX.DXGI.dll
+C:\Users\Dani\Desktop\Project 4\RobotParty\RobotParty\bin\Windows\x86\Debug\SharpDX.Direct3D11.dll
+C:\Users\Dani\Desktop\Project 4\RobotParty\RobotParty\bin\Windows\x86\Debug\SharpDX.Direct2D1.dll
+C:\Users\Dani\Desktop\Project 4\RobotParty\RobotParty\bin\Windows\x86\Debug\SharpDX.XInput.dll
+C:\Users\Dani\Desktop\Project 4\RobotParty\RobotParty\bin\Windows\x86\Debug\SharpDX.Direct3D9.dll
+C:\Users\Dani\Desktop\Project 4\RobotParty\RobotParty\bin\Windows\x86\Debug\MonoGame.Framework.xml
+C:\Users\Dani\Desktop\Project 4\RobotParty\RobotParty\bin\Windows\x86\Debug\SharpDX.MediaFoundation.xml
+C:\Users\Dani\Desktop\Project 4\RobotParty\RobotParty\bin\Windows\x86\Debug\SharpDX.xml
+C:\Users\Dani\Desktop\Project 4\RobotParty\RobotParty\bin\Windows\x86\Debug\SharpDX.XAudio2.xml
+C:\Users\Dani\Desktop\Project 4\RobotParty\RobotParty\bin\Windows\x86\Debug\SharpDX.DXGI.xml
+C:\Users\Dani\Desktop\Project 4\RobotParty\RobotParty\bin\Windows\x86\Debug\SharpDX.Direct3D11.xml
+C:\Users\Dani\Desktop\Project 4\RobotParty\RobotParty\bin\Windows\x86\Debug\SharpDX.Direct2D1.xml
+C:\Users\Dani\Desktop\Project 4\RobotParty\RobotParty\bin\Windows\x86\Debug\SharpDX.XInput.xml
+C:\Users\Dani\Desktop\Project 4\RobotParty\RobotParty\bin\Windows\x86\Debug\SharpDX.Direct3D9.xml
+C:\Users\Dani\Desktop\Project 4\RobotParty\RobotParty\obj\x86\Debug\RobotParty.csprojResolveAssemblyReference.cache
+C:\Users\Dani\Desktop\Project 4\RobotParty\RobotParty\obj\x86\Debug\RobotParty.exe
+C:\Users\Dani\Desktop\Project 4\RobotParty\RobotParty\obj\x86\Debug\RobotParty.pdb
+C:\Users\Rens\Documents\HR\HR1617\OP4\Project App\Project-4-Groep-2\RobotParty\RobotParty\bin\Windows\x86\Debug\RobotParty.exe.config
+C:\Users\Rens\Documents\HR\HR1617\OP4\Project App\Project-4-Groep-2\RobotParty\RobotParty\bin\Windows\x86\Debug\MySql.Data.dll

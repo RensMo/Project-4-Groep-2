@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using static RobotParty.ScreenManager;
+using MySql.Data.MySqlClient;
+using System.Data;
 
 namespace RobotParty
 {
@@ -11,7 +13,7 @@ namespace RobotParty
     public interface IonCollision {
         bool Collision(Ielement element1, Ielement element2);
     }
-
+    // simple collision class, takes 2 elements and check if they collide. return true/false.
     public class onCollision : IonCollision {
         bool collision;
         int el1X;
@@ -63,14 +65,14 @@ namespace RobotParty
             }
 
             else if(element1 is MainCharacter && element2 is EnemyBullet) {
-                el1X += 25;
-                el1Y += 25;
+                el1X += 20;
+                el1Y += 20;
                 el2X += 2;
                 el2Y += 2;
                 if (el2X > el1X) {
-                    if (el2X < (el1X + 10)) {
+                    if (el2X < (el1X + 15)) {
                         if (el2Y > el1Y) {
-                            if (el2Y < (el1Y + 20)) {
+                            if (el2Y < (el1Y + 25)) {
                                 collision = true;
                                 
                             }
@@ -80,12 +82,14 @@ namespace RobotParty
             }
 
             else if(element1 is MainCharacter && element2 is PickUpCharacter) {
-                el1Y += 20;
-                el1X += 20;
+                el1Y += 15;
+                el1X += 25;
+                el2X += 5;
+                el2Y += 5;
                 if (el2X > el1X) {
                     if (el2X < (el1X + 15)) {
                         if (el2Y > el1Y) {
-                            if (el2Y < (el1Y + 15)) {
+                            if (el2Y < (el1Y + 25)) {
                                 collision = true;
                                 Console.WriteLine("main/pickup");
                                 
@@ -130,22 +134,7 @@ namespace RobotParty
                 }
             }
 
-            //if(element1 is Character && element2 is Character) {
-            //    if (el2X > el1X) {
-            //        if (el2X < (el1X + 10)) {
-            //            if (el2Y > el1Y) {
-            //                if (el2Y < (el1Y + 20)) {
-            //                    collision = true;
-            //                }
-            //            }
-            //        }
-            //    }
-            //}
-            // if projectile.X > character.X && projectile.X < Character.X + 60 && projectile.Y > Character.Y && projectile.Y < character.Y - 60
-
-            //if(el1X >= el2X && el1Y >= el2Y && el1X <= el2X + 10 && el1Y <= el2Y + 10) {
-            //    collision = true;
-            //}
+            
             else {
                 collision = false;
                 
@@ -163,13 +152,14 @@ namespace RobotParty
     {
         void onMainCharacter(MainCharacter character, ScreenManager screenmanager, float dt);
         void onProjectile(Projectile projectile, ScreenManager screenmanager, float dt);
-        void onScreenmanager(ScreenManager screenmanager, float dt);
+        void onScreenmanager(ScreenManager screenmanager, float dt, MainCharacter MainCharacter);
         void onEnemyCharacter(EnemyCharacter character, ScreenManager screenmanager, float dt);
         void onPickUpCharacter(PickUpCharacter character, ScreenManager screenmanager, float dt);
         void onVillainCharacter(VillainCharacter character, ScreenManager screenmanager, float dt, int index);
+        void onText(text text, ScreenManager screenmanager);
     }
 
-    // implement onchar, onproj
+    // updatevisitor is called by each element. here we describe the update logic for each element. 
     public class UpdateVisitor : Ielementvisitor
     {
         IinputManager inputmanager;
@@ -182,13 +172,20 @@ namespace RobotParty
         float lastFriendlyBullet;
         bool pickupchar = true;
         int level = 0;
-        
+        bool database = true;
+        bool GetTop5 = true;
+        int score;
+        int scoreindex = 1;
+
+
+
 
         public UpdateVisitor(IinputManager inputmanager, IonCollision collisioncalculator) {
             this.inputmanager = inputmanager;
             this.collisioncalculator = collisioncalculator;
         }
 
+        // on enemy character first changes the position, and then fires a bullet every second in a random direction.
         public void onEnemyCharacter(EnemyCharacter character, ScreenManager screenmanager, float dt) {
 
             Tuple<int, int> characterpos = new Tuple<int, int>(character.getPos().Item1 + 25, character.getPos().Item2 + 25);
@@ -202,7 +199,6 @@ namespace RobotParty
             EnemyTimeCounter += dt;
             if (EnemyTimeCounter > 1000.0f) {
                 EnemyTimeCounter = 0.0f;
-                //Console.WriteLine(dt.ToString());
                 switch (character.RandomShot()) {
 
                     case 0:
@@ -241,49 +237,17 @@ namespace RobotParty
             
         }
 
+        // here we update maincharacter. check if health is below 0, check for any collisions with opponents, and check for key input and respond properly
         public void onMainCharacter(MainCharacter character, ScreenManager screenmanager, float dt)
         {
             
             if(character.health < 0) {
                 Console.WriteLine("you lose");
+                removelist.Add(character);
             }
 
             foreach (var el in screenmanager.elements)
             {
-                //    if (collisioncalculator.Collision(character, el))
-                //    {
-                //        //check if it's an enemy character
-                //        if (el is EnemyCharacter)
-                //        {
-                //            removelist.Add(character);
-                //            Console.WriteLine("coll enemy");
-                //            break;
-                //        }
-
-                //        else if (el is VillainCharacter)
-                //        {
-                //            removelist.Add(character);
-                //            Console.WriteLine("coll villain");
-
-                //            break;
-                //        }
-                //        else if (el is PickUpCharacter)
-                //        {
-                //            character.health = 500;
-                //            removelist.Add(el);
-                //            screenmanager.score += 100;
-                //            break;
-                //        }
-                //        // check if it's an enemy bullet
-                //        if (el is EnemyBullet)
-                //        {
-                //            character.health -= 50;
-                //            removelist.Add(el);
-                //            break;
-                //        }
-                //    }
-                //}
-
                 if (el is EnemyBullet)
                 {
 
@@ -452,6 +416,7 @@ namespace RobotParty
             
         }
 
+        // here we check for collision between projectiles and enemies, if so, remove them
         public void onProjectile(Projectile projectile, ScreenManager screenmanager, float dt) {
             projectile.position = new Tuple<int, int>(projectile.position.Item1 + projectile.direction.Item1, projectile.position.Item2 + projectile.direction.Item2);
             foreach (var el in screenmanager.elements) {
@@ -471,10 +436,12 @@ namespace RobotParty
                 }
             }
         }
-
-        public void onScreenmanager(ScreenManager screenmanager, float dt)
+        // foreach element in the list, update. foreach element in list of new elements, add them, foreach element in list of removed element, remove them.
+        // also check if elements are out of the borders. 
+        public void onScreenmanager(ScreenManager screenmanager, float dt, MainCharacter MainCharacter)
         {
             pickupchar = false;
+            bool mainchar = false;
             foreach(Ielement el in screenmanager.elements) {
                 if(el.getPos().Item1 < 0 || el.getPos().Item2 < 0 || el.getPos().Item1 > 800 || el.getPos().Item2 > 500) {
                     if(el is Projectile) { removelist.Add(el); }
@@ -482,15 +449,19 @@ namespace RobotParty
                 if (el is Character) {
                     // check for borders
                     var pos = el.getPos();
-                    if (pos.Item1 < - 20) { el.setPos(new Tuple<int, int>(- 20, pos.Item2)); }
-                    if (pos.Item1 > 760) { el.setPos(new Tuple<int, int>(760, pos.Item2)); }
-                    if (pos.Item2 < - 15) { el.setPos(new Tuple<int, int>(pos.Item1, - 15)); }
-                    if (pos.Item2 > 435) { el.setPos(new Tuple<int, int>(pos.Item1, 435)); }
+                    if (pos.Item1 < - 20) { el.setPos(new Tuple<int, int>(- 19, pos.Item2)); }
+                    if (pos.Item1 > 760) { el.setPos(new Tuple<int, int>(759, pos.Item2)); }
+                    if (pos.Item2 < - 15) { el.setPos(new Tuple<int, int>(pos.Item1, - 14)); }
+                    if (pos.Item2 > 435) { el.setPos(new Tuple<int, int>(pos.Item1, 434)); }
                 }
 
 
                 if (el is PickUpCharacter) {
                     pickupchar = true;
+                }
+
+                if(el is MainCharacter) {
+                    mainchar = true;
                 }
 
                 el.Update(this, dt);
@@ -500,6 +471,111 @@ namespace RobotParty
                 level += 1;
                 screenmanager.Create(level);
             }
+            // end of the game logic
+            if (mainchar == false)
+            {
+                if (screenmanager.lives != 0)
+                {
+                    screenmanager.lives -= 1;
+                    MainCharacter.health = 200;
+                    screenmanager.Create(level);
+                    
+
+
+                }
+
+                else
+            {
+                if (database)
+                {
+                    // set up a database connection and add a score
+                    string cs = @"server=185.114.157.171;userid=specific_groep2;password=123kaan;database=specific_project4";
+                    MySqlConnection con = null;
+                    MySqlDataReader rdr = null;
+
+                    try
+                    {
+                        con = new MySqlConnection(cs);
+                        con.Open();
+
+                        string stm = "INSERT INTO score values (" + screenmanager.score.ToString() + ")";
+                        MySqlCommand cmd = new MySqlCommand(stm, con);
+                        rdr = cmd.ExecuteReader();
+
+                        cmd.ExecuteNonQuery();
+                    }
+                    catch (MySqlException ex)
+                    {
+                        Console.WriteLine("Error: {0}", ex.ToString());
+
+                    }
+                    finally
+                    {
+                        if (rdr != null)
+                        {
+                            rdr.Close();
+                        }
+
+                        if (con != null)
+                        {
+                            con.Close();
+                        }
+                        database = false;
+
+                    }
+                }
+
+
+                    if (GetTop5)
+                    {
+                        // set up a database connection and add a score
+                        string cs = @"server=185.114.157.171;userid=specific_groep2;password=123kaan;database=specific_project4";
+                        MySqlConnection con = null;
+                        MySqlDataReader rdr = null;
+
+                        try
+                        {
+                            con = new MySqlConnection(cs);
+                            con.Open();
+
+                            string stm = "SELECT * FROM score ORDER BY score DESC LIMIT 5";
+                            MySqlCommand cmd = new MySqlCommand(stm, con);
+                            rdr = cmd.ExecuteReader();
+                            while (rdr.Read())
+                            {
+                                score = rdr.GetInt32("score");
+                                screenmanager.Top5Score.Add(new text(new Tuple<int, int>(350, 220 + (scoreindex * 20)), screenmanager,"Score "+ scoreindex.ToString()+ ":  "+ score.ToString()));
+                                scoreindex += 1;
+                            }
+                            cmd.ExecuteNonQuery();
+                        }
+                        catch (MySqlException ex)
+                        {
+                            Console.WriteLine("Error: {0}", ex.ToString());
+
+                        }
+                        finally
+                        {
+                            if (rdr != null)
+                            {
+                                rdr.Close();
+                            }
+
+                            if (con != null)
+                            {
+                                con.Close();
+                            }
+                            GetTop5 = false;
+
+                        }
+                    }
+                    level = 10;
+                screenmanager.Create(level);
+                    
+                   
+            }
+            }
+            
 
             int i = 0;
             foreach(Ielement el in newlist) {
@@ -519,10 +595,12 @@ namespace RobotParty
             
         }
 
-        
+        public void onText(text text, ScreenManager screenmanager) {
+                    // nothiing to do here
+                }
     }
 
-    // implement onchar, onproj, onscreen
+    // this is where we describe the draw logic of each element, just like we update them in the updatevisitor
     class DrawVisitor : Ielementvisitor
     {
         IDrawManager drawmanager;
@@ -559,13 +637,24 @@ namespace RobotParty
             
         }
 
-        public void onScreenmanager(ScreenManager ScreenManager, float dt)
+        public void onScreenmanager(ScreenManager ScreenManager, float dt,MainCharacter MainCharacter)
         {
+            var LivesPoint = new Microsoft.Xna.Framework.Point(0, 0);
             var ScorePoint = new Microsoft.Xna.Framework.Point(375, 0);
             drawmanager.drawText("Score:" + ScreenManager.score.ToString(), ScorePoint, 5, Colour.Black);
+            drawmanager.drawText("Lives left:" + ScreenManager.lives.ToString(), LivesPoint, 5, Colour.Black);
+            foreach(text text in ScreenManager.Top5Score)
+            {
+                text.Draw(this, dt);
+            }
             foreach (Ielement el in ScreenManager.elements) {
                 el.Draw(this, dt);
             }
+        }
+
+        public void onText(text text, ScreenManager screenmanager) {
+            var point = new Microsoft.Xna.Framework.Point(text.getPos().Item1, text.getPos().Item2);
+            drawmanager.drawText(text.Text, point, 50, Colour.Black);
         }
 
         public void onVillainCharacter(VillainCharacter character, ScreenManager screenmanager, float dt, int index)
