@@ -6,6 +6,8 @@ using Microsoft.Xna.Framework.Input;
 
 namespace RobotParty
 {
+
+    // interface for all elements in the game. at the very least an element is updatable, drawable and you can get/set a position
     public interface Ielement
     {
         void Draw(Ielementvisitor drawvisitor, float dt);
@@ -14,7 +16,8 @@ namespace RobotParty
         void setPos(Tuple<int, int> newpos);
     }
 
-    // implement draw, create
+    // screenmanager is made to have a list with all the elements for the current state of the game.
+    // the screenmanager keeps track of the score and which level should be displayed
     public class ScreenManager {
         public List<Ielement> elements = new List<Ielement>();
         MainCharacter mainCharacter;
@@ -35,15 +38,42 @@ namespace RobotParty
                 // 2. At least one PickupCharacter
                 // 3. One MainCharacter
                 case 0:
-                    elements.Add(new EnemyCharacter(new Tuple<int, int>(10, 10), 50, 30, mainCharacter, this));
+                    elements.Add(new EnemyCharacter(new Tuple<int, int>(100, 10), 50, 30, mainCharacter, this));
+                    elements.Add(new EnemyCharacter(new Tuple<int, int>(10, 100), 50, 30, mainCharacter, this));
+                    elements.Add(new EnemyCharacter(new Tuple<int, int>(50, 10), 50, 30, mainCharacter, this));
+                    elements.Add(new EnemyCharacter(new Tuple<int, int>(10, 50), 50, 30, mainCharacter, this));
+                    elements.Add(new EnemyCharacter(new Tuple<int, int>(100, 300), 50, 30, mainCharacter, this));
+                    elements.Add(new EnemyCharacter(new Tuple<int, int>(150, 10), 50, 30, mainCharacter, this));
+                    elements.Add(new EnemyCharacter(new Tuple<int, int>(10, 102), 50, 30, mainCharacter, this));
+                    elements.Add(new EnemyCharacter(new Tuple<int, int>(300, 300), 50, 30, mainCharacter, this));
+                    elements.Add(new EnemyCharacter(new Tuple<int, int>(10, 250), 50, 30, mainCharacter, this));
+                    elements.Add(new EnemyCharacter(new Tuple<int, int>(50, 150), 50, 30, mainCharacter, this));
+                    elements.Add(new EnemyCharacter(new Tuple<int, int>(0, 50), 50, 30, mainCharacter, this));
+                    elements.Add(new EnemyCharacter(new Tuple<int, int>(500, 300), 50, 30, mainCharacter, this));
+                    elements.Add(new EnemyCharacter(new Tuple<int, int>(150, 400), 50, 30, mainCharacter, this));
+                    elements.Add(new EnemyCharacter(new Tuple<int, int>(250, 102), 50, 30, mainCharacter, this));
+
+
+                    elements.Add(new VillainCharacter(new Tuple<int, int>(300, 300), 50, 1, this));
+                    elements.Add(new VillainCharacter(new Tuple<int, int>(200, 300), 50, 1, this));
+                    elements.Add(new VillainCharacter(new Tuple<int, int>(100, 300), 50, 1, this));
+                    elements.Add(new VillainCharacter(new Tuple<int, int>(500, 300), 50, 1, this));
                     elements.Add(new VillainCharacter(new Tuple<int, int>(400, 300), 50, 1, this));
+                    elements.Add(new VillainCharacter(new Tuple<int, int>(400, 300), 50, 1, this));
+
                     elements.Add(new PickUpCharacter(new Tuple<int, int>(300, 300), 50, 1, this));
+                    elements.Add(new PickUpCharacter(new Tuple<int, int>(400, 300), 50, 1, this));
+                    elements.Add(new PickUpCharacter(new Tuple<int, int>(500, 300), 50, 1, this));
                     elements.Add(mainCharacter);
                     break;
                 case 1:
                     elements = new List<Ielement>();
                     elements.Add(new PickUpCharacter(new Tuple<int, int>(100, 300), 50, 1, this));
                     elements.Add(mainCharacter);
+                    break;
+                case 10:
+                    elements = new List<Ielement>();
+                    elements.Add(new text(new Tuple<int, int>(350, 200), this, "press ESC to quit."));
                     break;
                     // todo add more characters when finished making those
             }
@@ -56,7 +86,35 @@ namespace RobotParty
         public void Create() { throw new NotImplementedException(); }
     }
 
-    // implement move, shoot, update
+    // this is a simple implementation of Ielement to show text on screen.
+    public class text : Ielement {
+        Tuple<int, int> position;
+        ScreenManager screenmanager;
+        public string Text;
+
+        public text(Tuple<int,int> position, ScreenManager screenmanager, string text) {
+            this.position = position;
+            this.screenmanager = screenmanager;
+            this.Text = text;
+        }
+        public void Draw(Ielementvisitor drawvisitor, float dt) {
+            drawvisitor.onText(this, screenmanager);
+        }
+
+        public Tuple<int, int> getPos() {
+            return position;
+        }
+
+        public void setPos(Tuple<int, int> newpos) {
+            position = newpos;
+        }
+
+        public void Update(Ielementvisitor updatevisitor, float dt) {
+            updatevisitor.onText(this, screenmanager);
+        }
+    }
+
+    // abstract class character, here we define everything all characters have in common, and below we add certain character-type specific behaviour
     public abstract class Character : Ielement
     {
         public Tuple<int, int> position;
@@ -92,11 +150,9 @@ namespace RobotParty
 
     }
 
-    // implement move/shoot/update
+    // this is where we create a maincharacter class. it contains all normal character logic and calls proper visitors
     public class MainCharacter : Character
     {
-        public IinputManager shootmanager = new PCInputAdapter();
-
         public MainCharacter(Tuple<int, int> position, int health, int speed, ScreenManager screenmanager) : base(position, health, speed, screenmanager)
         {
         }
@@ -110,7 +166,7 @@ namespace RobotParty
         }
     }
 
-    //Enemy character
+    //Enemy character is a character that searches for the maincharacter and follows it. this is done with getdirection and move. it also shoots in a random direction every second
     public class EnemyCharacter : Character {
         MainCharacter mainCharacter;
        // ScreenManager screenmanager;
@@ -152,7 +208,7 @@ namespace RobotParty
         }
     }
 
-    //Pick-up character
+    //Pick-up character is the character that needs to be picked up by the main character. it is only drawn and gets removed from the list once the maincharacter hovers over it.
     public class PickUpCharacter : Character {
         public PickUpCharacter(Tuple<int, int> position, int health, int speed, ScreenManager screenmanager) : base(position, health, speed, screenmanager) {
         }
@@ -166,6 +222,7 @@ namespace RobotParty
         }
     }
 
+    // villaincharacter is a different enemy ccharacter, this one walks in squares and kill the maincharacter on collisiion
     public class VillainCharacter : Character
     {
 
@@ -204,7 +261,7 @@ namespace RobotParty
         public void Create() { throw new NotImplementedException(); }
     }
 
-    // implement update
+    // projectile is an abstract class that describes behaviour of all projectiles
     public abstract class Projectile : Ielement {
         public Tuple<int, int> position;
         public Tuple<int, int> direction;
@@ -228,6 +285,7 @@ namespace RobotParty
         }
     }
 
+    // these are extensions of projectiles so that we can implement differen collision logic. 
     public class FriendlyBullet : Projectile {
         public FriendlyBullet(Tuple<int, int> position, Tuple<int, int> direction, ScreenManager screenmanager) : base(position, direction, screenmanager) {
         }

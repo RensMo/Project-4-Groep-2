@@ -105,3 +105,6 @@ C:\Users\Dani\Desktop\Nieuwe error versie\RobotParty\RobotParty\bin\Windows\x86\
 C:\Users\Dani\Desktop\Nieuwe error versie\RobotParty\RobotParty\obj\x86\Debug\RobotParty.csprojResolveAssemblyReference.cache
 C:\Users\Dani\Desktop\Nieuwe error versie\RobotParty\RobotParty\obj\x86\Debug\RobotParty.exe
 C:\Users\Dani\Desktop\Nieuwe error versie\RobotParty\RobotParty\obj\x86\Debug\RobotParty.pdb
+C:\Users\rober\OneDrive\Documenten\GitHub\Project-4-Groep-2-master\RobotParty\RobotParty\obj\x86\Debug\RobotParty.csprojResolveAssemblyReference.cache
+C:\Users\rober\OneDrive\Documenten\GitHub\Project-4-Groep-2-master\RobotParty\RobotParty\bin\Windows\x86\Debug\RobotParty.exe.config
+C:\Users\rober\OneDrive\Documenten\GitHub\Project-4-Groep-2-master\RobotParty\RobotParty\bin\Windows\x86\Debug\MySql.Data.dll
