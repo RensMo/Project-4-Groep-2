@@ -504,68 +504,71 @@ namespace RobotDroid
         {
             // if (element.is_intersecting)
             var touchCollection = TouchPanel.GetState();
-            if (touchCollection.Count > 0)
-            {
-                //Only Fire Select Once it's been released
-                if (touchCollection[0].State == TouchLocationState.Moved || touchCollection[0].State == TouchLocationState.Pressed)
+            
+                foreach (TouchLocation tl in touchCollection)
                 {
 
-                    if (element.is_intersecting(touchCollection[0].Position))
+                    //Only Fire Select Once it's been released
+                    if (touchCollection[0].State == TouchLocationState.Moved || touchCollection[0].State == TouchLocationState.Pressed)
                     {
-                        if (element.text == "right")
+
+                        if (element.is_intersecting(tl.Position))
                         {
-                            
-                            Console.WriteLine("touch registered !!!");
-                            character.Move("right", dt);
-                        }
-                        if (element.text == "left")
-                        {
-                            Console.WriteLine("touch registered !!!");
-                            character.Move("left", dt);
-                        }
-                        if (element.text == "up")
-                        {
-                            Console.WriteLine("touch registered !!!");
-                            character.Move("up", dt);
-                        }
-                        if (element.text == "down")
-                        {
-                            Console.WriteLine("touch registered !!!");
-                            character.Move("down", dt);
+                            if (element.text == "right")
+                            {
+
+                                Console.WriteLine("touch registered !!!");
+                                character.Move("right", dt);
+                            }
+                            if (element.text == "left")
+                            {
+                                Console.WriteLine("touch registered !!!");
+                                character.Move("left", dt);
+                            }
+                            if (element.text == "up")
+                            {
+                                Console.WriteLine("touch registered !!!");
+                                character.Move("up", dt);
+                            }
+                            if (element.text == "down")
+                            {
+                                Console.WriteLine("touch registered !!!");
+                                character.Move("down", dt);
+                            }
+
+                            if (element.text == "shootup")
+                            {
+                                Console.WriteLine("touch registered !!!");
+                                var directionX = 0;
+                                var directionY = -1;
+                                newlist.Add(new FriendlyBullet(new Tuple<int, int>(character.position.Item1 + 80, character.position.Item2 + 28), new Tuple<int, int>((int)(Math.Round(directionX * dt / 1000)), (int)(Math.Round(directionY - 1000 * dt / 1000))), screenmanager));
+
+                            }
+                            if (element.text == "shootdown")
+                            {
+                                var directionX = 0;
+                                var directionY = 1;
+                                newlist.Add(new FriendlyBullet(new Tuple<int, int>(character.position.Item1 + 80, character.position.Item2 + 160), new Tuple<int, int>((int)(Math.Round(directionX * dt / 1000)), (int)(Math.Round(directionY + 1000 * dt / 1000))), screenmanager));
+
+                            }
+                            if (element.text == "shootright")
+                            {
+                                var directionX = 1;
+                                var directionY = 0;
+                                newlist.Add(new FriendlyBullet(new Tuple<int, int>(character.position.Item1 + 90, character.position.Item2 + 50), new Tuple<int, int>((int)(Math.Round(directionX + 1000 * dt / 1000)), (int)(Math.Round(directionY * dt / 1000))), screenmanager));
+
+                            }
+                            if (element.text == "shootleft")
+                            {
+                                var directionX = -1;
+                                var directionY = 0;
+                                newlist.Add(new FriendlyBullet(new Tuple<int, int>(character.position.Item1 + 40, character.position.Item2 + 50), new Tuple<int, int>((int)(Math.Round(directionX - 1000 * dt / 1000)), (int)(Math.Round(directionY * dt / 1000))), screenmanager));
+
+                            }
                         }
 
-                        if (element.text == "shootup")
-                        {
-                            Console.WriteLine("touch registered !!!");
-                            var directionX = 0;
-                            var directionY = -1;
-                            newlist.Add(new FriendlyBullet(new Tuple<int, int>(character.position.Item1 + 80, character.position.Item2 + 28), new Tuple<int, int>((int)(Math.Round(directionX * dt / 1000)), (int)(Math.Round(directionY - 1000 * dt / 1000))), screenmanager));
-                            
-                        }
-                        if (element.text == "shootdown")
-                        {
-                            var directionX = 0;
-                            var directionY = 1;
-                            newlist.Add(new FriendlyBullet(new Tuple<int, int>(character.position.Item1 + 80, character.position.Item2 + 160), new Tuple<int, int>((int)(Math.Round(directionX * dt / 1000)), (int)(Math.Round(directionY + 1000 * dt / 1000))), screenmanager));
-
-                        }
-                        if (element.text == "shootright")
-                        {
-                            var directionX = 1;
-                            var directionY = 0;
-                            newlist.Add(new FriendlyBullet(new Tuple<int, int>(character.position.Item1 + 90, character.position.Item2 + 50), new Tuple<int, int>((int)(Math.Round(directionX + 1000 * dt / 1000)), (int)(Math.Round(directionY * dt / 1000))), screenmanager));
-
-                        }
-                        if (element.text == "shootleft")
-                        {
-                            var directionX = -1;
-                            var directionY = 0;
-                            newlist.Add(new FriendlyBullet(new Tuple<int, int>(character.position.Item1 + 40, character.position.Item2 + 50), new Tuple<int, int>((int)(Math.Round(directionX - 1000 * dt / 1000)), (int)(Math.Round(directionY * dt / 1000))), screenmanager));
-
-                        }
                     }
-
-                }
+                
 
 
                 //element.setPos(new Tuple<int, int>(element.top_left_corner.Item1, element.top_left_corner.Item2));
