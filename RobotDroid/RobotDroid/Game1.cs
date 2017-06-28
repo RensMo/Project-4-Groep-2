@@ -1,6 +1,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Collections.Generic;
 
 namespace RobotDroid
 {
@@ -11,17 +12,27 @@ namespace RobotDroid
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        int level;
 
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+            level = 0;
 
             graphics.IsFullScreen = true;
+            
             graphics.PreferredBackBufferWidth = 800;
             graphics.PreferredBackBufferHeight = 480;
             graphics.SupportedOrientations = DisplayOrientation.LandscapeLeft | DisplayOrientation.LandscapeRight;
         }
+
+        IinputManager inputmanager;
+        IDrawManager drawmanager;
+        Ielementvisitor updatevisitor;
+        Ielementvisitor drawvisitor;
+        List<ScreenManager> screenmanagers;
+        IonCollision collisioncalculator;
 
         /// <summary>
         /// Allows the game to perform any initialization it needs to before starting to run.
@@ -34,6 +45,14 @@ namespace RobotDroid
             // TODO: Add your initialization logic here
 
             base.Initialize();
+            this.IsMouseVisible = true;
+            screenmanagers = new List<ScreenManager>();
+            screenmanagers.Add(new ScreenManager());
+            screenmanagers[0].Create(0);
+            inputmanager = new PCInputAdapter();
+            collisioncalculator = new onCollision();
+            updatevisitor = new UpdateVisitor(inputmanager, collisioncalculator);
+
         }
 
         /// <summary>
@@ -44,6 +63,8 @@ namespace RobotDroid
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            drawmanager = new MonoGameAdapter(spriteBatch, Content);
+            drawvisitor = new DrawVisitor(drawmanager);
 
             // TODO: use this.Content to load your game content here
         }
@@ -68,6 +89,7 @@ namespace RobotDroid
                 Exit();
 
             // TODO: Add your update logic here
+            screenmanagers[level].Update(updatevisitor, (float)gameTime.ElapsedGameTime.TotalMilliseconds);
 
             base.Update(gameTime);
         }
@@ -80,9 +102,11 @@ namespace RobotDroid
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            // TODO: Add your drawing code here
-
+            spriteBatch.Begin();
+            screenmanagers[0].Draw(drawvisitor, 0f);
+            spriteBatch.End();
             base.Draw(gameTime);
+
         }
     }
 }
