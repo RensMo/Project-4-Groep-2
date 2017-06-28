@@ -61,13 +61,13 @@ namespace RobotParty
                     elements.Add(new FollowEnemyCharacter(new Tuple<float, float>(150, 400), 50, 30, this, mainCharacter));
                     
                     elements.Add(new FollowEnemyCharacter(new Tuple<float, float>(250, 102), 50, 30, this, mainCharacter));
-                    /*
+                    
                     elements.Add(new CircleEnemyCharacter(new Tuple<float, float>(300, 300), 50, 30, this, 100));
                     elements.Add(new CircleEnemyCharacter(new Tuple<float, float>(310, 310), 50, 30, this, 100));
                     elements.Add(new CircleEnemyCharacter(new Tuple<float, float>(320, 320), 50, 30, this, 100));
                     elements.Add(new CircleEnemyCharacter(new Tuple<float, float>(330, 330), 50, 30, this, 100));
                     elements.Add(new CircleEnemyCharacter(new Tuple<float, float>(340, 340), 50, 30, this, 100));
-                    */
+                    
                     elements.Add(new VillainCharacter(new Tuple<float, float>(300, 300), 50, 1, this));
                     elements.Add(new VillainCharacter(new Tuple<float, float>(200, 300), 50, 1, this));
                     elements.Add(new VillainCharacter(new Tuple<float, float>(100, 300), 50, 1, this));
@@ -281,11 +281,9 @@ namespace RobotParty
         public override List<string> GetDirection()
         {
             var direction = new List<string>();
-            //Console.WriteLine("---");
-            //Console.WriteLine("Position: " + position);
+
             if (circleStep.Item1 == position.Item1 && circleStep.Item2 == position.Item2) {
                 circleStep = GetTarget();
-                Console.WriteLine("Target: " + circleStep);
             }
             
             var positionX = position.Item1;
@@ -298,10 +296,7 @@ namespace RobotParty
             else if (targetY - positionY > 0) { direction.Add("down"); }
 
             if (targetX - positionX < 0 ) { direction.Add("left"); }
-            else if (targetX - positionX > 0) { direction.Add("right"); }
-
-            Console.WriteLine("Direction: ");
-            foreach (var shit in direction) { Console.WriteLine(shit); };          
+            else if (targetX - positionX > 0) { direction.Add("right"); }        
 
             return direction;
         }
