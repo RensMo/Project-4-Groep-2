@@ -641,6 +641,8 @@ namespace RobotParty
         {
             var LivesPoint = new Microsoft.Xna.Framework.Point(0, 0);
             var ScorePoint = new Microsoft.Xna.Framework.Point(375, 0);
+            var HealthPoint = new Microsoft.Xna.Framework.Point(200, 0);
+            drawmanager.drawText("health:" + MainCharacter.health.ToString(), HealthPoint, 5, Colour.Black);
             drawmanager.drawText("Score:" + ScreenManager.score.ToString(), ScorePoint, 5, Colour.Black);
             drawmanager.drawText("Lives left:" + ScreenManager.lives.ToString(), LivesPoint, 5, Colour.Black);
             foreach(text text in ScreenManager.Top5Score)

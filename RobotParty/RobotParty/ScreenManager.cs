@@ -41,12 +41,12 @@ namespace RobotParty
                 // 3. One MainCharacter
                 case 0:
                     //elements.Add(new FollowEnemyCharacter(new Tuple<int, int>(10, 10), 50, 30, this, mainCharacter));
-                    elements.Add(new CircleEnemyCharacter(new Tuple<int, int>(300, 300), 50, 30, this, 100));
+                    //elements.Add(new CircleEnemyCharacter(new Tuple<int, int>(300, 300), 50, 30, this, 100));
                     //elements.Add(new VillainCharacter(new Tuple<int, int>(400, 300), 50, 1, this));
 
                     elements = new List<Ielement>();
                     elements.Add(new FollowEnemyCharacter(new Tuple<int, int>(100, 10), 50, 30, this, mainCharacter));
-                    elements.Add(new FollowEnemyCharacter(new Tuple<int, int>(10, 100), 50, 30,this, mainCharacter));
+                    elements.Add(new FollowEnemyCharacter(new Tuple<int, int>(10, 100), 50, 30, this, mainCharacter));
                     elements.Add(new FollowEnemyCharacter(new Tuple<int, int>(50, 10), 50, 30, this, mainCharacter));
                     elements.Add(new FollowEnemyCharacter(new Tuple<int, int>(10, 50), 50, 30, this, mainCharacter));
                     elements.Add(new FollowEnemyCharacter(new Tuple<int, int>(100, 300), 50, 30, this, mainCharacter));
@@ -59,8 +59,8 @@ namespace RobotParty
                     elements.Add(new FollowEnemyCharacter(new Tuple<int, int>(500, 300), 50, 30, this, mainCharacter));
                     elements.Add(new FollowEnemyCharacter(new Tuple<int, int>(150, 400), 50, 30, this, mainCharacter));
                     elements.Add(new FollowEnemyCharacter(new Tuple<int, int>(250, 102), 50, 30, this, mainCharacter));
-
                     elements.Add(new CircleEnemyCharacter(new Tuple<int, int>(300, 300), 50, 30, this, 100));
+
 
                     elements.Add(new VillainCharacter(new Tuple<int, int>(300, 300), 50, 1, this));
                     elements.Add(new VillainCharacter(new Tuple<int, int>(200, 300), 50, 1, this));
@@ -70,13 +70,19 @@ namespace RobotParty
                     elements.Add(new VillainCharacter(new Tuple<int, int>(400, 300), 50, 1, this));
 
                     elements.Add(new PickUpCharacter(new Tuple<int, int>(300, 300), 50, 1, this));
-                    elements.Add(new PickUpCharacter(new Tuple<int, int>(400, 300), 50, 1, this));
-                    elements.Add(new PickUpCharacter(new Tuple<int, int>(500, 300), 50, 1, this));
+                    //elements.Add(new PickUpCharacter(new Tuple<int, int>(400, 300), 50, 1, this));
+                    //elements.Add(new PickUpCharacter(new Tuple<int, int>(500, 300), 50, 1, this));
                     elements.Add(mainCharacter);
                     break;
                 case 1:
                     elements = new List<Ielement>();
                     elements.Add(new PickUpCharacter(new Tuple<int, int>(100, 300), 50, 1, this));
+                    elements.Add(mainCharacter);
+                    break;
+                case 2:
+                    elements = new List<Ielement>();
+                    elements.Add(new PickUpCharacter(new Tuple<int, int>(150, 1), 50, 1, this));
+                    elements.Add(new CircleEnemyCharacter(new Tuple<int, int>(300, 300), 50, 30, this, 100));
                     elements.Add(mainCharacter);
                     break;
                 case 10:
