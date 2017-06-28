@@ -12,8 +12,8 @@ namespace RobotParty
     {
         void Draw(Ielementvisitor drawvisitor, float dt);
         void Update(Ielementvisitor updatevisitor, float dt);
-        Tuple<int, int> getPos();
-        void setPos(Tuple<int, int> newpos);
+        Tuple<float, float> getPos();
+        void setPos(Tuple<float, float> newpos);
     }
 
     // screenmanager is made to have a list with all the elements for the current state of the game.
@@ -26,7 +26,7 @@ namespace RobotParty
         public List<text> Top5Score = new List<text>();
 
         public ScreenManager() {
-            mainCharacter = new MainCharacter(new Tuple<int, int>(100, 100), 200, 100,  this);
+            mainCharacter = new MainCharacter(new Tuple<float, float>(100f, 100f), 200, 100,  this);
         }
 
         public void Update(Ielementvisitor visitor, float dt) { visitor.onScreenmanager(this, dt,mainCharacter); }
@@ -40,54 +40,61 @@ namespace RobotParty
                 // 2. At least one PickupCharacter
                 // 3. One MainCharacter
                 case 0:
-                    //elements.Add(new FollowEnemyCharacter(new Tuple<int, int>(10, 10), 50, 30, this, mainCharacter));
-                    //elements.Add(new CircleEnemyCharacter(new Tuple<int, int>(300, 300), 50, 30, this, 100));
-                    //elements.Add(new VillainCharacter(new Tuple<int, int>(400, 300), 50, 1, this));
+                    //elements.Add(new FollowEnemyCharacter(new Tuple<float, float>(10, 10), 50, 30, this, mainCharacter));
+                    //elements.Add(new CircleEnemyCharacter(new Tuple<float, float>(300, 300), 50, 30, this, 100));
+                    //elements.Add(new VillainCharacter(new Tuple<float, float>(400, 300), 50, 1, this));
 
                     elements = new List<Ielement>();
-                    elements.Add(new FollowEnemyCharacter(new Tuple<int, int>(100, 10), 50, 30, this, mainCharacter));
-                    elements.Add(new FollowEnemyCharacter(new Tuple<int, int>(10, 100), 50, 30, this, mainCharacter));
-                    elements.Add(new FollowEnemyCharacter(new Tuple<int, int>(50, 10), 50, 30, this, mainCharacter));
-                    elements.Add(new FollowEnemyCharacter(new Tuple<int, int>(10, 50), 50, 30, this, mainCharacter));
-                    elements.Add(new FollowEnemyCharacter(new Tuple<int, int>(100, 300), 50, 30, this, mainCharacter));
-                    elements.Add(new FollowEnemyCharacter(new Tuple<int, int>(150, 10), 50, 30, this, mainCharacter));
-                    elements.Add(new FollowEnemyCharacter(new Tuple<int, int>(10, 102), 50, 30, this, mainCharacter));
-                    elements.Add(new FollowEnemyCharacter(new Tuple<int, int>(300, 300), 50, 30, this, mainCharacter));
-                    elements.Add(new FollowEnemyCharacter(new Tuple<int, int>(10, 250), 50, 30, this, mainCharacter));
-                    elements.Add(new FollowEnemyCharacter(new Tuple<int, int>(50, 150), 50, 30, this, mainCharacter));
-                    elements.Add(new FollowEnemyCharacter(new Tuple<int, int>(0, 50), 50, 30, this, mainCharacter));
-                    elements.Add(new FollowEnemyCharacter(new Tuple<int, int>(500, 300), 50, 30, this, mainCharacter));
-                    elements.Add(new FollowEnemyCharacter(new Tuple<int, int>(150, 400), 50, 30, this, mainCharacter));
-                    elements.Add(new FollowEnemyCharacter(new Tuple<int, int>(250, 102), 50, 30, this, mainCharacter));
-                    elements.Add(new CircleEnemyCharacter(new Tuple<int, int>(300, 300), 50, 30, this, 100));
+                    
+                    elements.Add(new FollowEnemyCharacter(new Tuple<float, float>(100, 10), 50, 30, this, mainCharacter));
+                    elements.Add(new FollowEnemyCharacter(new Tuple<float, float>(10, 100), 50, 30, this, mainCharacter));
+                    elements.Add(new FollowEnemyCharacter(new Tuple<float, float>(50, 10), 50, 30, this, mainCharacter));
+                    elements.Add(new FollowEnemyCharacter(new Tuple<float, float>(10, 50), 50, 30, this, mainCharacter));
+                    elements.Add(new FollowEnemyCharacter(new Tuple<float, float>(100, 300), 50, 30, this, mainCharacter));
+                    elements.Add(new FollowEnemyCharacter(new Tuple<float, float>(150, 10), 50, 30, this, mainCharacter));
+                    elements.Add(new FollowEnemyCharacter(new Tuple<float, float>(10, 102), 50, 30, this, mainCharacter));
+                    elements.Add(new FollowEnemyCharacter(new Tuple<float, float>(300, 300), 50, 30, this, mainCharacter));
+                    elements.Add(new FollowEnemyCharacter(new Tuple<float, float>(10, 250), 50, 30, this, mainCharacter));
+                    elements.Add(new FollowEnemyCharacter(new Tuple<float, float>(50, 150), 50, 30, this, mainCharacter));
+                    elements.Add(new FollowEnemyCharacter(new Tuple<float, float>(0, 50), 50, 30, this, mainCharacter));
+                    elements.Add(new FollowEnemyCharacter(new Tuple<float, float>(500, 300), 50, 30, this, mainCharacter));
+                    elements.Add(new FollowEnemyCharacter(new Tuple<float, float>(150, 400), 50, 30, this, mainCharacter));
+                    
+                    elements.Add(new FollowEnemyCharacter(new Tuple<float, float>(250, 102), 50, 30, this, mainCharacter));
+                    /*
+                    elements.Add(new CircleEnemyCharacter(new Tuple<float, float>(300, 300), 50, 30, this, 100));
+                    elements.Add(new CircleEnemyCharacter(new Tuple<float, float>(310, 310), 50, 30, this, 100));
+                    elements.Add(new CircleEnemyCharacter(new Tuple<float, float>(320, 320), 50, 30, this, 100));
+                    elements.Add(new CircleEnemyCharacter(new Tuple<float, float>(330, 330), 50, 30, this, 100));
+                    elements.Add(new CircleEnemyCharacter(new Tuple<float, float>(340, 340), 50, 30, this, 100));
+                    */
+                    elements.Add(new VillainCharacter(new Tuple<float, float>(300, 300), 50, 1, this));
+                    elements.Add(new VillainCharacter(new Tuple<float, float>(200, 300), 50, 1, this));
+                    elements.Add(new VillainCharacter(new Tuple<float, float>(100, 300), 50, 1, this));
+                    elements.Add(new VillainCharacter(new Tuple<float, float>(500, 300), 50, 1, this));
+                    elements.Add(new VillainCharacter(new Tuple<float, float>(400, 300), 50, 1, this));
+                    elements.Add(new VillainCharacter(new Tuple<float, float>(400, 300), 50, 1, this));
 
-
-                    elements.Add(new VillainCharacter(new Tuple<int, int>(300, 300), 50, 1, this));
-                    elements.Add(new VillainCharacter(new Tuple<int, int>(200, 300), 50, 1, this));
-                    elements.Add(new VillainCharacter(new Tuple<int, int>(100, 300), 50, 1, this));
-                    elements.Add(new VillainCharacter(new Tuple<int, int>(500, 300), 50, 1, this));
-                    elements.Add(new VillainCharacter(new Tuple<int, int>(400, 300), 50, 1, this));
-                    elements.Add(new VillainCharacter(new Tuple<int, int>(400, 300), 50, 1, this));
-
-                    elements.Add(new PickUpCharacter(new Tuple<int, int>(300, 300), 50, 1, this));
-                    //elements.Add(new PickUpCharacter(new Tuple<int, int>(400, 300), 50, 1, this));
-                    //elements.Add(new PickUpCharacter(new Tuple<int, int>(500, 300), 50, 1, this));
+                    elements.Add(new PickUpCharacter(new Tuple<float, float>(300, 300), 50, 1, this));
+                    //elements.Add(new PickUpCharacter(new Tuple<float, float>(400, 300), 50, 1, this));
+                    //elements.Add(new PickUpCharacter(new Tuple<float, float>(500, 300), 50, 1, this));
                     elements.Add(mainCharacter);
                     break;
                 case 1:
                     elements = new List<Ielement>();
-                    elements.Add(new PickUpCharacter(new Tuple<int, int>(100, 300), 50, 1, this));
+                    elements.Add(new PickUpCharacter(new Tuple<float, float>(100, 300), 50, 1, this));
+                    elements.Add(new CircleEnemyCharacter(new Tuple<float, float>(300, 300), 50, 30, this, 100));
                     elements.Add(mainCharacter);
                     break;
                 case 2:
                     elements = new List<Ielement>();
-                    elements.Add(new PickUpCharacter(new Tuple<int, int>(150, 1), 50, 1, this));
-                    elements.Add(new CircleEnemyCharacter(new Tuple<int, int>(300, 300), 50, 30, this, 100));
+                    elements.Add(new PickUpCharacter(new Tuple<float, float>(150, 1), 50, 1, this));
+                    elements.Add(new CircleEnemyCharacter(new Tuple<float, float>(300, 300), 50, 30, this, 100));
                     elements.Add(mainCharacter);
                     break;
                 case 10:
                     elements = new List<Ielement>();
-                    elements.Add(new text(new Tuple<int, int>(350, 200), this, "press ESC to quit."));
+                    elements.Add(new text(new Tuple<float, float>(350, 200), this, "press ESC to quit."));
                     break;
                     // todo add more characters when finished making those
             }
@@ -102,11 +109,11 @@ namespace RobotParty
 
     // this is a simple implementation of Ielement to show text on screen.
     public class text : Ielement {
-        Tuple<int, int> position;
+        Tuple<float, float> position;
         ScreenManager screenmanager;
         public string Text;
 
-        public text(Tuple<int,int> position, ScreenManager screenmanager, string text) {
+        public text(Tuple<float,float> position, ScreenManager screenmanager, string text) {
             this.position = position;
             this.screenmanager = screenmanager;
             this.Text = text;
@@ -115,11 +122,11 @@ namespace RobotParty
             drawvisitor.onText(this, screenmanager);
         }
 
-        public Tuple<int, int> getPos() {
+        public Tuple<float, float> getPos() {
             return position;
         }
 
-        public void setPos(Tuple<int, int> newpos) {
+        public void setPos(Tuple<float, float> newpos) {
             position = newpos;
         }
 
@@ -131,12 +138,12 @@ namespace RobotParty
     // abstract class character, here we define everything all characters have in common, and below we add certain character-type specific behaviour
     public abstract class Character : Ielement
     {
-        public Tuple<int, int> position;
+        public Tuple<float, float> position;
         public int health;
         public ScreenManager screenmanager;
         int speed;
 
-        public Character(Tuple<int, int> position, int health, int speed, ScreenManager screenmanager)
+        public Character(Tuple<float, float> position, int health, int speed, ScreenManager screenmanager)
         {
             this.position = position;
             this.health = health;
@@ -144,8 +151,8 @@ namespace RobotParty
             this.speed = speed;
         }
 
-        public Tuple<int,int> getPos() { return position; }
-        public void setPos(Tuple<int, int> newpos) { position = newpos; }
+        public Tuple<float,float> getPos() { return position; }
+        public void setPos(Tuple<float, float> newpos) { position = newpos; }
 
         public abstract void Draw(Ielementvisitor drawvisitor, float dt);
         
@@ -156,10 +163,10 @@ namespace RobotParty
             var posX = position.Item1;
             var posY = position.Item2;
 
-            if (direction == "right") { position = new Tuple<int, int>((int)Math.Round((posX + speed * dt / 1000)), posY); }
-            if (direction == "up") { position = new Tuple<int, int>(posX, (int)Math.Round(posY - speed * dt / 1000)); }
-            if (direction == "down") { position = new Tuple<int, int>(posX, (int)Math.Round(posY + speed * dt / 1000)); }
-            if (direction == "left") { position = new Tuple<int, int>((int)Math.Round(posX - speed * dt / 1000), posY); }
+            if (direction == "right") { position = new Tuple<float, float>(posX + speed * dt / 1000, posY); }
+            if (direction == "up") { position = new Tuple<float, float>(posX, posY - speed * dt / 1000); }
+            if (direction == "down") { position = new Tuple<float, float>(posX, posY + speed * dt / 1000); }
+            if (direction == "left") { position = new Tuple<float, float>(posX - speed * dt / 1000, posY); }
         }
 
     }
@@ -167,7 +174,7 @@ namespace RobotParty
     // this is where we create a maincharacter class. it contains all normal character logic and calls proper visitors
     public class MainCharacter : Character
     {
-        public MainCharacter(Tuple<int, int> position, int health, int speed, ScreenManager screenmanager) : base(position, health, speed, screenmanager)
+        public MainCharacter(Tuple<float, float> position, int health, int speed, ScreenManager screenmanager) : base(position, health, speed, screenmanager)
         {
         }
 
@@ -183,7 +190,7 @@ namespace RobotParty
     //Enemy character
     public abstract class EnemyCharacter : Character
     {
-        public EnemyCharacter(Tuple<int, int> position, int health, int speed, ScreenManager screenmanager) : base(position, health, speed, screenmanager)
+        public EnemyCharacter(Tuple<float, float> position, int health, int speed, ScreenManager screenmanager) : base(position, health, speed, screenmanager)
         {
         }
 
@@ -212,7 +219,7 @@ namespace RobotParty
     {
         MainCharacter mainCharacter;
 
-        public FollowEnemyCharacter(Tuple<int, int> position, int health, int speed, ScreenManager screenmanager, MainCharacter mainCharacter) : base(position, health, speed, screenmanager)
+        public FollowEnemyCharacter(Tuple<float, float> position, int health, int speed, ScreenManager screenmanager, MainCharacter mainCharacter) : base(position, health, speed, screenmanager)
         {
             this.mainCharacter = mainCharacter;
         }
@@ -241,31 +248,31 @@ namespace RobotParty
     {
         int speed;
         int radius;
-        Tuple<int, int> position_0; //initial position
-        Tuple<int, int> circleStep;
+        Tuple<float, float> position_0; //initial position
+        Tuple<float, float> circleStep;
         int step;
 
-        public CircleEnemyCharacter(Tuple<int, int> position, int health, int speed, ScreenManager screenmanager, int radius) : base(position, health, speed, screenmanager)
+        public CircleEnemyCharacter(Tuple<float, float> position, int health, int speed, ScreenManager screenmanager, int radius) : base(position, health, speed, screenmanager)
         {
             this.radius = radius;
             this.speed = speed;
 
-            position_0 = new Tuple<int,int>(position.Item1 - radius, position.Item2);
+            position_0 = new Tuple<float, float>(position.Item1 - radius, position.Item2);
             step = 1;
             circleStep = GetTarget();
 
         }
 
-        private Tuple<int, int> GetTarget() {
-            Tuple<int, int> target;
+        private Tuple<float, float> GetTarget() {
+            Tuple<float, float> target;
             
             var x_0 = position_0.Item1;
             var y_0 = position_0.Item2;
             
-            var x_1 = radius * Math.Cos(2* Math.PI / 360 * step) + x_0;
-            var y_1 = radius * Math.Sin(2 * Math.PI / 360 * step) + y_0;
+            var x_1 = radius * Math.Cos(Math.PI / 180 * step) + x_0;
+            var y_1 = radius * Math.Sin(Math.PI / 180 * step) + y_0;
 
-            target = new Tuple<int, int>((int)Math.Round(x_1), (int)Math.Round(y_1));
+            target = new Tuple<float, float>((int)Math.Round(x_1), (int)Math.Round(y_1));
             if (step == 360) step = 0;
             step++;
             return target;
@@ -281,18 +288,17 @@ namespace RobotParty
                 Console.WriteLine("Target: " + circleStep);
             }
             
-
             var positionX = position.Item1;
             var positionY = position.Item2;
 
             var targetX = circleStep.Item1;
             var targetY = circleStep.Item2;
 
-            if (positionX > targetX) { direction.Add("left"); }
-            else if (positionX < targetX) { direction.Add("right"); }
+            if (targetY - positionY < 0) { direction.Add("up"); }
+            else if (targetY - positionY > 0) { direction.Add("down"); }
 
-            if (positionY > targetY) { direction.Add("up"); }
-            else if (positionY < targetY) { direction.Add("down"); }
+            if (targetX - positionX < 0 ) { direction.Add("left"); }
+            else if (targetX - positionX > 0) { direction.Add("right"); }
 
             Console.WriteLine("Direction: ");
             foreach (var shit in direction) { Console.WriteLine(shit); };          
@@ -303,7 +309,7 @@ namespace RobotParty
 
     //Pick-up character is the character that needs to be picked up by the main character. it is only drawn and gets removed from the list once the maincharacter hovers over it.
     public class PickUpCharacter : Character {
-        public PickUpCharacter(Tuple<int, int> position, int health, int speed, ScreenManager screenmanager) : base(position, health, speed, screenmanager) {
+        public PickUpCharacter(Tuple<float, float> position, int health, int speed, ScreenManager screenmanager) : base(position, health, speed, screenmanager) {
         }
 
         public override void Draw(Ielementvisitor drawvisitor, float dt) {
@@ -321,7 +327,7 @@ namespace RobotParty
 
         int index = 1;
 
-        public VillainCharacter(Tuple<int, int> position, int health, int speed, ScreenManager screenmanager) : base(position, health, speed, screenmanager)
+        public VillainCharacter(Tuple<float, float> position, int health, int speed, ScreenManager screenmanager) : base(position, health, speed, screenmanager)
         {
         }
 
@@ -356,18 +362,18 @@ namespace RobotParty
 
     // projectile is an abstract class that describes behaviour of all projectiles
     public abstract class Projectile : Ielement {
-        public Tuple<int, int> position;
-        public Tuple<int, int> direction;
+        public Tuple<float, float> position;
+        public Tuple<float, float> direction;
         ScreenManager screenmanager;
 
-        public Projectile(Tuple<int, int> position, Tuple<int, int> direction, ScreenManager screenmanager) {
+        public Projectile(Tuple<float, float> position, Tuple<float, float> direction, ScreenManager screenmanager) {
             this.position = position;
             this.direction = direction;
             this.screenmanager = screenmanager;
         }
 
-        public Tuple<int, int> getPos() { return position; }
-        public void setPos(Tuple<int, int> newpos) { position = newpos; }
+        public Tuple<float, float> getPos() { return position; }
+        public void setPos(Tuple<float, float> newpos) { position = newpos; }
 
         public void Draw(Ielementvisitor drawvisitor, float dt) {
             drawvisitor.onProjectile(this, screenmanager, dt);
@@ -380,12 +386,12 @@ namespace RobotParty
 
     // these are extensions of projectiles so that we can implement differen collision logic. 
     public class FriendlyBullet : Projectile {
-        public FriendlyBullet(Tuple<int, int> position, Tuple<int, int> direction, ScreenManager screenmanager) : base(position, direction, screenmanager) {
+        public FriendlyBullet(Tuple<float, float> position, Tuple<float, float> direction, ScreenManager screenmanager) : base(position, direction, screenmanager) {
         }
     }
     public class EnemyBullet : Projectile
     {
-        public EnemyBullet(Tuple<int, int> position, Tuple<int, int> direction,ScreenManager screenmanager) : base(position, direction,screenmanager)
+        public EnemyBullet(Tuple<float, float> position, Tuple<float, float> direction,ScreenManager screenmanager) : base(position, direction,screenmanager)
         {
         }
     }
