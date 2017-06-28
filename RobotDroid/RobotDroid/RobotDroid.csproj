@@ -59,6 +59,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Activity1.cs" />
+    <Compile Include="AndroidAdapter.cs" />
+    <Compile Include="AndroidScreenManager.cs" />
+    <Compile Include="AndroidVisitor.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
