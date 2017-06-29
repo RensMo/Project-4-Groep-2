@@ -51,15 +51,22 @@ namespace RobotDroid {
                 case 0:
                     //elements.Add(new FollowEnemyCharacter(new Tuple<float, float>(10, 10), 50, 30, this, mainCharacter));
                     //elements.Add(new CircleEnemyCharacter(new Tuple<float, float>(300, 300), 50, 30, this, 100));
-                    //elements.Add(new VillainCharacter(new Tuple<float, float>(400, 300), 50, 1, this));
+                    
 
                     elements = new List<Ielement>();
+                    elements.Add(new VillainCharacter(new Tuple<float, float>(400, 300), 50, 1, this));
 
+                    elements.Add(new VillainCharacter(new Tuple<float, float>(600, 300), 50, 1, this));
                     elements.Add(new PickUpCharacter(new Tuple<float, float>(100, 300), 50, 1, this));
                     elements.Add(new Button("left", new Tuple<float, float>(44, 1537), 120, 120, "links", new Tuple<int, int>(44, 1537), this, mainCharacter));
                     elements.Add(new Button("right", new Tuple<float, float>(284, 1537), 120, 120, "links", new Tuple<int, int>(284, 1537), this, mainCharacter));
                     elements.Add(new Button("up", new Tuple<float, float>(164, 1417), 120, 120, "links", new Tuple<int, int>(164, 1417), this, mainCharacter));
                     elements.Add(new Button("down", new Tuple<float, float>(164, 1657), 120, 120, "links", new Tuple<int, int>(164, 1657), this, mainCharacter));
+                    elements.Add(new Button("upleft", new Tuple<float, float>(44, 1417), 100, 100, "links", new Tuple<int, int>(44, 1417), this, mainCharacter));
+                    elements.Add(new Button("downleft", new Tuple<float, float>(44, 1677), 100, 100, "links", new Tuple<int, int>(44, 1677), this, mainCharacter));
+                    elements.Add(new Button("upright", new Tuple<float, float>(304, 1417), 100, 100, "links", new Tuple<int, int>(304, 1417), this, mainCharacter));
+                    elements.Add(new Button("downright", new Tuple<float, float>(304, 1677), 100, 100, "links", new Tuple<int, int>(304, 1677), this, mainCharacter));
+
 
                     elements.Add(new Button("shootleft", new Tuple<float, float>(676, 1537), 120, 120, "links", new Tuple<int, int>(676, 1537), this, mainCharacter));
                     elements.Add(new Button("shootright", new Tuple<float, float>(916, 1537), 120, 120, "links", new Tuple<int, int>(916, 1537), this, mainCharacter));
@@ -71,12 +78,38 @@ namespace RobotDroid {
                     break;
                 case 1:
                     elements = new List<Ielement>();
+                    elements.Add(new Button("left", new Tuple<float, float>(44, 1537), 120, 120, "links", new Tuple<int, int>(44, 1537), this, mainCharacter));
+                    elements.Add(new Button("right", new Tuple<float, float>(284, 1537), 120, 120, "links", new Tuple<int, int>(284, 1537), this, mainCharacter));
+                    elements.Add(new Button("up", new Tuple<float, float>(164, 1417), 120, 120, "links", new Tuple<int, int>(164, 1417), this, mainCharacter));
+                    elements.Add(new Button("down", new Tuple<float, float>(164, 1657), 120, 120, "links", new Tuple<int, int>(164, 1657), this, mainCharacter));
+                    elements.Add(new Button("upleft", new Tuple<float, float>(44, 1417), 100, 100, "links", new Tuple<int, int>(44, 1417), this, mainCharacter));
+                    elements.Add(new Button("downleft", new Tuple<float, float>(44, 1677), 100, 100, "links", new Tuple<int, int>(44, 1677), this, mainCharacter));
+                    elements.Add(new Button("upright", new Tuple<float, float>(304, 1417), 100, 100, "links", new Tuple<int, int>(304, 1417), this, mainCharacter));
+                    elements.Add(new Button("downright", new Tuple<float, float>(304, 1677), 100, 100, "links", new Tuple<int, int>(304, 1677), this, mainCharacter));
+
+                    elements.Add(new Button("shootleft", new Tuple<float, float>(676, 1537), 120, 120, "links", new Tuple<int, int>(676, 1537), this, mainCharacter));
+                    elements.Add(new Button("shootright", new Tuple<float, float>(916, 1537), 120, 120, "links", new Tuple<int, int>(916, 1537), this, mainCharacter));
+                    elements.Add(new Button("shootup", new Tuple<float, float>(796, 1417), 120, 120, "links", new Tuple<int, int>(796, 1417), this, mainCharacter));
+                    elements.Add(new Button("shootdown", new Tuple<float, float>(796, 1657), 120, 120, "links", new Tuple<int, int>(796, 1657), this, mainCharacter));
                     elements.Add(new PickUpCharacter(new Tuple<float, float>(100, 300), 50, 1, this));
                     elements.Add(new CircleEnemyCharacter(new Tuple<float, float>(300, 300), 50, 30, this, 100));
                     elements.Add(mainCharacter);
                     break;
                 case 2:
                     elements = new List<Ielement>();
+                    elements.Add(new Button("left", new Tuple<float, float>(44, 1537), 120, 120, "links", new Tuple<int, int>(44, 1537), this, mainCharacter));
+                    elements.Add(new Button("right", new Tuple<float, float>(284, 1537), 120, 120, "links", new Tuple<int, int>(284, 1537), this, mainCharacter));
+                    elements.Add(new Button("up", new Tuple<float, float>(164, 1417), 120, 120, "links", new Tuple<int, int>(164, 1417), this, mainCharacter));
+                    elements.Add(new Button("down", new Tuple<float, float>(164, 1657), 120, 120, "links", new Tuple<int, int>(164, 1657), this, mainCharacter));
+                    elements.Add(new Button("upleft", new Tuple<float, float>(44, 1417), 100, 100, "links", new Tuple<int, int>(44, 1417), this, mainCharacter));
+                    elements.Add(new Button("downleft", new Tuple<float, float>(44, 1677), 100, 100, "links", new Tuple<int, int>(44, 1677), this, mainCharacter));
+                    elements.Add(new Button("upright", new Tuple<float, float>(304, 1417), 100, 100, "links", new Tuple<int, int>(304, 1417), this, mainCharacter));
+                    elements.Add(new Button("downright", new Tuple<float, float>(304, 1677), 100, 100, "links", new Tuple<int, int>(304, 1677), this, mainCharacter));
+
+                    elements.Add(new Button("shootleft", new Tuple<float, float>(676, 1537), 120, 120, "links", new Tuple<int, int>(676, 1537), this, mainCharacter));
+                    elements.Add(new Button("shootright", new Tuple<float, float>(916, 1537), 120, 120, "links", new Tuple<int, int>(916, 1537), this, mainCharacter));
+                    elements.Add(new Button("shootup", new Tuple<float, float>(796, 1417), 120, 120, "links", new Tuple<int, int>(796, 1417), this, mainCharacter));
+                    elements.Add(new Button("shootdown", new Tuple<float, float>(796, 1657), 120, 120, "links", new Tuple<int, int>(796, 1657), this, mainCharacter));
                     elements.Add(new PickUpCharacter(new Tuple<float, float>(150, 1), 50, 1, this));
                     elements.Add(new CircleEnemyCharacter(new Tuple<float, float>(300, 300), 50, 30, this, 100));
                     elements.Add(mainCharacter);
@@ -163,6 +196,10 @@ namespace RobotDroid {
             if (direction == "up") { position = new Tuple<float, float>(posX, posY - speed * dt / 1000); }
             if (direction == "down") { position = new Tuple<float, float>(posX, posY + speed * dt / 1000); }
             if (direction == "left") { position = new Tuple<float, float>(posX - speed * dt / 1000, posY); }
+            if (direction == "upright") { position = new Tuple<float, float>(posX + speed * dt / 1000, posY - speed * dt / 1000); }
+            if (direction == "upleft") { position = new Tuple<float, float>(posX - speed * dt / 1000, posY - speed * dt / 1000); }
+            if (direction == "downright") { position = new Tuple<float, float>(posX + speed * dt / 1000, posY + speed * dt / 1000); }
+            if (direction == "downleft") { position = new Tuple<float, float>(posX - speed * dt / 1000, posY + speed * dt / 1000); }
         }
 
     }

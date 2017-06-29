@@ -37,17 +37,17 @@ namespace RobotDroid
 
             if (element1 is EnemyCharacter && element2 is FriendlyBullet)
             {
-                el1Y += 20;
-                el1X += 20;
+                el1Y += 30;
+                el1X += 40;
                 el2X += 2;
                 el2Y += 2;
                 if (el2X > el1X)
                 {
-                    if (el2X < (el1X + 15))
+                    if (el2X < (el1X + 30))
                     {
                         if (el2Y > el1Y)
                         {
-                            if (el2Y < (el1Y + 25))
+                            if (el2Y < (el1Y + 50))
                             {
                                 collision = true;
                                 Console.WriteLine("enemychar");
@@ -59,17 +59,17 @@ namespace RobotDroid
             }
             else if (element1 is VillainCharacter && element2 is FriendlyBullet)
             {
-                el1Y += 20;
-                el1X += 20;
+                el1Y += 30;
+                el1X += 40;
                 el2X += 2;
                 el2Y += 2;
                 if (el2X > el1X)
                 {
-                    if (el2X < (el1X + 15))
+                    if (el2X < (el1X + 30))
                     {
                         if (el2Y > el1Y)
                         {
-                            if (el2Y < (el1Y + 25))
+                            if (el2Y < (el1Y + 50))
                             {
                                 collision = true;
                                 Console.WriteLine("villainchar");
@@ -82,17 +82,17 @@ namespace RobotDroid
 
             else if (element1 is MainCharacter && element2 is EnemyBullet)
             {
-                el1X += 20;
-                el1Y += 20;
+                el1X += 40;
+                el1Y += 40;
                 el2X += 2;
                 el2Y += 2;
                 if (el2X > el1X)
                 {
-                    if (el2X < (el1X + 15))
+                    if (el2X < (el1X + 30))
                     {
                         if (el2Y > el1Y)
                         {
-                            if (el2Y < (el1Y + 25))
+                            if (el2Y < (el1Y + 50))
                             {
                                 collision = true;
 
@@ -104,17 +104,17 @@ namespace RobotDroid
 
             else if (element1 is MainCharacter && element2 is PickUpCharacter)
             {
-                el1Y += 15;
-                el1X += 25;
-                el2X += 5;
-                el2Y += 5;
+                el1Y += 30;
+                el1X += 50;
+                el2X += 10;
+                el2Y += 10;
                 if (el2X > el1X)
                 {
-                    if (el2X < (el1X + 15))
+                    if (el2X < (el1X + 30))
                     {
                         if (el2Y > el1Y)
                         {
-                            if (el2Y < (el1Y + 25))
+                            if (el2Y < (el1Y + 50))
                             {
                                 collision = true;
                                 Console.WriteLine("main/pickup");
@@ -126,17 +126,17 @@ namespace RobotDroid
             }
             else if (element1 is MainCharacter && element2 is EnemyCharacter)
             {
-                el1Y += 20;
-                el1X += 20;
-                el2X += 25;
-                el2Y += 25;
+                el1Y += 40;
+                el1X += 40;
+                el2X += 50;
+                el2Y += 50;
                 if (el2X > el1X)
                 {
-                    if (el2X < (el1X + 15))
+                    if (el2X < (el1X + 30))
                     {
                         if (el2Y > el1Y)
                         {
-                            if (el2Y < (el1Y + 25))
+                            if (el2Y < (el1Y + 50))
                             {
                                 collision = true;
                                 Console.WriteLine("main/enemy");
@@ -149,17 +149,17 @@ namespace RobotDroid
 
             else if (element1 is MainCharacter && element2 is VillainCharacter)
             {
-                el1Y += 20;
-                el1X += 20;
-                el2X += 25;
-                el2Y += 25;
+                el1Y += 40;
+                el1X += 40;
+                el2X += 50;
+                el2Y += 50;
                 if (el2X > el1X)
                 {
-                    if (el2X < (el1X + 15))
+                    if (el2X < (el1X + 30))
                     {
                         if (el2Y > el1Y)
                         {
-                            if (el2Y < (el1Y + 25))
+                            if (el2Y < (el1Y + 50))
                             {
                                 collision = true;
                                 Console.WriteLine("main/villain");
@@ -246,35 +246,35 @@ namespace RobotDroid
                 {
 
                     case 0:
-                        newlist.Add(new EnemyBullet(characterpos, new Tuple<float, float>(1, 0), screenmanager));
+                        newlist.Add(new EnemyBullet(new Tuple<float, float>(character.position.Item1 + 55, character.position.Item2 + 55), new Tuple<float, float>(1, 0), screenmanager));
                         break;
                     case 1:
 
-                        newlist.Add(new EnemyBullet(characterpos, new Tuple<float, float>(1, 1), screenmanager));
+                        newlist.Add(new EnemyBullet(new Tuple<float, float>(character.position.Item1 + 55, character.position.Item2 + 55), new Tuple<float, float>(1, 1), screenmanager));
                         break;
                     case 2:
 
-                        newlist.Add(new EnemyBullet(characterpos, new Tuple<float, float>(0, 1), screenmanager));
+                        newlist.Add(new EnemyBullet(new Tuple<float, float>(character.position.Item1 + 55, character.position.Item2 + 55), new Tuple<float, float>(0, 1), screenmanager));
                         break;
                     case 3:
 
-                        newlist.Add(new EnemyBullet(characterpos, new Tuple<float, float>(-1, 0), screenmanager));
+                        newlist.Add(new EnemyBullet(new Tuple<float, float>(character.position.Item1 + 55, character.position.Item2 + 55), new Tuple<float, float>(-1, 0), screenmanager));
                         break;
                     case 4:
 
-                        newlist.Add(new EnemyBullet(characterpos, new Tuple<float, float>(-1, 1), screenmanager));
+                        newlist.Add(new EnemyBullet(new Tuple<float, float>(character.position.Item1 + 55, character.position.Item2 + 55), new Tuple<float, float>(-1, 1), screenmanager));
                         break;
                     case 5:
 
-                        newlist.Add(new EnemyBullet(characterpos, new Tuple<float, float>(0, -1), screenmanager));
+                        newlist.Add(new EnemyBullet(new Tuple<float, float>(character.position.Item1 + 55, character.position.Item2 + 55), new Tuple<float, float>(0, -1), screenmanager));
                         break;
                     case 6:
 
-                        newlist.Add(new EnemyBullet(characterpos, new Tuple<float, float>(-1, -1), screenmanager));
+                        newlist.Add(new EnemyBullet(new Tuple<float, float>(character.position.Item1 + 55, character.position.Item2 + 55), new Tuple<float, float>(-1, -1), screenmanager));
                         break;
                     case 7:
 
-                        newlist.Add(new EnemyBullet(characterpos, new Tuple<float, float>(1, -1), screenmanager));
+                        newlist.Add(new EnemyBullet(new Tuple<float, float>(character.position.Item1 + 55, character.position.Item2 + 55), new Tuple<float, float>(1, -1), screenmanager));
                         break;
 
                 }
@@ -365,7 +365,7 @@ namespace RobotDroid
 
                         var directionX = 1;
                         var directionY = -1;
-                        newlist.Add(new FriendlyBullet(new Tuple<float, float>(character.position.Item1 + 28, character.position.Item2 + 28), new Tuple<float, float>((int)(Math.Round(directionX + 1000 * dt / 1000)), (int)(Math.Round(directionY - 1000 * dt / 1000))), screenmanager));
+                        newlist.Add(new FriendlyBullet(new Tuple<float, float>(character.position.Item1, character.position.Item2 ), new Tuple<float, float>((int)(Math.Round(directionX + 1000 * dt / 1000)), (int)(Math.Round(directionY - 1000 * dt / 1000))), screenmanager));
                         break;
                     }
 
@@ -373,7 +373,7 @@ namespace RobotDroid
                     {
                         var directionX = -1;
                         var directionY = -1;
-                        newlist.Add(new FriendlyBullet(new Tuple<float, float>(character.position.Item1 + 28, character.position.Item2 + 28), new Tuple<float, float>((int)(Math.Round(directionX - 1000 * dt / 1000)), (int)(Math.Round(directionY - 1000 * dt / 1000))), screenmanager));
+                        newlist.Add(new FriendlyBullet(new Tuple<float, float>(character.position.Item1, character.position.Item2), new Tuple<float, float>((int)(Math.Round(directionX - 1000 * dt / 1000)), (int)(Math.Round(directionY - 1000 * dt / 1000))), screenmanager));
                         break;
                     }
 
@@ -381,7 +381,7 @@ namespace RobotDroid
                     {
                         var directionX = -1;
                         var directionY = 1;
-                        newlist.Add(new FriendlyBullet(new Tuple<float, float>(character.position.Item1 + 28, character.position.Item2 + 28), new Tuple<float, float>((int)(Math.Round(directionX - 1000 * dt / 1000)), (int)(Math.Round(directionY + 1000 * dt / 1000))), screenmanager));
+                        newlist.Add(new FriendlyBullet(new Tuple<float, float>(character.position.Item1, character.position.Item2), new Tuple<float, float>((int)(Math.Round(directionX - 1000 * dt / 1000)), (int)(Math.Round(directionY + 1000 * dt / 1000))), screenmanager));
                         break;
                     }
 
@@ -389,35 +389,35 @@ namespace RobotDroid
                     {
                         var directionX = 1;
                         var directionY = 1;
-                        newlist.Add(new FriendlyBullet(new Tuple<float, float>(character.position.Item1 + 28, character.position.Item2 + 28), new Tuple<float, float>((int)(Math.Round(directionX + 1000 * dt / 1000)), (int)(Math.Round(directionY + 1000 * dt / 1000))), screenmanager));
+                        newlist.Add(new FriendlyBullet(new Tuple<float, float>(character.position.Item1, character.position.Item2), new Tuple<float, float>((int)(Math.Round(directionX + 1000 * dt / 1000)), (int)(Math.Round(directionY + 1000 * dt / 1000))), screenmanager));
                         break;
                     }
                     if (el == "Up")
                     {
                         var directionX = 0;
                         var directionY = -1;
-                        newlist.Add(new FriendlyBullet(new Tuple<float, float>(character.position.Item1 + 28, character.position.Item2 + 28), new Tuple<float, float>((int)(Math.Round(directionX * dt / 1000)), (int)(Math.Round(directionY - 1000 * dt / 1000))), screenmanager));
+                        newlist.Add(new FriendlyBullet(new Tuple<float, float>(character.position.Item1, character.position.Item2), new Tuple<float, float>((int)(Math.Round(directionX * dt / 1000)), (int)(Math.Round(directionY - 1000 * dt / 1000))), screenmanager));
                         break;
                     }
                     if (el == "Down")
                     {
                         var directionX = 0;
                         var directionY = 1;
-                        newlist.Add(new FriendlyBullet(new Tuple<float, float>(character.position.Item1 + 28, character.position.Item2 + 28), new Tuple<float, float>((int)(Math.Round(directionX * dt / 1000)), (int)(Math.Round(directionY + 1000 * dt / 1000))), screenmanager));
+                        newlist.Add(new FriendlyBullet(new Tuple<float, float>(character.position.Item1, character.position.Item2), new Tuple<float, float>((int)(Math.Round(directionX * dt / 1000)), (int)(Math.Round(directionY + 1000 * dt / 1000))), screenmanager));
                         break;
                     }
                     if (el == "Right")
                     {
                         var directionX = 1;
                         var directionY = 0;
-                        newlist.Add(new FriendlyBullet(new Tuple<float, float>(character.position.Item1 + 28, character.position.Item2 + 28), new Tuple<float, float>((int)(Math.Round(directionX + 1000 * dt / 1000)), (int)(Math.Round(directionY * dt / 1000))), screenmanager));
+                        newlist.Add(new FriendlyBullet(new Tuple<float, float>(character.position.Item1, character.position.Item2), new Tuple<float, float>((int)(Math.Round(directionX + 1000 * dt / 1000)), (int)(Math.Round(directionY * dt / 1000))), screenmanager));
                         break;
                     }
                     if (el == "Left")
                     {
                         var directionX = -1;
                         var directionY = 0;
-                        newlist.Add(new FriendlyBullet(new Tuple<float, float>(character.position.Item1 + 28, character.position.Item2 + 28), new Tuple<float, float>((int)(Math.Round(directionX - 1000 * dt / 1000)), (int)(Math.Round(directionY * dt / 1000))), screenmanager));
+                        newlist.Add(new FriendlyBullet(new Tuple<float, float>(character.position.Item1 , character.position.Item2), new Tuple<float, float>((int)(Math.Round(directionX - 1000 * dt / 1000)), (int)(Math.Round(directionY * dt / 1000))), screenmanager));
                         break;
                     }
                 }
@@ -675,7 +675,7 @@ namespace RobotDroid
         public void onButton(Button element, ScreenManager screenmanager, float dt, MainCharacter character)
         {
             var touchCollection = TouchPanel.GetState();
-
+            FriendlyTimeCounter += dt;
             foreach (TouchLocation tl in touchCollection)
             {
 
@@ -688,53 +688,81 @@ namespace RobotDroid
                         if (element.text == "right")
                         {
 
-                            Console.WriteLine("touch registered !!!");
                             character.Move("right", dt);
                         }
                         if (element.text == "left")
                         {
-                            Console.WriteLine("touch registered !!!");
                             character.Move("left", dt);
                         }
                         if (element.text == "up")
                         {
-                            Console.WriteLine("touch registered !!!");
                             character.Move("up", dt);
                         }
                         if (element.text == "down")
                         {
-                            Console.WriteLine("touch registered !!!");
+                            
                             character.Move("down", dt);
+                        }
+                        if (element.text == "upleft")
+                        {
+                            character.Move("upleft", dt);
+                        }
+                        if (element.text == "downleft")
+                        {
+                            character.Move("downleft", dt);
+                        }
+                        if (element.text == "upright")
+                        {
+                            character.Move("upright", dt);
+                        }
+                        if (element.text == "downright")
+                        {
+                            character.Move("downright", dt);
                         }
 
                         if (element.text == "shootup")
                         {
-                            Console.WriteLine("touch registered !!!");
-                            var directionX = 0;
-                            var directionY = -1;
-                            newlist.Add(new FriendlyBullet(new Tuple<float, float>(character.position.Item1 + 80, character.position.Item2 + 28), new Tuple<float, float>((int)(Math.Round(directionX * dt / 1000)), (int)(Math.Round(directionY - 1000 * dt / 1000))), screenmanager));
-
+                            
+                            if (FriendlyTimeCounter > 500.0f)
+                            {
+                                FriendlyTimeCounter = 0.0f;
+                                var directionX = 0;
+                                var directionY = -1;
+                                newlist.Add(new FriendlyBullet(new Tuple<float, float>(character.position.Item1 + 55, character.position.Item2 + 55), new Tuple<float, float>((int)(Math.Round(directionX * dt / 1000)), (int)(Math.Round(directionY - 1000 * dt / 1000))), screenmanager));
+                            }
                         }
                         if (element.text == "shootdown")
                         {
-                            var directionX = 0;
-                            var directionY = 1;
-                            newlist.Add(new FriendlyBullet(new Tuple<float, float>(character.position.Item1 + 80, character.position.Item2 + 160), new Tuple<float, float>((int)(Math.Round(directionX * dt / 1000)), (int)(Math.Round(directionY + 1000 * dt / 1000))), screenmanager));
-
+                            
+                            if (FriendlyTimeCounter > 500.0f)
+                            {
+                                FriendlyTimeCounter = 0.0f;
+                                var directionX = 0;
+                                var directionY = 1;
+                                newlist.Add(new FriendlyBullet(new Tuple<float, float>(character.position.Item1 + 55, character.position.Item2 + 55), new Tuple<float, float>((int)(Math.Round(directionX * dt / 1000)), (int)(Math.Round(directionY + 1000 * dt / 1000))), screenmanager));
+                            }
                         }
                         if (element.text == "shootright")
                         {
-                            var directionX = 1;
-                            var directionY = 0;
-                            newlist.Add(new FriendlyBullet(new Tuple<float, float>(character.position.Item1 + 90, character.position.Item2 + 50), new Tuple<float, float>((int)(Math.Round(directionX + 1000 * dt / 1000)), (int)(Math.Round(directionY * dt / 1000))), screenmanager));
-
+                            
+                            if (FriendlyTimeCounter > 500.0f)
+                            {
+                                FriendlyTimeCounter = 0.0f;
+                                var directionX = 1;
+                                var directionY = 0;
+                                newlist.Add(new FriendlyBullet(new Tuple<float, float>(character.position.Item1 + 55, character.position.Item2 + 55), new Tuple<float, float>((int)(Math.Round(directionX + 1000 * dt / 1000)), (int)(Math.Round(directionY * dt / 1000))), screenmanager));
+                            }
                         }
                         if (element.text == "shootleft")
                         {
-                            var directionX = -1;
-                            var directionY = 0;
-                            newlist.Add(new FriendlyBullet(new Tuple<float, float>(character.position.Item1 + 40, character.position.Item2 + 50), new Tuple<float, float>((int)(Math.Round(directionX - 1000 * dt / 1000)), (int)(Math.Round(directionY * dt / 1000))), screenmanager));
-
+                            
+                            if (FriendlyTimeCounter > 500.0f)
+                            {
+                                FriendlyTimeCounter = 0.0f;
+                                var directionX = -1;
+                                var directionY = 0;
+                                newlist.Add(new FriendlyBullet(new Tuple<float, float>(character.position.Item1 + 55, character.position.Item2 + 55), new Tuple<float, float>((int)(Math.Round(directionX - 1000 * dt / 1000)), (int)(Math.Round(directionY * dt / 1000))), screenmanager));
+                            }
                         }
                     }
 
@@ -772,14 +800,14 @@ namespace RobotDroid
         public void onEnemyCharacter(EnemyCharacter character, ScreenManager screenmanager, float dt)
         {
             var point = new Microsoft.Xna.Framework.Point((int)Math.Round(character.position.Item1), (int)Math.Round(character.position.Item2));
-            drawmanager.drawEnemy(point, 60, 60, Colour.White);
+            drawmanager.drawEnemy(point, 120, 120, Colour.White);
         }
 
         public void onMainCharacter(MainCharacter Character, ScreenManager screenmanager, float dt)
         {
 
             var point = new Microsoft.Xna.Framework.Point((int)Math.Round(Character.position.Item1), (int)Math.Round(Character.position.Item2));
-            drawmanager.drawMainCharacter(point, 60, 60, Colour.White);
+            drawmanager.drawMainCharacter(point, 120, 120, Colour.White);
 
 
         }
@@ -787,7 +815,7 @@ namespace RobotDroid
         public void onPickUpCharacter(PickUpCharacter Character, ScreenManager screenmanager, float dt)
         {
             var point = new Microsoft.Xna.Framework.Point((int)Math.Round(Character.position.Item1), (int)Math.Round(Character.position.Item2));
-            drawmanager.drawRectangle(point, 10, 10, Colour.Pink);
+            drawmanager.drawRectangle(point, 20, 20, Colour.Pink);
         }
 
 
@@ -804,9 +832,9 @@ namespace RobotDroid
             var LivesPoint = new Microsoft.Xna.Framework.Point(0, 0);
             var ScorePoint = new Microsoft.Xna.Framework.Point(375, 0);
             var HealthPoint = new Microsoft.Xna.Framework.Point(200, 0);
-            drawmanager.drawText("health:" + MainCharacter.health.ToString(), HealthPoint, 5, Colour.Black);
-            drawmanager.drawText("Score:" + ScreenManager.score.ToString(), ScorePoint, 5, Colour.Black);
-            drawmanager.drawText("Lives left:" + ScreenManager.lives.ToString(), LivesPoint, 5, Colour.Black);
+            drawmanager.drawText("health:" + MainCharacter.health.ToString(), HealthPoint, 10, Colour.Black);
+            drawmanager.drawText("Score:" + ScreenManager.score.ToString(), ScorePoint, 10, Colour.Black);
+            drawmanager.drawText("Lives left:" + ScreenManager.lives.ToString(), LivesPoint, 10, Colour.Black);
             foreach (text text in ScreenManager.Top5Score)
             {
                 text.Draw(this, dt);
@@ -826,7 +854,7 @@ namespace RobotDroid
         public void onVillainCharacter(VillainCharacter character, ScreenManager screenmanager, float dt, int index)
         {
             var point = new Microsoft.Xna.Framework.Point((int)Math.Round(character.position.Item1), (int)Math.Round(character.position.Item2));
-            drawmanager.drawEnemy(point, 60, 60, Colour.White);
+            drawmanager.drawEnemy(point, 120, 120, Colour.White);
         }
     }
 }

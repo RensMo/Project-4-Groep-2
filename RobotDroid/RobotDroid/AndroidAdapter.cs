@@ -137,7 +137,7 @@ namespace RobotDroid {
         }
 
         public void drawText(string text, Point top_left_coordinate, int size, Colour color) {
-            sprite_batch.DrawString(default_font, text, new Vector2(top_left_coordinate.X, top_left_coordinate.Y), convert_color(color));
+            sprite_batch.DrawString(default_font, text, new Vector2(top_left_coordinate.X, top_left_coordinate.Y) ,convert_color(color));
         }
 
         public void drawMainCharacter(Point top_left_coordinate, float width, float height, Colour color) {
