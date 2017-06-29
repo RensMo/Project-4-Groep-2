@@ -26,98 +26,77 @@ namespace RobotParty
             el2Y = element2.getPos().Item2;
 
             if(element1 is EnemyCharacter && element2 is FriendlyBullet) {
-                el1Y += 20;
-                el1X += 20;
-                el2X += 2;
-                el2Y += 2;
-                if (el2X > el1X){
-                    if (el2X < (el1X + 15)) {
-                        if (el2Y > el1Y) {
-                            if (el2Y < (el1Y + 25)) {
-                                collision = true;
-                                Console.WriteLine("enemychar");
-                            }
-                        }
+                int VillainX = element1.getPos().Item1;
+                int VillainY = element1.getPos().Item2;
+                int BulletX =  element2.getPos().Item1;
+                int BulletY =  element2.getPos().Item2;
+                if (BulletX >= VillainX + 50 && BulletX <= (VillainX + 100))
+                {
+                    if (BulletY >= VillainY && BulletY <=(VillainY + 50)){
+                        collision = true;
                     }
                 }
             }
             else if (element1 is VillainCharacter && element2 is FriendlyBullet) {
-                el1Y += 20;
-                el1X += 20;
-                el2X += 2;
-                el2Y += 2;
-                if (el2X > el1X) {
-                    if (el2X < (el1X + 15)) {
-                        if (el2Y > el1Y) {
-                            if (el2Y < (el1Y + 25)) {
-                                collision = true;
-                                Console.WriteLine("villainchar");
-                            }
-                        }
+                int VillainX = element1.getPos().Item1;
+                int VillainY = element1.getPos().Item2;
+                int BulletX =  element2.getPos().Item1;
+                int BulletY =  element2.getPos().Item2;
+                if (BulletX >= VillainX + 50 && BulletX <= (VillainX + 100))
+                {
+                    if (BulletY >= VillainY && BulletY <=(VillainY + 50)){
+                        collision = true;
                     }
                 }
             }
 
             else if(element1 is MainCharacter && element2 is EnemyBullet) {
-                el1X += 25;
-                el1Y += 25;
-                el2X += 2;
-                el2Y += 2;
-                if (el2X > el1X) {
-                    if (el2X < (el1X + 10)) {
-                        if (el2Y > el1Y) {
-                            if (el2Y < (el1Y + 20)) {
-                                collision = true;
-                            }
-                        }
+                int VillainX = element1.getPos().Item1;
+                int VillainY = element1.getPos().Item2;
+                int BulletX =  element2.getPos().Item1;
+                int BulletY =  element2.getPos().Item2;
+                if (BulletX >= VillainX + 50 && BulletX <= (VillainX + 100))
+                {
+                    if (BulletY >= VillainY && BulletY <=(VillainY + 50)){
+                        collision = true;
                     }
                 }
             }
 
             else if(element1 is MainCharacter && element2 is PickUpCharacter) {
-                el1Y += 20;
-                el1X += 20;
-                if (el2X > el1X) {
-                    if (el2X < (el1X + 15)) {
-                        if (el2Y > el1Y) {
-                            if (el2Y < (el1Y + 15)) {
-                                collision = true;
-                                Console.WriteLine("main/pickup");
-                            }
-                        }
+                int VillainX = element1.getPos().Item1;
+                int VillainY = element1.getPos().Item2;
+                int BulletX =  element2.getPos().Item1;
+                int BulletY =  element2.getPos().Item2;
+                if (BulletX >= VillainX + 50 && BulletX <= (VillainX + 100))
+                {
+                    if (BulletY >= VillainY && BulletY <=(VillainY + 50)){
+                        collision = true;
                     }
                 }
             }
             else if (element1 is MainCharacter && element2 is EnemyCharacter) {
-                el1Y += 20;
-                el1X += 20;
-                el2X += 25;
-                el2Y += 25;
-                if (el2X > el1X) {
-                    if (el2X < (el1X + 15)) {
-                        if (el2Y > el1Y) {
-                            if (el2Y < (el1Y + 25)) {
-                                collision = true;
-                                Console.WriteLine("main/enemy");
-                            }
-                        }
+                int VillainX = element1.getPos().Item1;
+                int VillainY = element1.getPos().Item2;
+                int BulletX =  element2.getPos().Item1;
+                int BulletY =  element2.getPos().Item2;
+                if (BulletX >= VillainX + 50 && BulletX <= (VillainX + 100))
+                {
+                    if (BulletY >= VillainY && BulletY <=(VillainY + 50)){
+                        collision = true;
                     }
                 }
             }
 
             else if (element1 is MainCharacter && element2 is VillainCharacter) {
-                el1Y += 20;
-                el1X += 20;
-                el2X += 25;
-                el2Y += 25;
-                if (el2X > el1X) {
-                    if (el2X < (el1X + 15)) {
-                        if (el2Y > el1Y) {
-                            if (el2Y < (el1Y + 25)) {
-                                collision = true;
-                                Console.WriteLine("main/villain");
-                            }
-                        }
+                int VillainX = element1.getPos().Item1;
+                int VillainY = element1.getPos().Item2;
+                int BulletX =  element2.getPos().Item1;
+                int BulletY =  element2.getPos().Item2;
+                if (BulletX >= VillainX + 50 && BulletX <= (VillainX + 100))
+                {
+                    if (BulletY >= VillainY && BulletY <=(VillainY + 50)){
+                        collision = true;
                     }
                 }
             }
