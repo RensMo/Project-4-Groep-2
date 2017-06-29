@@ -518,7 +518,7 @@ namespace RobotDroid
                     var pos = el.getPos();
                     if (pos.Item1 < -20) { el.setPos(new Tuple<float, float>(-19, pos.Item2)); }
                     if (pos.Item1 > 1040) { el.setPos(new Tuple<float, float>(1039, pos.Item2)); }
-                    if (pos.Item2 < -15) { el.setPos(new Tuple<float, float>(pos.Item1, -14)); }
+                    if (pos.Item2 < 5) { el.setPos(new Tuple<float, float>(pos.Item1, 6)); }
                     if (pos.Item2 > 1290) { el.setPos(new Tuple<float, float>(pos.Item1, 1289)); }
                 }
 
@@ -723,46 +723,73 @@ namespace RobotDroid
                         if (element.text == "shootup")
                         {
                             
-                            if (FriendlyTimeCounter > 500.0f)
-                            {
-                                FriendlyTimeCounter = 0.0f;
+                            
                                 var directionX = 0;
                                 var directionY = -1;
                                 newlist.Add(new FriendlyBullet(new Tuple<float, float>(character.position.Item1 + 55, character.position.Item2 + 55), new Tuple<float, float>((int)(Math.Round(directionX * dt / 1000)), (int)(Math.Round(directionY - 1000 * dt / 1000))), screenmanager));
-                            }
+                            
                         }
                         if (element.text == "shootdown")
                         {
                             
-                            if (FriendlyTimeCounter > 500.0f)
-                            {
-                                FriendlyTimeCounter = 0.0f;
+                            
                                 var directionX = 0;
                                 var directionY = 1;
                                 newlist.Add(new FriendlyBullet(new Tuple<float, float>(character.position.Item1 + 55, character.position.Item2 + 55), new Tuple<float, float>((int)(Math.Round(directionX * dt / 1000)), (int)(Math.Round(directionY + 1000 * dt / 1000))), screenmanager));
-                            }
+                            
                         }
                         if (element.text == "shootright")
                         {
                             
-                            if (FriendlyTimeCounter > 500.0f)
-                            {
-                                FriendlyTimeCounter = 0.0f;
+                            
                                 var directionX = 1;
                                 var directionY = 0;
                                 newlist.Add(new FriendlyBullet(new Tuple<float, float>(character.position.Item1 + 55, character.position.Item2 + 55), new Tuple<float, float>((int)(Math.Round(directionX + 1000 * dt / 1000)), (int)(Math.Round(directionY * dt / 1000))), screenmanager));
-                            }
+                            
                         }
                         if (element.text == "shootleft")
                         {
                             
-                            if (FriendlyTimeCounter > 500.0f)
-                            {
-                                FriendlyTimeCounter = 0.0f;
+                            
                                 var directionX = -1;
                                 var directionY = 0;
                                 newlist.Add(new FriendlyBullet(new Tuple<float, float>(character.position.Item1 + 55, character.position.Item2 + 55), new Tuple<float, float>((int)(Math.Round(directionX - 1000 * dt / 1000)), (int)(Math.Round(directionY * dt / 1000))), screenmanager));
-                            }
+                            
+                        }
+                        if (element.text == "shootupright")
+                        {
+                            
+                                var directionX = 1;
+                                var directionY = -1;
+                                newlist.Add(new FriendlyBullet(new Tuple<float, float>(character.position.Item1 + 55, character.position.Item2 + 55), new Tuple<float, float>((int)(Math.Round(directionX + 1000 * dt / 1000)), (int)(Math.Round(directionY - 1000 * dt / 1000))), screenmanager));
+                            
+                        }
+
+                        if (element.text == "shootupleft")
+                        {
+                            
+                                var directionX = -1;
+                                var directionY = -1;
+                                newlist.Add(new FriendlyBullet(new Tuple<float, float>(character.position.Item1 + 55, character.position.Item2 + 55), new Tuple<float, float>((int)(Math.Round(directionX - 1000 * dt / 1000)), (int)(Math.Round(directionY - 1000 * dt / 1000))), screenmanager));
+                            
+                        }
+
+                        if (element.text == "shootdownleft")
+                        {
+                           
+                                var directionX = -1;
+                                var directionY = 1;
+                                newlist.Add(new FriendlyBullet(new Tuple<float, float>(character.position.Item1 + 55, character.position.Item2 + 55), new Tuple<float, float>((int)(Math.Round(directionX - 1000 * dt / 1000)), (int)(Math.Round(directionY + 1000 * dt / 1000))), screenmanager));
+                            
+                        }
+
+                        if (element.text == "shootdownright")
+                        {
+                            
+                                var directionX = 1;
+                                var directionY = 1;
+                                newlist.Add(new FriendlyBullet(new Tuple<float, float>(character.position.Item1 + 55, character.position.Item2 + 55), new Tuple<float, float>((int)(Math.Round(directionX + 1000 * dt / 1000)), (int)(Math.Round(directionY + 1000 * dt / 1000))), screenmanager));
+                            
                         }
                     }
 
@@ -830,8 +857,8 @@ namespace RobotDroid
         public void onScreenmanager(ScreenManager ScreenManager, float dt, MainCharacter MainCharacter)
         {
             var LivesPoint = new Microsoft.Xna.Framework.Point(0, 0);
-            var ScorePoint = new Microsoft.Xna.Framework.Point(375, 0);
-            var HealthPoint = new Microsoft.Xna.Framework.Point(200, 0);
+            var ScorePoint = new Microsoft.Xna.Framework.Point(430, 0);
+            var HealthPoint = new Microsoft.Xna.Framework.Point(875, 0);
             drawmanager.drawText("health:" + MainCharacter.health.ToString(), HealthPoint, 10, Colour.Black);
             drawmanager.drawText("Score:" + ScreenManager.score.ToString(), ScorePoint, 10, Colour.Black);
             drawmanager.drawText("Lives left:" + ScreenManager.lives.ToString(), LivesPoint, 10, Colour.Black);

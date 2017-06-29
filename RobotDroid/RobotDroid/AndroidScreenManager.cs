@@ -72,6 +72,10 @@ namespace RobotDroid {
                     elements.Add(new Button("shootright", new Tuple<float, float>(916, 1537), 120, 120, "links", new Tuple<int, int>(916, 1537), this, mainCharacter));
                     elements.Add(new Button("shootup", new Tuple<float, float>(796, 1417), 120, 120, "links", new Tuple<int, int>(796, 1417), this, mainCharacter));
                     elements.Add(new Button("shootdown", new Tuple<float, float>(796, 1657), 120, 120, "links", new Tuple<int, int>(796, 1657), this, mainCharacter));
+                    elements.Add(new Button("shootupleft", new Tuple<float, float>(676, 1417), 100, 100, "links", new Tuple<int, int>(676, 1417), this, mainCharacter));
+                    elements.Add(new Button("shootdownleft", new Tuple<float, float>(676, 1657), 100, 100, "links", new Tuple<int, int>(676, 1677), this, mainCharacter));
+                    elements.Add(new Button("shootupright", new Tuple<float, float>(936, 1417), 100, 100, "links", new Tuple<int, int>(936, 1417), this, mainCharacter));
+                    elements.Add(new Button("shootdownright", new Tuple<float, float>(936, 1677), 100, 100, "links", new Tuple<int, int>(936, 1677), this, mainCharacter));
                     //elements.Add(new PickUpCharacter(new Tuple<float, float>(400, 300), 50, 1, this));
                     //elements.Add(new PickUpCharacter(new Tuple<float, float>(500, 300), 50, 1, this));
                     elements.Add(mainCharacter);
