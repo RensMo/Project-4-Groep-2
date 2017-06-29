@@ -109,7 +109,7 @@ namespace RobotParty
         void drawText(string text, Point top_left_coordinate, int size, Colour color);
         void drawImage();
         void drawMainCharacter(Point top_left_coordinate, float width, float height, Colour color);
-        void drawEnemy(Point top_left_coordinate, float width, float height, Colour color);
+        void drawEnemy(Point top_left_coordinate, float width, float height, Colour color, int index);
     }
 
     public enum Colour { White, Black, Blue, Pink };
@@ -119,14 +119,16 @@ namespace RobotParty
         ContentManager content_manager;
         Texture2D spriteMC, spriteEC,
             spriteEC2, spriteEC3, spriteVC,
+            spriteVC2, spriteVC3,
             spriteMC2, spriteMC3, SSJ;
 
         Texture2D[] spritesenemy;
         Texture2D[] spritesmain;
+        Texture2D[] spritesvillain;
         Texture2D white_pixel;
         SpriteFont default_font;
         Random rnd = new Random();
-        
+        int b;
 
         Game game;
         public MonoGameAdapter(SpriteBatch sprite_batch, ContentManager content_manager) {
@@ -143,8 +145,13 @@ namespace RobotParty
             SSJ = content_manager.Load<Texture2D>("SSJ");
 
             spriteVC = content_manager.Load<Texture2D>("VillainCharacter");
+            spriteVC2 = content_manager.Load<Texture2D>("spriteVC2");
+            spriteVC3 = content_manager.Load<Texture2D>("spriteVC3");
+
             spritesenemy = new Texture2D[3] { spriteEC2, spriteEC3, spriteEC };
             spritesmain = new Texture2D[4] { spriteMC2, spriteMC3, spriteMC, SSJ };
+            spritesvillain = new Texture2D[3] { spriteVC2, spriteVC3, spriteVC };
+            
         }
 
         private Microsoft.Xna.Framework.Color convert_color(Colour color) {
@@ -185,9 +192,12 @@ namespace RobotParty
             sprite_batch.Draw(spritesmain[a], new Rectangle((int)top_left_coordinate.X, (int)top_left_coordinate.Y, (int)width, (int)height), convert_color(color));
         }
 
-        public void drawEnemy(Point top_left_coordinate, float width, float height, Colour color) {
+        public void drawEnemy(Point top_left_coordinate, float width, float height, Colour color, int index) {
             int a = rnd.Next(0, 3);
-            sprite_batch.Draw(spritesenemy[a], new Rectangle((int)top_left_coordinate.X, (int)top_left_coordinate.Y, (int)width, (int)height), convert_color(color));
+            Texture2D[][] een = new Texture2D[][] { spritesenemy, spritesvillain };
+            
+            
+            sprite_batch.Draw(een[index][a], new Rectangle((int)top_left_coordinate.X, (int)top_left_coordinate.Y, (int)width, (int)height), convert_color(color));
         }
 
         // implement drawImage

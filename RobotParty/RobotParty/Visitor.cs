@@ -605,14 +605,20 @@ namespace RobotParty
     class DrawVisitor : Ielementvisitor
     {
         IDrawManager drawmanager;
-
+        Random rnd = new Random();
+        int b;
+        int c;
         public DrawVisitor(IDrawManager drawmanager) {
             this.drawmanager = drawmanager;
+            this.b = rnd.Next(0, 2);
+            this.c = rnd.Next(0, 2);
         }
 
         public void onEnemyCharacter(EnemyCharacter character, ScreenManager screenmanager, float dt) {
+            
+            
             var point = new Microsoft.Xna.Framework.Point((int)Math.Round(character.position.Item1), (int)Math.Round(character.position.Item2));
-            drawmanager.drawEnemy(point, 60, 60, Colour.White);
+            drawmanager.drawEnemy(point, 60, 60, Colour.White,c);
         }
 
         public void onMainCharacter(MainCharacter Character, ScreenManager screenmanager, float dt)
@@ -662,8 +668,10 @@ namespace RobotParty
 
         public void onVillainCharacter(VillainCharacter character, ScreenManager screenmanager, float dt, int index)
         {
+            
+            
             var point = new Microsoft.Xna.Framework.Point((int)Math.Round(character.position.Item1), (int)Math.Round(character.position.Item2));
-            drawmanager.drawEnemy(point, 60, 60, Colour.White);
+            drawmanager.drawEnemy(point, 60, 60, Colour.White,b);
         }
     }
 }
