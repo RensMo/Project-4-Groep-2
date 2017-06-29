@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -117,10 +117,17 @@ namespace RobotParty
     public class MonoGameAdapter : IDrawManager {
         SpriteBatch sprite_batch;
         ContentManager content_manager;
-        Texture2D spriteMC;
-        Texture2D spriteEC;
+        Texture2D spriteMC, spriteEC,
+            spriteEC2, spriteEC3, spriteVC,
+            spriteMC2, spriteMC3, SSJ;
+
+        Texture2D[] spritesenemy;
+        Texture2D[] spritesmain;
         Texture2D white_pixel;
         SpriteFont default_font;
+        Random rnd = new Random();
+        
+
         Game game;
         public MonoGameAdapter(SpriteBatch sprite_batch, ContentManager content_manager) {
             this.sprite_batch = sprite_batch;
@@ -128,7 +135,16 @@ namespace RobotParty
             white_pixel = content_manager.Load<Texture2D>("white_pixel");
             default_font = content_manager.Load<SpriteFont>("arial");
             spriteMC = content_manager.Load<Texture2D>("MainCharacter");
+            spriteMC2 = content_manager.Load<Texture2D>("spriteMC2");
+            spriteMC3 = content_manager.Load<Texture2D>("spriteMC3");
             spriteEC = content_manager.Load<Texture2D>("EnemyCharacter");
+            spriteEC2 = content_manager.Load<Texture2D>("spriteEC2");
+            spriteEC3 = content_manager.Load<Texture2D>("spriteEC3");
+            SSJ = content_manager.Load<Texture2D>("SSJ");
+
+            spriteVC = content_manager.Load<Texture2D>("VillainCharacter");
+            spritesenemy = new Texture2D[3] { spriteEC2, spriteEC3, spriteEC };
+            spritesmain = new Texture2D[4] { spriteMC2, spriteMC3, spriteMC, SSJ };
         }
 
         private Microsoft.Xna.Framework.Color convert_color(Colour color) {
@@ -154,11 +170,24 @@ namespace RobotParty
         }
 
         public void drawMainCharacter(Point top_left_coordinate, float width, float height, Colour color) {
-            sprite_batch.Draw(spriteMC, new Rectangle((int)top_left_coordinate.X, (int)top_left_coordinate.Y, (int)width, (int)height), convert_color(color));
+            // press num lock for Super Saiyan
+            var key = Keyboard.GetState();
+            int a;
+            
+            if (key.NumLock)
+            {
+                 a = rnd.Next(3, 4);
+            }
+            else if (key.IsKeyDown(Keys.W) || key.IsKeyDown(Keys.D) || key.IsKeyDown(Keys.A) || key.IsKeyDown(Keys.S))  {  a = rnd.Next(0, 2); }
+            else { a = rnd.Next(2, 3); }
+            
+
+            sprite_batch.Draw(spritesmain[a], new Rectangle((int)top_left_coordinate.X, (int)top_left_coordinate.Y, (int)width, (int)height), convert_color(color));
         }
 
         public void drawEnemy(Point top_left_coordinate, float width, float height, Colour color) {
-            sprite_batch.Draw(spriteEC, new Rectangle((int)top_left_coordinate.X, (int)top_left_coordinate.Y, (int)width, (int)height), convert_color(color));
+            int a = rnd.Next(0, 3);
+            sprite_batch.Draw(spritesenemy[a], new Rectangle((int)top_left_coordinate.X, (int)top_left_coordinate.Y, (int)width, (int)height), convert_color(color));
         }
 
         // implement drawImage
