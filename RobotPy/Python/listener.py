@@ -1,6 +1,5 @@
 import socket
 import sys
-import socket
 
 def startListen():
     host = 'localhost'
