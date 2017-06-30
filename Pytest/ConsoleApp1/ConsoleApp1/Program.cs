@@ -27,7 +27,7 @@ namespace ConsoleApp1
             StartListener();
         }
 
-        public void Send(string data) //other than string?
+        public void Send(string json) //other than string?
         {
             if (RemoteIpEndPoint.Address != IPAddress.Any && RemoteIpEndPoint.Port != 0)
             {
