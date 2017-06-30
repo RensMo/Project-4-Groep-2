@@ -10,6 +10,8 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Microsoft.Xna.Framework.Input.Touch;
+using MySql.Data.MySqlClient;
+using System.Data;
 
 namespace RobotDroid
 {
@@ -106,7 +108,7 @@ namespace RobotDroid
             {
                 el1Y += 30;
                 el1X += 50;
-                el2X += 10;
+                el2X += 30;
                 el2Y += 10;
                 if (el2X > el1X)
                 {
@@ -241,7 +243,7 @@ namespace RobotDroid
             if (EnemyTimeCounter > 1000.0f)
             {
                 EnemyTimeCounter = 0.0f;
-
+                
                 switch (character.RandomShot())
                 {
 
@@ -353,75 +355,75 @@ namespace RobotDroid
 
             }
 
-            FriendlyTimeCounter += dt;
-            if (FriendlyTimeCounter > 500.0f)
-            {
-                FriendlyTimeCounter = 0.0f;
-                foreach (var el in inputmanager.onInput())
-                {
+            //FriendlyTimeCounter += dt;
+            //if (FriendlyTimeCounter > 500.0f)
+            //{
+            //    FriendlyTimeCounter = 0.0f;
+            //    foreach (var el in inputmanager.onInput())
+            //    {
 
-                    if (el == "UpRight")
-                    {
+            //        if (el == "UpRight")
+            //        {
 
-                        var directionX = 1;
-                        var directionY = -1;
-                        newlist.Add(new FriendlyBullet(new Tuple<float, float>(character.position.Item1, character.position.Item2 ), new Tuple<float, float>((int)(Math.Round(directionX + 1000 * dt / 1000)), (int)(Math.Round(directionY - 1000 * dt / 1000))), screenmanager));
-                        break;
-                    }
+            //            var directionX = 1;
+            //            var directionY = -1;
+            //            newlist.Add(new FriendlyBullet(new Tuple<float, float>(character.position.Item1, character.position.Item2 ), new Tuple<float, float>((int)(Math.Round(directionX + 1000 * dt / 1000)), (int)(Math.Round(directionY - 1000 * dt / 1000))), screenmanager));
+            //            break;
+            //        }
 
-                    if (el == "UpLeft")
-                    {
-                        var directionX = -1;
-                        var directionY = -1;
-                        newlist.Add(new FriendlyBullet(new Tuple<float, float>(character.position.Item1, character.position.Item2), new Tuple<float, float>((int)(Math.Round(directionX - 1000 * dt / 1000)), (int)(Math.Round(directionY - 1000 * dt / 1000))), screenmanager));
-                        break;
-                    }
+            //        if (el == "UpLeft")
+            //        {
+            //            var directionX = -1;
+            //            var directionY = -1;
+            //            newlist.Add(new FriendlyBullet(new Tuple<float, float>(character.position.Item1, character.position.Item2), new Tuple<float, float>((int)(Math.Round(directionX - 1000 * dt / 1000)), (int)(Math.Round(directionY - 1000 * dt / 1000))), screenmanager));
+            //            break;
+            //        }
 
-                    if (el == "DownLeft")
-                    {
-                        var directionX = -1;
-                        var directionY = 1;
-                        newlist.Add(new FriendlyBullet(new Tuple<float, float>(character.position.Item1, character.position.Item2), new Tuple<float, float>((int)(Math.Round(directionX - 1000 * dt / 1000)), (int)(Math.Round(directionY + 1000 * dt / 1000))), screenmanager));
-                        break;
-                    }
+            //        if (el == "DownLeft")
+            //        {
+            //            var directionX = -1;
+            //            var directionY = 1;
+            //            newlist.Add(new FriendlyBullet(new Tuple<float, float>(character.position.Item1, character.position.Item2), new Tuple<float, float>((int)(Math.Round(directionX - 1000 * dt / 1000)), (int)(Math.Round(directionY + 1000 * dt / 1000))), screenmanager));
+            //            break;
+            //        }
 
-                    if (el == "DownRight")
-                    {
-                        var directionX = 1;
-                        var directionY = 1;
-                        newlist.Add(new FriendlyBullet(new Tuple<float, float>(character.position.Item1, character.position.Item2), new Tuple<float, float>((int)(Math.Round(directionX + 1000 * dt / 1000)), (int)(Math.Round(directionY + 1000 * dt / 1000))), screenmanager));
-                        break;
-                    }
-                    if (el == "Up")
-                    {
-                        var directionX = 0;
-                        var directionY = -1;
-                        newlist.Add(new FriendlyBullet(new Tuple<float, float>(character.position.Item1, character.position.Item2), new Tuple<float, float>((int)(Math.Round(directionX * dt / 1000)), (int)(Math.Round(directionY - 1000 * dt / 1000))), screenmanager));
-                        break;
-                    }
-                    if (el == "Down")
-                    {
-                        var directionX = 0;
-                        var directionY = 1;
-                        newlist.Add(new FriendlyBullet(new Tuple<float, float>(character.position.Item1, character.position.Item2), new Tuple<float, float>((int)(Math.Round(directionX * dt / 1000)), (int)(Math.Round(directionY + 1000 * dt / 1000))), screenmanager));
-                        break;
-                    }
-                    if (el == "Right")
-                    {
-                        var directionX = 1;
-                        var directionY = 0;
-                        newlist.Add(new FriendlyBullet(new Tuple<float, float>(character.position.Item1, character.position.Item2), new Tuple<float, float>((int)(Math.Round(directionX + 1000 * dt / 1000)), (int)(Math.Round(directionY * dt / 1000))), screenmanager));
-                        break;
-                    }
-                    if (el == "Left")
-                    {
-                        var directionX = -1;
-                        var directionY = 0;
-                        newlist.Add(new FriendlyBullet(new Tuple<float, float>(character.position.Item1 , character.position.Item2), new Tuple<float, float>((int)(Math.Round(directionX - 1000 * dt / 1000)), (int)(Math.Round(directionY * dt / 1000))), screenmanager));
-                        break;
-                    }
-                }
-            }
+            //        if (el == "DownRight")
+            //        {
+            //            var directionX = 1;
+            //            var directionY = 1;
+            //            newlist.Add(new FriendlyBullet(new Tuple<float, float>(character.position.Item1, character.position.Item2), new Tuple<float, float>((int)(Math.Round(directionX + 1000 * dt / 1000)), (int)(Math.Round(directionY + 1000 * dt / 1000))), screenmanager));
+            //            break;
+            //        }
+            //        if (el == "Up")
+            //        {
+            //            var directionX = 0;
+            //            var directionY = -1;
+            //            newlist.Add(new FriendlyBullet(new Tuple<float, float>(character.position.Item1, character.position.Item2), new Tuple<float, float>((int)(Math.Round(directionX * dt / 1000)), (int)(Math.Round(directionY - 1000 * dt / 1000))), screenmanager));
+            //            break;
+            //        }
+            //        if (el == "Down")
+            //        {
+            //            var directionX = 0;
+            //            var directionY = 1;
+            //            newlist.Add(new FriendlyBullet(new Tuple<float, float>(character.position.Item1, character.position.Item2), new Tuple<float, float>((int)(Math.Round(directionX * dt / 1000)), (int)(Math.Round(directionY + 1000 * dt / 1000))), screenmanager));
+            //            break;
+            //        }
+            //        if (el == "Right")
+            //        {
+            //            var directionX = 1;
+            //            var directionY = 0;
+            //            newlist.Add(new FriendlyBullet(new Tuple<float, float>(character.position.Item1, character.position.Item2), new Tuple<float, float>((int)(Math.Round(directionX + 1000 * dt / 1000)), (int)(Math.Round(directionY * dt / 1000))), screenmanager));
+            //            break;
+            //        }
+            //        if (el == "Left")
+            //        {
+            //            var directionX = -1;
+            //            var directionY = 0;
+            //            newlist.Add(new FriendlyBullet(new Tuple<float, float>(character.position.Item1 , character.position.Item2), new Tuple<float, float>((int)(Math.Round(directionX - 1000 * dt / 1000)), (int)(Math.Round(directionY * dt / 1000))), screenmanager));
+            //            break;
+            //        }
+            //    }
+            //}
         }
 
 
@@ -517,7 +519,7 @@ namespace RobotDroid
                     // check for borders
                     var pos = el.getPos();
                     if (pos.Item1 < -20) { el.setPos(new Tuple<float, float>(-19, pos.Item2)); }
-                    if (pos.Item1 > 1040) { el.setPos(new Tuple<float, float>(1039, pos.Item2)); }
+                    if (pos.Item1 > 1040) { el.setPos(new Tuple<float, float>(1339, pos.Item2)); }
                     if (pos.Item2 < 5) { el.setPos(new Tuple<float, float>(pos.Item1, 6)); }
                     if (pos.Item2 > 1290) { el.setPos(new Tuple<float, float>(pos.Item1, 1289)); }
                 }
@@ -554,96 +556,96 @@ namespace RobotDroid
 
                 }
 
-                //else
-                //{
-                //    if (database)
-                //    {
-                //        // set up a database connection and add a score
-                //        string cs = @"server=185.114.157.171;userid=specific_groep2;password=123kaan;database=specific_project4";
-                //        MySqlConnection con = null;
-                //        MySqlDataReader rdr = null;
+                else
+                {
+                    if (database)
+                    {
+                        // set up a database connection and add a score
+                        string cs = @"server=185.114.157.171;userid=specific_groep2;password=123kaan;database=specific_project4";
+                        MySqlConnection con = null;
+                        MySqlDataReader rdr = null;
 
-                //        try
-                //        {
-                //            con = new MySqlConnection(cs);
-                //            con.Open();
+                        try
+                        {
+                            con = new MySqlConnection(cs);
+                            con.Open();
 
-                //            string stm = "INSERT INTO score values (" + screenmanager.score.ToString() + ")";
-                //            MySqlCommand cmd = new MySqlCommand(stm, con);
-                //            rdr = cmd.ExecuteReader();
+                            string stm = "INSERT INTO score values (" + screenmanager.score.ToString() + ")";
+                            MySqlCommand cmd = new MySqlCommand(stm, con);
+                            rdr = cmd.ExecuteReader();
 
-                //            cmd.ExecuteNonQuery();
-                //        }
-                //        catch (MySqlException ex)
-                //        {
-                //            Console.WriteLine("Error: {0}", ex.ToString());
+                            cmd.ExecuteNonQuery();
+                        }
+                        catch (MySqlException ex)
+                        {
+                            Console.WriteLine("Error: {0}", ex.ToString());
 
-                //        }
-                //        finally
-                //        {
-                //            if (rdr != null)
-                //            {
-                //                rdr.Close();
-                //            }
+                        }
+                        finally
+                        {
+                            if (rdr != null)
+                            {
+                                rdr.Close();
+                            }
 
-                //            if (con != null)
-                //            {
-                //                con.Close();
-                //            }
-                //            database = false;
+                            if (con != null)
+                            {
+                                con.Close();
+                            }
+                            database = false;
 
-                //        }
-                //    }
-
-
-                //    if (GetTop5)
-                //    {
-                //        // set up a database connection and add a score
-                //        string cs = @"server=185.114.157.171;userid=specific_groep2;password=123kaan;database=specific_project4";
-                //        MySqlConnection con = null;
-                //        MySqlDataReader rdr = null;
-
-                //        try
-                //        {
-                //            con = new MySqlConnection(cs);
-                //            con.Open();
-
-                //            string stm = "SELECT * FROM score ORDER BY score DESC LIMIT 5";
-                //            MySqlCommand cmd = new MySqlCommand(stm, con);
-                //            rdr = cmd.ExecuteReader();
-                //            while (rdr.Read())
-                //            {
-                //                score = rdr.GetInt32("score");
-                //                screenmanager.Top5Score.Add(new text(new Tuple<float, float>(350, 220 + (scoreindex * 20)), screenmanager, "Score " + scoreindex.ToString() + ":  " + score.ToString()));
-                //                scoreindex += 1;
-                //            }
-                //            cmd.ExecuteNonQuery();
-                //        }
-                //        catch (MySqlException ex)
-                //        {
-                //            Console.WriteLine("Error: {0}", ex.ToString());
-
-                //        }
-                //        finally
-                //        {
-                //            if (rdr != null)
-                //            {
-                //                rdr.Close();
-                //            }
-
-                //            if (con != null)
-                //            {
-                //                con.Close();
-                //            }
-                //            GetTop5 = false;
-
-                //        }
-                //    }
-                //    level = 10;
-                //    screenmanager.Create(level);
+                        }
+                    }
 
 
-                //}
+                    if (GetTop5)
+                    {
+                        // set up a database connection and add a score
+                        string cs = @"server=185.114.157.171;userid=specific_groep2;password=123kaan;database=specific_project4";
+                        MySqlConnection con = null;
+                        MySqlDataReader rdr = null;
+
+                        try
+                        {
+                            con = new MySqlConnection(cs);
+                            con.Open();
+
+                            string stm = "SELECT * FROM score ORDER BY score DESC LIMIT 5";
+                            MySqlCommand cmd = new MySqlCommand(stm, con);
+                            rdr = cmd.ExecuteReader();
+                            while (rdr.Read())
+                            {
+                                score = rdr.GetInt32("score");
+                                screenmanager.Top5Score.Add(new text(new Tuple<float, float>(390, 220 + (scoreindex * 100)), screenmanager, "Score " + scoreindex.ToString() + ":  " + score.ToString()));
+                                scoreindex += 1;
+                            }
+                            cmd.ExecuteNonQuery();
+                        }
+                        catch (MySqlException ex)
+                        {
+                            Console.WriteLine("Error: {0}", ex.ToString());
+
+                        }
+                        finally
+                        {
+                            if (rdr != null)
+                            {
+                                rdr.Close();
+                            }
+
+                            if (con != null)
+                            {
+                                con.Close();
+                            }
+                            GetTop5 = false;
+
+                        }
+                    }
+                    level = 10;
+                    screenmanager.Create(level);
+
+
+                }
             }
 
 
@@ -676,6 +678,7 @@ namespace RobotDroid
         {
             var touchCollection = TouchPanel.GetState();
             FriendlyTimeCounter += dt;
+            Console.WriteLine(FriendlyTimeCounter.ToString());
             foreach (TouchLocation tl in touchCollection)
             {
 
@@ -722,74 +725,89 @@ namespace RobotDroid
 
                         if (element.text == "shootup")
                         {
-                            
-                            
+                            if (FriendlyTimeCounter > 4000.0f)
+                            {
+                                FriendlyTimeCounter = 0.0f;
                                 var directionX = 0;
                                 var directionY = -1;
                                 newlist.Add(new FriendlyBullet(new Tuple<float, float>(character.position.Item1 + 55, character.position.Item2 + 55), new Tuple<float, float>((int)(Math.Round(directionX * dt / 1000)), (int)(Math.Round(directionY - 1000 * dt / 1000))), screenmanager));
-                            
+                            }
                         }
                         if (element.text == "shootdown")
                         {
-                            
-                            
+
+                            if (FriendlyTimeCounter > 4000.0f)
+                            {
+                                FriendlyTimeCounter = 0.0f;
                                 var directionX = 0;
                                 var directionY = 1;
                                 newlist.Add(new FriendlyBullet(new Tuple<float, float>(character.position.Item1 + 55, character.position.Item2 + 55), new Tuple<float, float>((int)(Math.Round(directionX * dt / 1000)), (int)(Math.Round(directionY + 1000 * dt / 1000))), screenmanager));
-                            
+                            }
                         }
                         if (element.text == "shootright")
                         {
-                            
-                            
+
+                            if (FriendlyTimeCounter > 4000.0f)
+                            {
+                                FriendlyTimeCounter = 0.0f;
                                 var directionX = 1;
                                 var directionY = 0;
                                 newlist.Add(new FriendlyBullet(new Tuple<float, float>(character.position.Item1 + 55, character.position.Item2 + 55), new Tuple<float, float>((int)(Math.Round(directionX + 1000 * dt / 1000)), (int)(Math.Round(directionY * dt / 1000))), screenmanager));
-                            
+                            }
                         }
                         if (element.text == "shootleft")
                         {
-                            
-                            
+
+                            if (FriendlyTimeCounter > 4000.0f)
+                            {
+                                FriendlyTimeCounter = 0.0f;
                                 var directionX = -1;
                                 var directionY = 0;
                                 newlist.Add(new FriendlyBullet(new Tuple<float, float>(character.position.Item1 + 55, character.position.Item2 + 55), new Tuple<float, float>((int)(Math.Round(directionX - 1000 * dt / 1000)), (int)(Math.Round(directionY * dt / 1000))), screenmanager));
-                            
+                            }
                         }
                         if (element.text == "shootupright")
                         {
-                            
+                            if (FriendlyTimeCounter > 4000.0f)
+                            {
+                                FriendlyTimeCounter = 0.0f;
                                 var directionX = 1;
                                 var directionY = -1;
                                 newlist.Add(new FriendlyBullet(new Tuple<float, float>(character.position.Item1 + 55, character.position.Item2 + 55), new Tuple<float, float>((int)(Math.Round(directionX + 1000 * dt / 1000)), (int)(Math.Round(directionY - 1000 * dt / 1000))), screenmanager));
-                            
+                            }
                         }
 
                         if (element.text == "shootupleft")
                         {
-                            
+                            if (FriendlyTimeCounter > 4000.0f)
+                            {
+                                FriendlyTimeCounter = 0.0f;
                                 var directionX = -1;
                                 var directionY = -1;
                                 newlist.Add(new FriendlyBullet(new Tuple<float, float>(character.position.Item1 + 55, character.position.Item2 + 55), new Tuple<float, float>((int)(Math.Round(directionX - 1000 * dt / 1000)), (int)(Math.Round(directionY - 1000 * dt / 1000))), screenmanager));
-                            
+                            }
                         }
 
                         if (element.text == "shootdownleft")
                         {
-                           
+                            if (FriendlyTimeCounter > 4000.0f)
+                            {
+                                FriendlyTimeCounter = 0.0f;
                                 var directionX = -1;
                                 var directionY = 1;
                                 newlist.Add(new FriendlyBullet(new Tuple<float, float>(character.position.Item1 + 55, character.position.Item2 + 55), new Tuple<float, float>((int)(Math.Round(directionX - 1000 * dt / 1000)), (int)(Math.Round(directionY + 1000 * dt / 1000))), screenmanager));
-                            
+                            }
                         }
 
                         if (element.text == "shootdownright")
                         {
-                            
+                            if (FriendlyTimeCounter > 4000.0f)
+                            {
+                                FriendlyTimeCounter = 0.0f;
                                 var directionX = 1;
                                 var directionY = 1;
                                 newlist.Add(new FriendlyBullet(new Tuple<float, float>(character.position.Item1 + 55, character.position.Item2 + 55), new Tuple<float, float>((int)(Math.Round(directionX + 1000 * dt / 1000)), (int)(Math.Round(directionY + 1000 * dt / 1000))), screenmanager));
-                            
+                            }
                         }
                     }
 
@@ -842,7 +860,7 @@ namespace RobotDroid
         public void onPickUpCharacter(PickUpCharacter Character, ScreenManager screenmanager, float dt)
         {
             var point = new Microsoft.Xna.Framework.Point((int)Math.Round(Character.position.Item1), (int)Math.Round(Character.position.Item2));
-            drawmanager.drawRectangle(point, 20, 20, Colour.Pink);
+            drawmanager.drawPickup(point, 60, 60, Colour.Pink);
         }
 
 
@@ -858,10 +876,10 @@ namespace RobotDroid
         {
             var LivesPoint = new Microsoft.Xna.Framework.Point(0, 0);
             var ScorePoint = new Microsoft.Xna.Framework.Point(430, 0);
-            var HealthPoint = new Microsoft.Xna.Framework.Point(875, 0);
-            drawmanager.drawText("health:" + MainCharacter.health.ToString(), HealthPoint, 10, Colour.Black);
-            drawmanager.drawText("Score:" + ScreenManager.score.ToString(), ScorePoint, 10, Colour.Black);
-            drawmanager.drawText("Lives left:" + ScreenManager.lives.ToString(), LivesPoint, 10, Colour.Black);
+            var HealthPoint = new Microsoft.Xna.Framework.Point(825, 0);
+            drawmanager.drawText("health:" + MainCharacter.health.ToString(), HealthPoint, 10, Colour.White);
+            drawmanager.drawText("Score:" + ScreenManager.score.ToString(), ScorePoint, 10, Colour.White);
+            drawmanager.drawText("Lives left:" + ScreenManager.lives.ToString(), LivesPoint, 10, Colour.White);
             foreach (text text in ScreenManager.Top5Score)
             {
                 text.Draw(this, dt);
@@ -875,7 +893,7 @@ namespace RobotDroid
         public void onText(text text, ScreenManager screenmanager)
         {
             var point = new Microsoft.Xna.Framework.Point((int)Math.Round(text.getPos().Item1), (int)Math.Round(text.getPos().Item2));
-            drawmanager.drawText(text.Text, point, 50, Colour.Black);
+            drawmanager.drawText(text.Text, point, 50, Colour.White);
         }
 
         public void onVillainCharacter(VillainCharacter character, ScreenManager screenmanager, float dt, int index)

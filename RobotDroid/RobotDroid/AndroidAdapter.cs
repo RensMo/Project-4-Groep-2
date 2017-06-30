@@ -94,6 +94,7 @@ namespace RobotDroid {
         void drawButton(Point top_left_coordinate, float width, float height, Colour color, string text);
         void drawMainCharacter(Point top_left_coordinate, float width, float height, Colour color);
         void drawEnemy(Point top_left_coordinate, float width, float height, Colour color);
+        void drawPickup(Point top_left_coordinate, float width, float height, Colour color);
     }
 
     public enum Colour { White, Black, Blue, Pink };
@@ -104,6 +105,8 @@ namespace RobotDroid {
         Texture2D spriteMC;
         Texture2D spriteEC;
         Texture2D white_pixel;
+        Texture2D Pickup;
+        Texture2D bg;
         SpriteFont default_font;
         Game game;
         public MonoGameAdapter(SpriteBatch sprite_batch, ContentManager content_manager) {
@@ -113,6 +116,8 @@ namespace RobotDroid {
             default_font = content_manager.Load<SpriteFont>("Arial");
             spriteMC = content_manager.Load<Texture2D>("MainCharacter");
             spriteEC = content_manager.Load<Texture2D>("EnemyCharacter");
+            Pickup = content_manager.Load<Texture2D>("pickup");
+            //bg = content_manager.Load<Texture2D>("start");
         }
 
         private Microsoft.Xna.Framework.Color convert_color(Colour color) {
@@ -146,6 +151,11 @@ namespace RobotDroid {
 
         public void drawEnemy(Point top_left_coordinate, float width, float height, Colour color) {
             sprite_batch.Draw(spriteEC, new Rectangle((int)top_left_coordinate.X, (int)top_left_coordinate.Y, (int)width, (int)height), convert_color(color));
+        }
+
+        public void drawPickup(Point top_left_coordinate, float width, float height, Colour color)
+        {
+            sprite_batch.Draw(Pickup, new Rectangle((int)top_left_coordinate.X, (int)top_left_coordinate.Y, (int)width, (int)height), convert_color(color));
         }
 
         // implement drawImage

@@ -100,6 +100,7 @@ class MonoPackageManager_Resources {
 		/* We need to ensure that "RobotDroid.dll" comes first in this list. */
 		"RobotDroid.dll",
 		"MonoGame.Framework.dll",
+		"MySql.Data.CF.dll",
 	};
 	public static final String[] Dependencies = new String[]{
 	};

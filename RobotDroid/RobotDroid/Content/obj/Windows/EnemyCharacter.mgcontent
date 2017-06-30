@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>C:/Users/Dani/Desktop/RobotDroid/RobotDroid/Content/EnemyCharacter.png</SourceFile>
-  <SourceTime>2017-06-28T12:55:53.7226408+02:00</SourceTime>
-  <DestFile>C:/Users/Dani/Desktop/RobotDroid/RobotDroid/Content/bin/Windows/EnemyCharacter.xnb</DestFile>
-  <DestTime>2017-06-29T14:19:08.8802657+02:00</DestTime>
+  <SourceFile>C:/Users/Dani/Desktop/Nieuwe map/RobotDroid/RobotDroid/Content/EnemyCharacter.png</SourceFile>
+  <SourceTime>2017-06-28T20:46:10+02:00</SourceTime>
+  <DestFile>C:/Users/Dani/Desktop/Nieuwe map/RobotDroid/RobotDroid/Content/bin/Windows/EnemyCharacter.xnb</DestFile>
+  <DestTime>2017-06-30T14:18:56.1141358+02:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2017-03-01T16:05:36+01:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

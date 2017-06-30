@@ -22,8 +22,8 @@ namespace RobotDroid
 
             graphics.IsFullScreen = true;
             
-            graphics.PreferredBackBufferWidth = 800;
-            graphics.PreferredBackBufferHeight = 480;
+            graphics.PreferredBackBufferWidth = 1080;
+            graphics.PreferredBackBufferHeight = 1920;
             graphics.SupportedOrientations = DisplayOrientation.LandscapeLeft | DisplayOrientation.LandscapeRight;
         }
 
@@ -33,6 +33,7 @@ namespace RobotDroid
         Ielementvisitor drawvisitor;
         List<ScreenManager> screenmanagers;
         IonCollision collisioncalculator;
+        Texture2D bg;
 
         /// <summary>
         /// Allows the game to perform any initialization it needs to before starting to run.
@@ -65,6 +66,7 @@ namespace RobotDroid
             spriteBatch = new SpriteBatch(GraphicsDevice);
             drawmanager = new MonoGameAdapter(spriteBatch, Content);
             drawvisitor = new DrawVisitor(drawmanager);
+            bg = Content.Load<Texture2D>("star");
 
             // TODO: use this.Content to load your game content here
         }
@@ -103,6 +105,7 @@ namespace RobotDroid
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             spriteBatch.Begin();
+            spriteBatch.Draw(bg, new Rectangle(0, 0, 1080, 1920), Color.White);
             screenmanagers[0].Draw(drawvisitor, 0f);
             spriteBatch.End();
             base.Draw(gameTime);

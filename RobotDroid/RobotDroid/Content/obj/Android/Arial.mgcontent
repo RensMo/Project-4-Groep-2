@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>C:/Users/Dani/Desktop/RobotDroid/RobotDroid/Content/Arial.spritefont</SourceFile>
-  <SourceTime>2017-06-29T14:18:56.4951322+02:00</SourceTime>
-  <DestFile>C:/Users/Dani/Desktop/RobotDroid/RobotDroid/Content/bin/Android/Arial.xnb</DestFile>
-  <DestTime>2017-06-29T14:19:42.6520868+02:00</DestTime>
+  <SourceFile>C:/Users/Dani/Desktop/Nieuwe map/RobotDroid/RobotDroid/Content/Arial.spritefont</SourceFile>
+  <SourceTime>2017-06-30T13:37:25.8009128+02:00</SourceTime>
+  <DestFile>C:/Users/Dani/Desktop/Nieuwe map/RobotDroid/RobotDroid/Content/bin/Android/Arial.xnb</DestFile>
+  <DestTime>2017-06-30T14:19:11.4571499+02:00</DestTime>
   <Importer>FontDescriptionImporter</Importer>
   <ImporterTime>2017-03-01T16:05:36+01:00</ImporterTime>
   <Processor>FontDescriptionProcessor</Processor>

@@ -4,9 +4,11 @@
   <Platform>Android</Platform>
   <Config />
   <SourceFiles>
-    <File>C:/Users/Dani/Desktop/RobotDroid/RobotDroid/Content/white_pixel.png</File>
-    <File>C:/Users/Dani/Desktop/RobotDroid/RobotDroid/Content/MainCharacter.png</File>
-    <File>C:/Users/Dani/Desktop/RobotDroid/RobotDroid/Content/EnemyCharacter.png</File>
-    <File>C:/Users/Dani/Desktop/RobotDroid/RobotDroid/Content/Arial.spritefont</File>
+    <File>C:/Users/Dani/Desktop/Nieuwe map/RobotDroid/RobotDroid/Content/white_pixel.png</File>
+    <File>C:/Users/Dani/Desktop/Nieuwe map/RobotDroid/RobotDroid/Content/MainCharacter.png</File>
+    <File>C:/Users/Dani/Desktop/Nieuwe map/RobotDroid/RobotDroid/Content/EnemyCharacter.png</File>
+    <File>C:/Users/Dani/Desktop/Nieuwe map/RobotDroid/RobotDroid/Content/Arial.spritefont</File>
+    <File>C:/Users/Dani/Desktop/Nieuwe map/RobotDroid/RobotDroid/Content/pickup.png</File>
+    <File>C:/Users/Dani/Desktop/Nieuwe map/RobotDroid/RobotDroid/Content/star.png</File>
   </SourceFiles>
 </SourceFileCollection>

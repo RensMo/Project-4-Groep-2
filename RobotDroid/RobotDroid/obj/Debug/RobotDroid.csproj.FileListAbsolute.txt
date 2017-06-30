@@ -42,4 +42,60 @@ C:\Users\Dani\Desktop\RobotDroid\RobotDroid\obj\Debug\android\assets\System.Xml.
 C:\Users\Dani\Desktop\RobotDroid\RobotDroid\obj\Debug\android\assets\System.Xml.Linq.dll.mdb
 C:\Users\Dani\Desktop\RobotDroid\RobotDroid\bin\Android\AnyCPU\Debug\RobotDroid.dll.config
 C:\Users\Dani\Desktop\RobotDroid\RobotDroid\obj\Debug\RobotDroid.dll.mdb
-C:\Users\Dani\Desktop\RobotDroid\RobotDroid\bin\Android\AnyCPU\Debug\RobotDroid.dll.mdb
+C:\Users\Kaan\Desktop\RobotDroid\RobotDroid\bin\Android\AnyCPU\Debug\RobotDroid.dll.config
+C:\Users\Kaan\Desktop\RobotDroid\RobotDroid\bin\Android\AnyCPU\Debug\RobotDroid.dll
+C:\Users\Kaan\Desktop\RobotDroid\RobotDroid\bin\Android\AnyCPU\Debug\RobotDroid.pdb
+C:\Users\Kaan\Desktop\RobotDroid\RobotDroid\bin\Android\AnyCPU\Debug\RobotDroid.RobotDroid.apk
+C:\Users\Kaan\Desktop\RobotDroid\RobotDroid\bin\Android\AnyCPU\Debug\RobotDroid.RobotDroid-Signed.apk
+C:\Users\Kaan\Desktop\RobotDroid\RobotDroid\bin\Android\AnyCPU\Debug\MonoGame.Framework.dll
+C:\Users\Kaan\Desktop\RobotDroid\RobotDroid\bin\Android\AnyCPU\Debug\MonoGame.Framework.xml
+C:\Users\Kaan\Desktop\RobotDroid\RobotDroid\obj\Debug\RobotDroid.csprojResolveAssemblyReference.cache
+C:\Users\Kaan\Desktop\RobotDroid\RobotDroid\obj\Debug\RobotDroid.dll
+C:\Users\Kaan\Desktop\RobotDroid\RobotDroid\obj\Debug\RobotDroid.pdb
+C:\Users\Kaan\Desktop\RobotDroid\RobotDroid\obj\Debug\android\bin\RobotDroid.RobotDroid.apk
+C:\Users\Kaan\Desktop\RobotDroid\RobotDroid\obj\Debug\res\values\strings.xml
+C:\Users\Kaan\Desktop\RobotDroid\RobotDroid\obj\Debug\res\drawable\icon.png
+C:\Users\Kaan\Desktop\RobotDroid\RobotDroid\obj\Debug\res\drawable\splash.png
+C:\Users\Kaan\Desktop\RobotDroid\RobotDroid\obj\Debug\res\values\styles.xml
+C:\Users\Kaan\Desktop\RobotDroid\RobotDroid\obj\Debug\R.cs.flag
+C:\Users\Kaan\Desktop\RobotDroid\RobotDroid\obj\Debug\uploadflags.txt
+C:\Users\Kaan\Desktop\RobotDroid\RobotDroid\bin\Android\AnyCPU\Debug\MySql.Data.CF.dll
+C:\Users\Kaan\Desktop\RobotDroid\RobotDroid\bin\Android\AnyCPU\Debug\RobotDroid.dll.mdb
+C:\Users\Kaan\Desktop\RobotDroid\RobotDroid\obj\Debug\android\assets\RobotDroid.dll.mdb
+C:\Users\Dani\Desktop\Nieuwe map\RobotDroid\RobotDroid\bin\Android\AnyCPU\Debug\RobotDroid.dll.config
+C:\Users\Dani\Desktop\Nieuwe map\RobotDroid\RobotDroid\bin\Android\AnyCPU\Debug\RobotDroid.dll
+C:\Users\Dani\Desktop\Nieuwe map\RobotDroid\RobotDroid\bin\Android\AnyCPU\Debug\RobotDroid.pdb
+C:\Users\Dani\Desktop\Nieuwe map\RobotDroid\RobotDroid\bin\Android\AnyCPU\Debug\RobotDroid.RobotDroid.apk
+C:\Users\Dani\Desktop\Nieuwe map\RobotDroid\RobotDroid\bin\Android\AnyCPU\Debug\RobotDroid.RobotDroid-Signed.apk
+C:\Users\Dani\Desktop\Nieuwe map\RobotDroid\RobotDroid\bin\Android\AnyCPU\Debug\MonoGame.Framework.dll
+C:\Users\Dani\Desktop\Nieuwe map\RobotDroid\RobotDroid\bin\Android\AnyCPU\Debug\MonoGame.Framework.xml
+C:\Users\Dani\Desktop\Nieuwe map\RobotDroid\RobotDroid\obj\Debug\RobotDroid.csprojResolveAssemblyReference.cache
+C:\Users\Dani\Desktop\Nieuwe map\RobotDroid\RobotDroid\obj\Debug\RobotDroid.dll
+C:\Users\Dani\Desktop\Nieuwe map\RobotDroid\RobotDroid\obj\Debug\RobotDroid.pdb
+C:\Users\Dani\Desktop\Nieuwe map\RobotDroid\RobotDroid\obj\Debug\android\bin\RobotDroid.RobotDroid.apk
+C:\Users\Dani\Desktop\Nieuwe map\RobotDroid\RobotDroid\obj\Debug\res\values\strings.xml
+C:\Users\Dani\Desktop\Nieuwe map\RobotDroid\RobotDroid\obj\Debug\res\drawable\icon.png
+C:\Users\Dani\Desktop\Nieuwe map\RobotDroid\RobotDroid\obj\Debug\res\drawable\splash.png
+C:\Users\Dani\Desktop\Nieuwe map\RobotDroid\RobotDroid\obj\Debug\res\values\styles.xml
+C:\Users\Dani\Desktop\Nieuwe map\RobotDroid\RobotDroid\obj\Debug\R.cs.flag
+C:\Users\Dani\Desktop\Nieuwe map\RobotDroid\RobotDroid\obj\Debug\uploadflags.txt
+C:\Users\Dani\Desktop\Nieuwe map\RobotDroid\RobotDroid\bin\Android\AnyCPU\Debug\RobotDroid.dll.mdb
+C:\Users\Dani\Desktop\Nieuwe map\RobotDroid\RobotDroid\obj\Debug\android\assets\RobotDroid.dll.mdb
+C:\Users\Dani\Desktop\Nieuwe map\RobotDroid\RobotDroid\bin\Android\AnyCPU\Debug\Java.Interop.dll.mdb
+C:\Users\Dani\Desktop\Nieuwe map\RobotDroid\RobotDroid\bin\Android\AnyCPU\Debug\Mono.Android.dll.mdb
+C:\Users\Dani\Desktop\Nieuwe map\RobotDroid\RobotDroid\bin\Android\AnyCPU\Debug\Mono.Data.Tds.dll.mdb
+C:\Users\Dani\Desktop\Nieuwe map\RobotDroid\RobotDroid\bin\Android\AnyCPU\Debug\mscorlib.dll.mdb
+C:\Users\Dani\Desktop\Nieuwe map\RobotDroid\RobotDroid\bin\Android\AnyCPU\Debug\OpenTK-1.0.dll.mdb
+C:\Users\Dani\Desktop\Nieuwe map\RobotDroid\RobotDroid\bin\Android\AnyCPU\Debug\System.ComponentModel.Composition.dll.mdb
+C:\Users\Dani\Desktop\Nieuwe map\RobotDroid\RobotDroid\bin\Android\AnyCPU\Debug\System.Core.dll.mdb
+C:\Users\Dani\Desktop\Nieuwe map\RobotDroid\RobotDroid\bin\Android\AnyCPU\Debug\System.Data.dll.mdb
+C:\Users\Dani\Desktop\Nieuwe map\RobotDroid\RobotDroid\bin\Android\AnyCPU\Debug\System.dll.mdb
+C:\Users\Dani\Desktop\Nieuwe map\RobotDroid\RobotDroid\bin\Android\AnyCPU\Debug\System.Net.Http.dll.mdb
+C:\Users\Dani\Desktop\Nieuwe map\RobotDroid\RobotDroid\bin\Android\AnyCPU\Debug\System.Numerics.dll.mdb
+C:\Users\Dani\Desktop\Nieuwe map\RobotDroid\RobotDroid\bin\Android\AnyCPU\Debug\System.Runtime.Serialization.dll.mdb
+C:\Users\Dani\Desktop\Nieuwe map\RobotDroid\RobotDroid\bin\Android\AnyCPU\Debug\System.ServiceModel.Internals.dll.mdb
+C:\Users\Dani\Desktop\Nieuwe map\RobotDroid\RobotDroid\bin\Android\AnyCPU\Debug\System.Transactions.dll.mdb
+C:\Users\Dani\Desktop\Nieuwe map\RobotDroid\RobotDroid\bin\Android\AnyCPU\Debug\System.Xml.dll.mdb
+C:\Users\Dani\Desktop\Nieuwe map\RobotDroid\RobotDroid\bin\Android\AnyCPU\Debug\System.Xml.Linq.dll.mdb
+C:\Users\Dani\Desktop\Nieuwe map\RobotDroid\RobotDroid\obj\Debug\RobotDroid.dll.mdb
+C:\Users\Dani\Desktop\Nieuwe map\RobotDroid\RobotDroid\bin\Android\AnyCPU\Debug\RobotDroid.dll.mdb

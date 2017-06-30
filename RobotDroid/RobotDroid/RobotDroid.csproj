@@ -48,9 +48,13 @@
   <ItemGroup>
     <Reference Include="Mono.Android" />
     <Reference Include="mscorlib" />
+    <Reference Include="MySql.Data.CF">
+      <HintPath>..\..\MySql.Data.CF.dll</HintPath>
+    </Reference>
     <Reference Include="OpenTK-1.0" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Xml" />
     <Reference Include="MonoGame.Framework">
