@@ -1,7 +1,9 @@
 import socket
 import sys
-import threading
 import json
+
+import threading
+from threading import Thread
 
 class UdpHandler:
     host = ''
@@ -21,9 +23,7 @@ class UdpHandler:
     def startlistening(self):
         if (self.listening == False):
             self.listening = True
-            self.l_thread = threading.Thread(target=self.listen())
-            self.l_thread.daemon = True
-            self.l_thread.start()
+            Thread(target=self.listen).start()
 
     def stoplistening(self):
         self.listening = False

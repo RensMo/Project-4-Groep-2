@@ -159,7 +159,7 @@ namespace RobotParty
         public void drawRectangle(Point top_left_coordinate, float width, float height, Colour color)
         {
             sprite_batch.Draw(white_pixel, new Rectangle((int)top_left_coordinate.X, (int)top_left_coordinate.Y, (int)width, (int)height), convert_color(color));
-            string json = String.Format("{{\"func\":\"{0}\", \"args\":[\"{1}\",\"{2}\",\"{3}\",\"{4}\",\"{5}\",,\"{6}\"]}}",
+            string json = String.Format("{{\"func\":\"{0}\", \"args\":[\"{1}\",\"{2}\",\"{3}\",\"{4}\",\"{5}\",\"{6}\"]}}",
                 System.Reflection.MethodBase.GetCurrentMethod().Name,
                 "white_pixel",
                 top_left_coordinate.X,

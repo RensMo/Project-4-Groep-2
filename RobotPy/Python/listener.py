@@ -25,3 +25,4 @@ def startListen():
 if __name__ == "__main__":
     print("Listening")
     startListen()
+    print("hier komt die nooit")
