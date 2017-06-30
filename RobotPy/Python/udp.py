@@ -1,7 +1,7 @@
 import socket
 import sys
 import threading
-
+import json
 
 class UdpHandler:
     host = ''
@@ -35,6 +35,7 @@ class UdpHandler:
             if not data:
                 break
             print('From server: ' + data.decode())
+
 
 if __name__ == "__main__":
     udpman = UdpHandler(23023)

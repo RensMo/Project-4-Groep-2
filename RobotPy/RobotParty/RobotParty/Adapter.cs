@@ -224,8 +224,8 @@ namespace RobotParty
         }
         public void drawRectangle(Point top_left_coordinate, float width, float height, Colour color)
         {
-            //sprite_batch.Draw(white_pixel, new Rectangle((int)top_left_coordinate.X, (int)top_left_coordinate.Y, (int)width, (int)height), convert_color(color
-            string json = String.Format("{{'func':'{0}', 'args':[{1},{2},{3},{4},{5},{6}]}}", 
+            sprite_batch.Draw(white_pixel, new Rectangle((int)top_left_coordinate.X, (int)top_left_coordinate.Y, (int)width, (int)height), convert_color(color));
+            string json = String.Format("{{\"func\":\"{0}\", \"args\":[\"{1}\",\"{2}\",\"{3}\",\"{4}\",\"{5}\",,\"{6}\"]}}",
                 System.Reflection.MethodBase.GetCurrentMethod().Name,
                 "white_pixel",
                 top_left_coordinate.X,
@@ -240,7 +240,7 @@ namespace RobotParty
         public void drawText(string text, Point top_left_coordinate, int size, Colour color)
         {
             sprite_batch.DrawString(default_font, text, new Vector2(top_left_coordinate.X, top_left_coordinate.Y), convert_color(color));
-            string json = String.Format("{{'func':'{0}', 'args':[{1},{2},{3},{4},{5}]}}",
+            string json = String.Format("{{\"func\":\"{0}\", \"args\":[\"{1}\",\"{2}\",\"{3}\",\"{4}\",\"{5}\"]}}",
                 System.Reflection.MethodBase.GetCurrentMethod().Name,
                 text,
                 top_left_coordinate.X,
@@ -254,11 +254,28 @@ namespace RobotParty
         public void drawMainCharacter(Point top_left_coordinate, float width, float height, Colour color)
         {
             sprite_batch.Draw(spriteMC, new Rectangle((int)top_left_coordinate.X, (int)top_left_coordinate.Y, (int)width, (int)height), convert_color(color));
+            string json = String.Format("{{\"func\":\"{0}\", \"args\":[\"{1}\",\"{2}\",\"{3}\",\"{4}\",\"{5}\"]}}",
+                System.Reflection.MethodBase.GetCurrentMethod().Name,
+                top_left_coordinate.X,
+                top_left_coordinate.Y,
+                width,
+                height,
+                color
+                );
+            udphandler.Send(json);
         }
 
         public void drawEnemy(Point top_left_coordinate, float width, float height, Colour color)
         {
             sprite_batch.Draw(spriteEC, new Rectangle((int)top_left_coordinate.X, (int)top_left_coordinate.Y, (int)width, (int)height), convert_color(color));
+            string json = String.Format("{{\"func\":\"{0}\", \"args\":[\"{1}\",\"{2}\",\"{3}\",\"{4}\",\"{5}\"]}}",
+                System.Reflection.MethodBase.GetCurrentMethod().Name,
+                top_left_coordinate.X,
+                top_left_coordinate.Y,
+                width,
+                height,
+                color
+                );
         }
 
         // implement drawImage
