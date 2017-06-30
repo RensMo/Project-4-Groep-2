@@ -844,7 +844,7 @@ namespace RobotDroid
         public void onPickUpCharacter(PickUpCharacter Character, ScreenManager screenmanager, float dt)
         {
             var point = new Microsoft.Xna.Framework.Point((int)Math.Round(Character.position.Item1), (int)Math.Round(Character.position.Item2));
-            drawmanager.drawRectangle(point, 20, 20, Colour.Pink);
+            drawmanager.drawPickup(point, 60, 60, Colour.Pink);
         }
 
 

@@ -49,15 +49,129 @@ namespace RobotDroid {
                 // 2. At least one PickupCharacter
                 // 3. One MainCharacter
                 case 0:
-                    //elements.Add(new FollowEnemyCharacter(new Tuple<float, float>(10, 10), 50, 30, this, mainCharacter));
-                    //elements.Add(new CircleEnemyCharacter(new Tuple<float, float>(300, 300), 50, 30, this, 100));
-                    
-
                     elements = new List<Ielement>();
-                    elements.Add(new VillainCharacter(new Tuple<float, float>(400, 300), 50, 1, this));
+                    elements.Add(new text(new Tuple<float, float>(440, 40), this, "Level 1"));
 
+                    elements.Add(new FollowEnemyCharacter(new Tuple<float, float>(10, 10), 50, 30, this, mainCharacter));
+                    elements.Add(new CircleEnemyCharacter(new Tuple<float, float>(300, 300), 50, 30, this, 100));                    
+                    elements.Add(new VillainCharacter(new Tuple<float, float>(400, 300), 50, 1, this));
                     elements.Add(new VillainCharacter(new Tuple<float, float>(600, 300), 50, 1, this));
                     elements.Add(new PickUpCharacter(new Tuple<float, float>(100, 300), 50, 1, this));
+
+                    elements.Add(new PickUpCharacter(new Tuple<float, float>(400, 300), 50, 1, this));
+                    elements.Add(new PickUpCharacter(new Tuple<float, float>(500, 300), 50, 1, this));
+                    elements.Add(new PickUpCharacter(new Tuple<float, float>(400, 300), 50, 1, this));
+                    elements.Add(new PickUpCharacter(new Tuple<float, float>(500, 300), 50, 1, this));
+
+                    //THE GAMEPAD
+                    elements.Add(new Button("left", new Tuple<float, float>(44, 1537), 120, 120, "links", new Tuple<int, int>(44, 1537), this, mainCharacter));
+                    elements.Add(new Button("right", new Tuple<float, float>(284, 1537), 120, 120, "links", new Tuple<int, int>(284, 1537), this, mainCharacter));
+                    elements.Add(new Button("up", new Tuple<float, float>(164, 1417), 120, 120, "links", new Tuple<int, int>(164, 1417), this, mainCharacter));
+                    elements.Add(new Button("down", new Tuple<float, float>(164, 1657), 120, 120, "links", new Tuple<int, int>(164, 1657), this, mainCharacter));
+                    elements.Add(new Button("upleft", new Tuple<float, float>(44, 1417), 100, 100, "links", new Tuple<int, int>(44, 1417), this, mainCharacter));
+                    elements.Add(new Button("downleft", new Tuple<float, float>(44, 1677), 100, 100, "links", new Tuple<int, int>(44, 1677), this, mainCharacter));
+                    elements.Add(new Button("upright", new Tuple<float, float>(304, 1417), 100, 100, "links", new Tuple<int, int>(304, 1417), this, mainCharacter));
+                    elements.Add(new Button("downright", new Tuple<float, float>(304, 1677), 100, 100, "links", new Tuple<int, int>(304, 1677), this, mainCharacter));
+
+                    elements.Add(new Button("shootleft", new Tuple<float, float>(676, 1537), 120, 120, "links", new Tuple<int, int>(676, 1537), this, mainCharacter));
+                    elements.Add(new Button("shootright", new Tuple<float, float>(916, 1537), 120, 120, "links", new Tuple<int, int>(916, 1537), this, mainCharacter));
+                    elements.Add(new Button("shootup", new Tuple<float, float>(796, 1417), 120, 120, "links", new Tuple<int, int>(796, 1417), this, mainCharacter));
+                    elements.Add(new Button("shootdown", new Tuple<float, float>(796, 1657), 120, 120, "links", new Tuple<int, int>(796, 1657), this, mainCharacter));
+                    elements.Add(new Button("shootupleft", new Tuple<float, float>(676, 1417), 100, 100, "links", new Tuple<int, int>(676, 1417), this, mainCharacter));
+                    elements.Add(new Button("shootdownleft", new Tuple<float, float>(676, 1657), 100, 100, "links", new Tuple<int, int>(676, 1677), this, mainCharacter));
+                    elements.Add(new Button("shootupright", new Tuple<float, float>(936, 1417), 100, 100, "links", new Tuple<int, int>(936, 1417), this, mainCharacter));
+                    elements.Add(new Button("shootdownright", new Tuple<float, float>(936, 1677), 100, 100, "links", new Tuple<int, int>(936, 1677), this, mainCharacter));
+                    elements.Add(mainCharacter);
+                    break;
+                case 1:
+                    elements = new List<Ielement>();
+                    elements.Add(new text(new Tuple<float, float>(440, 40), this, "Level 2"));
+
+                    elements.Add(new FollowEnemyCharacter(new Tuple<float, float>(10, 10), 50, 30, this, mainCharacter));
+                    elements.Add(new CircleEnemyCharacter(new Tuple<float, float>(300, 300), 50, 30, this, 100));
+                    elements.Add(new VillainCharacter(new Tuple<float, float>(400, 300), 50, 1, this));
+                    elements.Add(new VillainCharacter(new Tuple<float, float>(600, 300), 50, 1, this));
+                    elements.Add(new PickUpCharacter(new Tuple<float, float>(100, 300), 50, 1, this));
+                    elements.Add(new PickUpCharacter(new Tuple<float, float>(400, 300), 50, 1, this));
+                    elements.Add(new PickUpCharacter(new Tuple<float, float>(500, 300), 50, 1, this));
+                    elements.Add(new CircleEnemyCharacter(new Tuple<float, float>(300, 300), 50, 30, this, 100));
+
+                    elements.Add(new PickUpCharacter(new Tuple<float, float>(400, 300), 50, 1, this));
+                    elements.Add(new PickUpCharacter(new Tuple<float, float>(500, 300), 50, 1, this));
+                    elements.Add(new PickUpCharacter(new Tuple<float, float>(400, 300), 50, 1, this));
+                    elements.Add(new PickUpCharacter(new Tuple<float, float>(500, 300), 50, 1, this));
+
+
+                    elements.Add(new Button("left", new Tuple<float, float>(44, 1537), 120, 120, "links", new Tuple<int, int>(44, 1537), this, mainCharacter));
+                    elements.Add(new Button("right", new Tuple<float, float>(284, 1537), 120, 120, "links", new Tuple<int, int>(284, 1537), this, mainCharacter));
+                    elements.Add(new Button("up", new Tuple<float, float>(164, 1417), 120, 120, "links", new Tuple<int, int>(164, 1417), this, mainCharacter));
+                    elements.Add(new Button("down", new Tuple<float, float>(164, 1657), 120, 120, "links", new Tuple<int, int>(164, 1657), this, mainCharacter));
+                    elements.Add(new Button("upleft", new Tuple<float, float>(44, 1417), 100, 100, "links", new Tuple<int, int>(44, 1417), this, mainCharacter));
+                    elements.Add(new Button("downleft", new Tuple<float, float>(44, 1677), 100, 100, "links", new Tuple<int, int>(44, 1677), this, mainCharacter));
+                    elements.Add(new Button("upright", new Tuple<float, float>(304, 1417), 100, 100, "links", new Tuple<int, int>(304, 1417), this, mainCharacter));
+                    elements.Add(new Button("downright", new Tuple<float, float>(304, 1677), 100, 100, "links", new Tuple<int, int>(304, 1677), this, mainCharacter));
+
+                    elements.Add(new Button("shootleft", new Tuple<float, float>(676, 1537), 120, 120, "links", new Tuple<int, int>(676, 1537), this, mainCharacter));
+                    elements.Add(new Button("shootright", new Tuple<float, float>(916, 1537), 120, 120, "links", new Tuple<int, int>(916, 1537), this, mainCharacter));
+                    elements.Add(new Button("shootup", new Tuple<float, float>(796, 1417), 120, 120, "links", new Tuple<int, int>(796, 1417), this, mainCharacter));
+                    elements.Add(new Button("shootdown", new Tuple<float, float>(796, 1657), 120, 120, "links", new Tuple<int, int>(796, 1657), this, mainCharacter));
+                    elements.Add(new Button("shootupleft", new Tuple<float, float>(676, 1417), 100, 100, "links", new Tuple<int, int>(676, 1417), this, mainCharacter));
+                    elements.Add(new Button("shootdownleft", new Tuple<float, float>(676, 1657), 100, 100, "links", new Tuple<int, int>(676, 1677), this, mainCharacter));
+                    elements.Add(new Button("shootupright", new Tuple<float, float>(936, 1417), 100, 100, "links", new Tuple<int, int>(936, 1417), this, mainCharacter));
+                    elements.Add(new Button("shootdownright", new Tuple<float, float>(936, 1677), 100, 100, "links", new Tuple<int, int>(936, 1677), this, mainCharacter));
+                    elements.Add(mainCharacter);
+                    break;
+                case 2:
+                    elements = new List<Ielement>();
+                    elements.Add(new text(new Tuple<float, float>(440, 40), this, "Level 3"));
+
+                    elements.Add(new PickUpCharacter(new Tuple<float, float>(400, 300), 50, 1, this));
+                    elements.Add(new PickUpCharacter(new Tuple<float, float>(500, 300), 50, 1, this));
+                    elements.Add(new PickUpCharacter(new Tuple<float, float>(400, 300), 50, 1, this));
+                    elements.Add(new PickUpCharacter(new Tuple<float, float>(500, 300), 50, 1, this));
+
+                    elements.Add(new CircleEnemyCharacter(new Tuple<float, float>(300, 300), 50, 30, this, 100));
+                    elements.Add(new FollowEnemyCharacter(new Tuple<float, float>(10, 10), 50, 30, this, mainCharacter));
+                    elements.Add(new CircleEnemyCharacter(new Tuple<float, float>(300, 300), 50, 30, this, 100));
+                    elements.Add(new VillainCharacter(new Tuple<float, float>(400, 300), 50, 1, this));
+                    elements.Add(new VillainCharacter(new Tuple<float, float>(600, 300), 50, 1, this));
+                    elements.Add(new PickUpCharacter(new Tuple<float, float>(100, 300), 50, 1, this));
+                    elements.Add(new PickUpCharacter(new Tuple<float, float>(400, 300), 50, 1, this));
+                    elements.Add(new PickUpCharacter(new Tuple<float, float>(500, 300), 50, 1, this));
+                    elements.Add(new CircleEnemyCharacter(new Tuple<float, float>(300, 300), 50, 30, this, 100));
+
+
+                    elements.Add(new Button("left", new Tuple<float, float>(44, 1537), 120, 120, "links", new Tuple<int, int>(44, 1537), this, mainCharacter));
+                    elements.Add(new Button("right", new Tuple<float, float>(284, 1537), 120, 120, "links", new Tuple<int, int>(284, 1537), this, mainCharacter));
+                    elements.Add(new Button("up", new Tuple<float, float>(164, 1417), 120, 120, "links", new Tuple<int, int>(164, 1417), this, mainCharacter));
+                    elements.Add(new Button("down", new Tuple<float, float>(164, 1657), 120, 120, "links", new Tuple<int, int>(164, 1657), this, mainCharacter));
+                    elements.Add(new Button("upleft", new Tuple<float, float>(44, 1417), 100, 100, "links", new Tuple<int, int>(44, 1417), this, mainCharacter));
+                    elements.Add(new Button("downleft", new Tuple<float, float>(44, 1677), 100, 100, "links", new Tuple<int, int>(44, 1677), this, mainCharacter));
+                    elements.Add(new Button("upright", new Tuple<float, float>(304, 1417), 100, 100, "links", new Tuple<int, int>(304, 1417), this, mainCharacter));
+                    elements.Add(new Button("downright", new Tuple<float, float>(304, 1677), 100, 100, "links", new Tuple<int, int>(304, 1677), this, mainCharacter));
+
+                    elements.Add(new Button("shootleft", new Tuple<float, float>(676, 1537), 120, 120, "links", new Tuple<int, int>(676, 1537), this, mainCharacter));
+                    elements.Add(new Button("shootright", new Tuple<float, float>(916, 1537), 120, 120, "links", new Tuple<int, int>(916, 1537), this, mainCharacter));
+                    elements.Add(new Button("shootup", new Tuple<float, float>(796, 1417), 120, 120, "links", new Tuple<int, int>(796, 1417), this, mainCharacter));
+                    elements.Add(new Button("shootdown", new Tuple<float, float>(796, 1657), 120, 120, "links", new Tuple<int, int>(796, 1657), this, mainCharacter));
+                    elements.Add(new Button("shootupleft", new Tuple<float, float>(676, 1417), 100, 100, "links", new Tuple<int, int>(676, 1417), this, mainCharacter));
+                    elements.Add(new Button("shootdownleft", new Tuple<float, float>(676, 1657), 100, 100, "links", new Tuple<int, int>(676, 1677), this, mainCharacter));
+                    elements.Add(new Button("shootupright", new Tuple<float, float>(936, 1417), 100, 100, "links", new Tuple<int, int>(936, 1417), this, mainCharacter));
+                    elements.Add(new Button("shootdownright", new Tuple<float, float>(936, 1677), 100, 100, "links", new Tuple<int, int>(936, 1677), this, mainCharacter));
+                    elements.Add(mainCharacter);
+                    break;
+                case 3:
+                    elements = new List<Ielement>();
+                    elements.Add(new text(new Tuple<float, float>(440, 40), this, "Level 4"));
+
+                    elements.Add(new FollowEnemyCharacter(new Tuple<float, float>(10, 10), 50, 30, this, mainCharacter));
+                    elements.Add(new CircleEnemyCharacter(new Tuple<float, float>(300, 300), 50, 30, this, 100));
+                    elements.Add(new VillainCharacter(new Tuple<float, float>(400, 300), 50, 1, this));
+                    elements.Add(new VillainCharacter(new Tuple<float, float>(600, 300), 50, 1, this));
+                    elements.Add(new CircleEnemyCharacter(new Tuple<float, float>(300, 300), 50, 30, this, 100));
+
+                    elements.Add(new PickUpCharacter(new Tuple<float, float>(400, 300), 50, 1, this));
+
                     elements.Add(new Button("left", new Tuple<float, float>(44, 1537), 120, 120, "links", new Tuple<int, int>(44, 1537), this, mainCharacter));
                     elements.Add(new Button("right", new Tuple<float, float>(284, 1537), 120, 120, "links", new Tuple<int, int>(284, 1537), this, mainCharacter));
                     elements.Add(new Button("up", new Tuple<float, float>(164, 1417), 120, 120, "links", new Tuple<int, int>(164, 1417), this, mainCharacter));
@@ -76,31 +190,26 @@ namespace RobotDroid {
                     elements.Add(new Button("shootdownleft", new Tuple<float, float>(676, 1657), 100, 100, "links", new Tuple<int, int>(676, 1677), this, mainCharacter));
                     elements.Add(new Button("shootupright", new Tuple<float, float>(936, 1417), 100, 100, "links", new Tuple<int, int>(936, 1417), this, mainCharacter));
                     elements.Add(new Button("shootdownright", new Tuple<float, float>(936, 1677), 100, 100, "links", new Tuple<int, int>(936, 1677), this, mainCharacter));
-                    //elements.Add(new PickUpCharacter(new Tuple<float, float>(400, 300), 50, 1, this));
-                    //elements.Add(new PickUpCharacter(new Tuple<float, float>(500, 300), 50, 1, this));
                     elements.Add(mainCharacter);
                     break;
-                case 1:
+                case 4:
                     elements = new List<Ielement>();
-                    elements.Add(new Button("left", new Tuple<float, float>(44, 1537), 120, 120, "links", new Tuple<int, int>(44, 1537), this, mainCharacter));
-                    elements.Add(new Button("right", new Tuple<float, float>(284, 1537), 120, 120, "links", new Tuple<int, int>(284, 1537), this, mainCharacter));
-                    elements.Add(new Button("up", new Tuple<float, float>(164, 1417), 120, 120, "links", new Tuple<int, int>(164, 1417), this, mainCharacter));
-                    elements.Add(new Button("down", new Tuple<float, float>(164, 1657), 120, 120, "links", new Tuple<int, int>(164, 1657), this, mainCharacter));
-                    elements.Add(new Button("upleft", new Tuple<float, float>(44, 1417), 100, 100, "links", new Tuple<int, int>(44, 1417), this, mainCharacter));
-                    elements.Add(new Button("downleft", new Tuple<float, float>(44, 1677), 100, 100, "links", new Tuple<int, int>(44, 1677), this, mainCharacter));
-                    elements.Add(new Button("upright", new Tuple<float, float>(304, 1417), 100, 100, "links", new Tuple<int, int>(304, 1417), this, mainCharacter));
-                    elements.Add(new Button("downright", new Tuple<float, float>(304, 1677), 100, 100, "links", new Tuple<int, int>(304, 1677), this, mainCharacter));
+                    elements.Add(new text(new Tuple<float, float>(440, 40), this, "Level 5"));
 
-                    elements.Add(new Button("shootleft", new Tuple<float, float>(676, 1537), 120, 120, "links", new Tuple<int, int>(676, 1537), this, mainCharacter));
-                    elements.Add(new Button("shootright", new Tuple<float, float>(916, 1537), 120, 120, "links", new Tuple<int, int>(916, 1537), this, mainCharacter));
-                    elements.Add(new Button("shootup", new Tuple<float, float>(796, 1417), 120, 120, "links", new Tuple<int, int>(796, 1417), this, mainCharacter));
-                    elements.Add(new Button("shootdown", new Tuple<float, float>(796, 1657), 120, 120, "links", new Tuple<int, int>(796, 1657), this, mainCharacter));
+                    elements.Add(new FollowEnemyCharacter(new Tuple<float, float>(10, 10), 50, 30, this, mainCharacter));
+                    elements.Add(new CircleEnemyCharacter(new Tuple<float, float>(300, 300), 50, 30, this, 100));
+                    elements.Add(new VillainCharacter(new Tuple<float, float>(400, 300), 50, 1, this));
+                    elements.Add(new VillainCharacter(new Tuple<float, float>(600, 300), 50, 1, this));
                     elements.Add(new PickUpCharacter(new Tuple<float, float>(100, 300), 50, 1, this));
+                    elements.Add(new PickUpCharacter(new Tuple<float, float>(400, 300), 50, 1, this));
+                    elements.Add(new PickUpCharacter(new Tuple<float, float>(500, 300), 50, 1, this));
                     elements.Add(new CircleEnemyCharacter(new Tuple<float, float>(300, 300), 50, 30, this, 100));
-                    elements.Add(mainCharacter);
-                    break;
-                case 2:
-                    elements = new List<Ielement>();
+
+                    elements.Add(new PickUpCharacter(new Tuple<float, float>(400, 300), 50, 1, this));
+                    elements.Add(new PickUpCharacter(new Tuple<float, float>(500, 300), 50, 1, this));
+                    elements.Add(new PickUpCharacter(new Tuple<float, float>(400, 300), 50, 1, this));
+                    elements.Add(new PickUpCharacter(new Tuple<float, float>(500, 300), 50, 1, this));
+
                     elements.Add(new Button("left", new Tuple<float, float>(44, 1537), 120, 120, "links", new Tuple<int, int>(44, 1537), this, mainCharacter));
                     elements.Add(new Button("right", new Tuple<float, float>(284, 1537), 120, 120, "links", new Tuple<int, int>(284, 1537), this, mainCharacter));
                     elements.Add(new Button("up", new Tuple<float, float>(164, 1417), 120, 120, "links", new Tuple<int, int>(164, 1417), this, mainCharacter));
@@ -110,17 +219,22 @@ namespace RobotDroid {
                     elements.Add(new Button("upright", new Tuple<float, float>(304, 1417), 100, 100, "links", new Tuple<int, int>(304, 1417), this, mainCharacter));
                     elements.Add(new Button("downright", new Tuple<float, float>(304, 1677), 100, 100, "links", new Tuple<int, int>(304, 1677), this, mainCharacter));
 
+
                     elements.Add(new Button("shootleft", new Tuple<float, float>(676, 1537), 120, 120, "links", new Tuple<int, int>(676, 1537), this, mainCharacter));
                     elements.Add(new Button("shootright", new Tuple<float, float>(916, 1537), 120, 120, "links", new Tuple<int, int>(916, 1537), this, mainCharacter));
                     elements.Add(new Button("shootup", new Tuple<float, float>(796, 1417), 120, 120, "links", new Tuple<int, int>(796, 1417), this, mainCharacter));
                     elements.Add(new Button("shootdown", new Tuple<float, float>(796, 1657), 120, 120, "links", new Tuple<int, int>(796, 1657), this, mainCharacter));
-                    elements.Add(new PickUpCharacter(new Tuple<float, float>(150, 1), 50, 1, this));
-                    elements.Add(new CircleEnemyCharacter(new Tuple<float, float>(300, 300), 50, 30, this, 100));
+                    elements.Add(new Button("shootupleft", new Tuple<float, float>(676, 1417), 100, 100, "links", new Tuple<int, int>(676, 1417), this, mainCharacter));
+                    elements.Add(new Button("shootdownleft", new Tuple<float, float>(676, 1657), 100, 100, "links", new Tuple<int, int>(676, 1677), this, mainCharacter));
+                    elements.Add(new Button("shootupright", new Tuple<float, float>(936, 1417), 100, 100, "links", new Tuple<int, int>(936, 1417), this, mainCharacter));
+                    elements.Add(new Button("shootdownright", new Tuple<float, float>(936, 1677), 100, 100, "links", new Tuple<int, int>(936, 1677), this, mainCharacter));
                     elements.Add(mainCharacter);
                     break;
+
                 case 10:
                     elements = new List<Ielement>();
-                    elements.Add(new text(new Tuple<float, float>(350, 200), this, "Top 5 Highscores"));
+                    elements.Add(new text(new Tuple<float, float>(350, 200), this, "GAME OVER"));
+                    elements.Add(new text(new Tuple<float, float>(350, 250), this, "Top 5 Highscores"));
                     break;
                     // todo add more characters when finished making those
             }
