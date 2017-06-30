@@ -16,6 +16,7 @@ namespace RobotParty
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "content";
+            udphandler = new UdpHandler(23023);
             level = 0;
         }
         IinputManager inputmanager;
@@ -31,8 +32,7 @@ namespace RobotParty
             this.IsMouseVisible = true;
             screenmanager = new ScreenManager();
             screenmanager.Create(0);
-            //udpmanager = new UdpHandler(23023);
-            inputmanager = new PCInputAdapter();
+            inputmanager = new PCInputAdapter(udphandler);
             collisioncalculator = new onCollision();
             updatevisitor = new UpdateVisitor(inputmanager, collisioncalculator);
         }
@@ -40,7 +40,6 @@ namespace RobotParty
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            this.udphandler = new UdpHandler(23023);
             drawmanager = new MonoGameAdapter(spriteBatch, Content, udphandler);
             drawvisitor = new DrawVisitor(drawmanager);
         }

@@ -24,7 +24,7 @@ namespace RobotParty
         bool listening;
         Thread listeningThread;
 
-        List<string> keys;
+        string keys;
 
         public UdpHandler(int port)
         {
@@ -65,15 +65,24 @@ namespace RobotParty
                 //Console.WriteLine("Waiting to receive");
                 Byte[] receiveBytes = udp.Receive(ref RemoteIpEndPoint);
                 string receiveString = Encoding.ASCII.GetString(receiveBytes);
-                Console.WriteLine(receiveString);
+                keys = keys + receiveString;
+                //Console.WriteLine(receiveString);
             }
         }
 
         public List<string> Getkeys()
         {
-            List<string> returnlist = keys;
-            keys.RemoveRange(0, returnlist.Count);
-            return returnlist;
+            List<string> returnkeyslist = new List<string>();
+            if (!string.IsNullOrEmpty(keys))
+            {
+                string returnkeys = keys;
+                keys.Remove(0, returnkeys.Length);
+                foreach (string keypress in keys.Split(','))
+                {
+                    returnkeyslist.Add(keypress);
+                }
+            }  
+            return returnkeyslist;
 
         }
 
@@ -82,93 +91,18 @@ namespace RobotParty
     class PCInputAdapter : IinputManager
     {
         List<string> keyslist;
+        UdpHandler udphandler;
+
+        public PCInputAdapter(UdpHandler udphandler)
+        {
+            this.udphandler = udphandler;
+        }
+
 
         public List<string> onInput()
         {
-            keyslist = new List<string>();
-            var key = Keyboard.GetState();
-            key.GetPressedKeys();
-
-            if (key.IsKeyDown(Keys.A))
-            {
-                keyslist.Add("A");
-            }
-            if (key.IsKeyDown(Keys.W))
-            {
-                keyslist.Add("W");
-            }
-            if (key.IsKeyDown(Keys.S))
-            {
-                keyslist.Add("S");
-            }
-            if (key.IsKeyDown(Keys.D))
-            {
-                keyslist.Add("D");
-            }
-
-            if (key.IsKeyDown(Keys.Right))
-            {
-                if (key.IsKeyDown(Keys.Up))
-                {
-                    keyslist.Add("UpRight");
-                }
-                else if (key.IsKeyDown(Keys.Down))
-                {
-                    keyslist.Add("DownRight");
-                }
-                else
-                {
-                    keyslist.Add("Right");
-                }
-            }
-
-            if (key.IsKeyDown(Keys.Left))
-            {
-                if (key.IsKeyDown(Keys.Up))
-                {
-                    keyslist.Add("UpLeft");
-                }
-                else if (key.IsKeyDown(Keys.Down))
-                {
-                    keyslist.Add("DownLeft");
-                }
-                else
-                {
-                    keyslist.Add("Left");
-                }
-            }
-
-            if (key.IsKeyDown(Keys.Up))
-            {
-                if (key.IsKeyDown(Keys.Right))
-                {
-                    keyslist.Add("UpRight");
-                }
-                else if (key.IsKeyDown(Keys.Left))
-                {
-                    keyslist.Add("UpLeft");
-                }
-                else { keyslist.Add("Up"); }
-            }
-
-            if (key.IsKeyDown(Keys.Down))
-            {
-                if (key.IsKeyDown(Keys.Right))
-                {
-                    keyslist.Add("DownRight");
-                }
-                else if (key.IsKeyDown(Keys.Left))
-                {
-                    keyslist.Add("DownLeft");
-                }
-                else
-                {
-                    keyslist.Add("Down");
-                }
-            }
-
-            return keyslist;
-
+            var keypresses = udphandler.Getkeys();
+            return keypresses;
         }
 
     }
