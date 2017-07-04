@@ -166,6 +166,8 @@ namespace RobotParty
         IonCollision collisioncalculator;
         List<Ielement> newlist = new List<Ielement>();
         List<Ielement> removelist = new List<Ielement>();
+        ProjectileFactory ProjectileFactory = new ProjectileFactory();
+
         float EnemyTimeCounter = 0.0f;
         float FriendlyTimeCounter = 1000.0f;
         float lastEnemyBullet;
@@ -203,35 +205,36 @@ namespace RobotParty
                 switch (character.RandomShot()) {
 
                     case 0:
-                        newlist.Add(new EnemyBullet(characterpos, new Tuple<float, float>(1, 0), screenmanager));
+                        newlist.Add(ProjectileFactory.Create(character, screenmanager, new Tuple<float, float>(1, 0), dt));
+                        
                         break;
                     case 1:
+                        newlist.Add(ProjectileFactory.Create(character, screenmanager, new Tuple<float, float>(1, 1), dt));
 
-                        newlist.Add(new EnemyBullet(characterpos, new Tuple<float, float>(1, 1), screenmanager));
                         break;
                     case 2:
+                        newlist.Add(ProjectileFactory.Create(character, screenmanager, new Tuple<float, float>(0, 1), dt));
 
-                        newlist.Add(new EnemyBullet(characterpos, new Tuple<float, float>(0, 1), screenmanager));
                         break;
                     case 3:
+                        newlist.Add(ProjectileFactory.Create(character, screenmanager, new Tuple<float, float>(-1, 0), dt));
 
-                        newlist.Add(new EnemyBullet(characterpos, new Tuple<float, float>(-1, 0), screenmanager));
                         break;
                     case 4:
+                        newlist.Add(ProjectileFactory.Create(character, screenmanager, new Tuple<float, float>(-1, 1), dt));
 
-                        newlist.Add(new EnemyBullet(characterpos, new Tuple<float, float>(-1, 1), screenmanager));
                         break;
                     case 5:
+                        newlist.Add(ProjectileFactory.Create(character, screenmanager, new Tuple<float, float>(0, -1), dt));
 
-                        newlist.Add(new EnemyBullet(characterpos, new Tuple<float, float>(0, -1), screenmanager));
                         break;
                     case 6:
+                        newlist.Add(ProjectileFactory.Create(character, screenmanager, new Tuple<float, float>(-1, -1), dt));
 
-                        newlist.Add(new EnemyBullet(characterpos, new Tuple<float, float>(-1, -1), screenmanager));
                         break;
                     case 7:
+                        newlist.Add(ProjectileFactory.Create(character, screenmanager, new Tuple<float, float>(1, -1), dt));
 
-                        newlist.Add(new EnemyBullet(characterpos, new Tuple<float, float>(1, -1), screenmanager));
                         break;
                       
                 }
@@ -242,8 +245,7 @@ namespace RobotParty
         // here we update maincharacter. check if health is below 0, check for any collisions with opponents, and check for key input and respond properly
         public void onMainCharacter(MainCharacter character, ScreenManager screenmanager, float dt)
         {
-            
-            if(character.health < 0) {
+            if(character.health == 0) {
                 Console.WriteLine("you lose");
                 removelist.Add(character);
             }
@@ -315,54 +317,45 @@ namespace RobotParty
 
                     if (el == "UpRight") {
 
-                        var directionX = 1;
-                        var directionY = -1;
-                        newlist.Add(new FriendlyBullet(new Tuple<float, float>(character.position.Item1 + 28, character.position.Item2 + 28), new Tuple<float, float>((int)(Math.Round(directionX + 1000 * dt / 1000)), (int)(Math.Round(directionY - 1000 * dt / 1000))), screenmanager));
+                        
+                        newlist.Add(ProjectileFactory.Create(character, screenmanager, new Tuple<float, float>((int)(Math.Round(1 + 1000 * dt / 1000)), (int)(Math.Round(-1 - 1000 * dt / 1000))), dt));
+
                         break;
                     }
 
                     if (el == "UpLeft") {
-                        var directionX = -1;
-                        var directionY = -1;
-                        newlist.Add(new FriendlyBullet(new Tuple<float, float>(character.position.Item1 + 28, character.position.Item2 + 28), new Tuple<float, float>((int)(Math.Round(directionX - 1000 * dt / 1000)), (int)(Math.Round(directionY - 1000 * dt / 1000))), screenmanager));
+                        newlist.Add(ProjectileFactory.Create(character, screenmanager, new Tuple<float, float>((int)(Math.Round(-1 - 1000 * dt / 1000)), (int)(Math.Round(-1 - 1000 * dt / 1000))), dt));
+
                         break;
                     }
 
                     if (el == "DownLeft") {
-                        var directionX = -1;
-                        var directionY = 1;
-                        newlist.Add(new FriendlyBullet(new Tuple<float, float>(character.position.Item1 + 28, character.position.Item2 + 28), new Tuple<float, float>((int)(Math.Round(directionX - 1000 * dt / 1000)), (int)(Math.Round(directionY + 1000 * dt / 1000))), screenmanager));
+                        newlist.Add(ProjectileFactory.Create(character, screenmanager, new Tuple<float, float>((int)(Math.Round(-1 - 1000 * dt / 1000)), (int)(Math.Round(1 + 1000 * dt / 1000))), dt));
                         break;
                     }
 
                     if (el == "DownRight") {
-                        var directionX = 1;
-                        var directionY = 1;
-                        newlist.Add(new FriendlyBullet(new Tuple<float, float>(character.position.Item1 + 28, character.position.Item2 + 28), new Tuple<float, float>((int)(Math.Round(directionX + 1000 * dt / 1000)), (int)(Math.Round(directionY + 1000 * dt / 1000))), screenmanager));
+                        newlist.Add(ProjectileFactory.Create(character, screenmanager, new Tuple<float, float>((int)(Math.Round(1 + 1000 * dt / 1000)), (int)(Math.Round(1 + 1000 * dt / 1000))), dt));
                         break;
                     }
                     if (el == "Up") {
-                        var directionX = 0;
-                        var directionY = -1;
-                        newlist.Add(new FriendlyBullet(new Tuple<float, float>(character.position.Item1 + 28, character.position.Item2 + 28), new Tuple<float, float>((int)(Math.Round(directionX * dt / 1000)), (int)(Math.Round(directionY - 1000 * dt / 1000))), screenmanager));
+                        newlist.Add(ProjectileFactory.Create(character, screenmanager, new Tuple<float, float>((int)(Math.Round(0 * dt / 1000)), (int)(Math.Round(-1 - 1000 * dt / 1000))), dt));
                         break;
                     }
                     if (el == "Down") {
-                        var directionX = 0;
-                        var directionY = 1;
-                        newlist.Add(new FriendlyBullet(new Tuple<float, float>(character.position.Item1 + 28, character.position.Item2 + 28), new Tuple<float, float>((int)(Math.Round(directionX * dt / 1000)), (int)(Math.Round(directionY + 1000 * dt / 1000))), screenmanager));
+                        newlist.Add(ProjectileFactory.Create(character, screenmanager, new Tuple<float, float>((int)(Math.Round(0 * dt / 1000)), (int)(Math.Round(1 + 1000 * dt / 1000))), dt));
+
                         break;
                     }
                     if (el == "Right") {
-                        var directionX = 1;
-                        var directionY = 0;
-                        newlist.Add(new FriendlyBullet(new Tuple<float, float>(character.position.Item1 + 28, character.position.Item2 + 28), new Tuple<float, float>((int)(Math.Round(directionX + 1000 * dt / 1000)), (int)(Math.Round(directionY * dt / 1000))), screenmanager));
+                        
+                        newlist.Add(ProjectileFactory.Create(character, screenmanager, new Tuple<float, float>((int)(Math.Round(1 + 1000 * dt / 1000)), (int)(Math.Round(0 * dt / 1000))), dt));
+
                         break;
                     }
                     if (el == "Left") {
-                        var directionX = -1;
-                        var directionY = 0;
-                        newlist.Add(new FriendlyBullet(new Tuple<float, float>(character.position.Item1 + 28, character.position.Item2 + 28), new Tuple<float, float>((int)(Math.Round(directionX - 1000 * dt / 1000)), (int)(Math.Round(directionY * dt / 1000))), screenmanager));
+                        newlist.Add(ProjectileFactory.Create(character, screenmanager, new Tuple<float, float>((int)(Math.Round(-1 - 1000 * dt / 1000)), (int)(Math.Round(0 * dt / 1000))), dt));
+
                         break;
                     }
                 }
@@ -425,13 +418,16 @@ namespace RobotParty
                     if(collisioncalculator.Collision(el, projectile)) {
                         screenmanager.score += 5;
                         removelist.Add(el);
+                        removelist.Add(projectile);
                         break;
                     }
                 }
                 else if (el is EnemyCharacter) {
                     if(collisioncalculator.Collision(el, projectile)) {
                         screenmanager.score += 15;
-                        removelist.Add(el);                        
+                        removelist.Add(el);
+                        removelist.Add(projectile);
+
                         break;
                     }
                 }

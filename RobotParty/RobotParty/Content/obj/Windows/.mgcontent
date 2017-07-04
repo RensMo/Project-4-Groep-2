@@ -4,8 +4,16 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
-    <File>C:/Users/Rens/Documents/HR/HR1617/OP4/Project App/Project-4-Groep-2/RobotParty/RobotParty/Content/white_pixel.png</File>
-    <File>C:/Users/Rens/Documents/HR/HR1617/OP4/Project App/Project-4-Groep-2/RobotParty/RobotParty/Content/MainCharacter.png</File>
-    <File>C:/Users/Rens/Documents/HR/HR1617/OP4/Project App/Project-4-Groep-2/RobotParty/RobotParty/Content/EnemyCharacter.png</File>
+    <File>C:/Users/Dani/Desktop/RobotParty/RobotParty/Content/white_pixel.png</File>
+    <File>C:/Users/Dani/Desktop/RobotParty/RobotParty/Content/MainCharacter.png</File>
+    <File>C:/Users/Dani/Desktop/RobotParty/RobotParty/Content/EnemyCharacter.png</File>
+    <File>C:/Users/Dani/Desktop/RobotParty/RobotParty/Content/VillainCharacter.png</File>
+    <File>C:/Users/Dani/Desktop/RobotParty/RobotParty/Content/spriteEC2.png</File>
+    <File>C:/Users/Dani/Desktop/RobotParty/RobotParty/Content/spriteEC3.png</File>
+    <File>C:/Users/Dani/Desktop/RobotParty/RobotParty/Content/spriteMC2.png</File>
+    <File>C:/Users/Dani/Desktop/RobotParty/RobotParty/Content/spriteMC3.png</File>
+    <File>C:/Users/Dani/Desktop/RobotParty/RobotParty/Content/SSJ.png</File>
+    <File>C:/Users/Dani/Desktop/RobotParty/RobotParty/Content/spriteVC2.png</File>
+    <File>C:/Users/Dani/Desktop/RobotParty/RobotParty/Content/spriteVC3.png</File>
   </SourceFiles>
 </SourceFileCollection>

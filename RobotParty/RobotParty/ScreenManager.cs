@@ -352,7 +352,19 @@ namespace RobotParty
 
     public class ProjectileFactory
     {
-        public void Create() { throw new NotImplementedException(); }
+        public Projectile Create(Character Character,ScreenManager ScreenManager,Tuple<float,float> direction, float dt) { 
+
+            if(Character is EnemyCharacter)
+            {
+                return new EnemyBullet(Character.position, direction, ScreenManager );
+            }
+
+            else 
+            {
+                return new FriendlyBullet(new Tuple<float, float>(Character.position.Item1 + 28, Character.position.Item2 + 28), direction,ScreenManager);
+            }
+
+        }
     }
 
     // projectile is an abstract class that describes behaviour of all projectiles
