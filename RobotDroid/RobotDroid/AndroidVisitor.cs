@@ -877,7 +877,7 @@ namespace RobotDroid
             var LivesPoint = new Microsoft.Xna.Framework.Point(0, 0);
             var ScorePoint = new Microsoft.Xna.Framework.Point(430, 0);
             var HealthPoint = new Microsoft.Xna.Framework.Point(875, 0);
-            drawmanager.drawText("health:" + MainCharacter.health.ToString(), HealthPoint, 10, Colour.White);
+            drawmanager.drawText("Health:" + MainCharacter.health.ToString(), HealthPoint, 10, Colour.White);
             drawmanager.drawText("Score:" + ScreenManager.score.ToString(), ScorePoint, 10, Colour.White);
             drawmanager.drawText("Lives left:" + ScreenManager.lives.ToString(), LivesPoint, 10, Colour.White);
             foreach (text text in ScreenManager.Top5Score)

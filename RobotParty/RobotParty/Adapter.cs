@@ -110,6 +110,7 @@ namespace RobotParty
         void drawImage();
         void drawMainCharacter(Point top_left_coordinate, float width, float height, Colour color);
         void drawEnemy(Point top_left_coordinate, float width, float height, Colour color, int index);
+
     }
 
     public enum Colour { White, Black, Blue, Pink };
@@ -126,6 +127,7 @@ namespace RobotParty
         Texture2D[] spritesmain;
         Texture2D[] spritesvillain;
         Texture2D white_pixel;
+        Texture2D Pickup;
         SpriteFont default_font;
         Random rnd = new Random();
         int b;

@@ -9,6 +9,7 @@ namespace RobotParty
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        Texture2D bg;
         public int level;
 
         public Game1()
@@ -37,6 +38,7 @@ namespace RobotParty
 
         protected override void LoadContent()
         {
+            bg = Content.Load<Texture2D>("stara");
             spriteBatch = new SpriteBatch(GraphicsDevice);
             drawmanager = new MonoGameAdapter(spriteBatch, Content);
             drawvisitor = new DrawVisitor(drawmanager);
@@ -57,6 +59,7 @@ namespace RobotParty
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             spriteBatch.Begin();
+            spriteBatch.Draw(bg, new Rectangle(0, 0, 800, 480), Color.White);
             screenmanager.Draw(drawvisitor, 0f);
             spriteBatch.End();
             base.Draw(gameTime);

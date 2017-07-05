@@ -541,7 +541,7 @@ namespace RobotParty
                             while (rdr.Read())
                             {
                                 score = rdr.GetInt32("score");
-                                screenmanager.Top5Score.Add(new text(new Tuple<float, float>(350, 220 + (scoreindex * 20)), screenmanager,"Score "+ scoreindex.ToString()+ ":  "+ score.ToString()));
+                                screenmanager.Top5Score.Add(new text(new Tuple<float, float>(365, 170 + (scoreindex * 40)), screenmanager,"Score "+ scoreindex.ToString()+ ":  "+ score.ToString()));
                                 scoreindex += 1;
                             }
                             cmd.ExecuteNonQuery();
@@ -642,12 +642,12 @@ namespace RobotParty
 
         public void onScreenmanager(ScreenManager ScreenManager, float dt,MainCharacter MainCharacter)
         {
-            var LivesPoint = new Microsoft.Xna.Framework.Point(0, 0);
-            var ScorePoint = new Microsoft.Xna.Framework.Point(375, 0);
-            var HealthPoint = new Microsoft.Xna.Framework.Point(200, 0);
-            drawmanager.drawText("health:" + MainCharacter.health.ToString(), HealthPoint, 5, Colour.Black);
-            drawmanager.drawText("Score:" + ScreenManager.score.ToString(), ScorePoint, 5, Colour.Black);
-            drawmanager.drawText("Lives left:" + ScreenManager.lives.ToString(), LivesPoint, 5, Colour.Black);
+            var LivesPoint = new Microsoft.Xna.Framework.Point(2, 0);
+            var ScorePoint = new Microsoft.Xna.Framework.Point(370, 0);
+            var HealthPoint = new Microsoft.Xna.Framework.Point(725, 0);
+            drawmanager.drawText("Health:" + MainCharacter.health.ToString(), HealthPoint, 5, Colour.White);
+            drawmanager.drawText("Score:" + ScreenManager.score.ToString(), ScorePoint, 5, Colour.White);
+            drawmanager.drawText("Lives left:" + ScreenManager.lives.ToString(), LivesPoint, 5, Colour.White);
             foreach(text text in ScreenManager.Top5Score)
             {
                 text.Draw(this, dt);
@@ -659,7 +659,7 @@ namespace RobotParty
 
         public void onText(text text, ScreenManager screenmanager) {
             var point = new Microsoft.Xna.Framework.Point((int)Math.Round(text.getPos().Item1), (int)Math.Round(text.getPos().Item2));
-            drawmanager.drawText(text.Text, point, 50, Colour.Black);
+            drawmanager.drawText(text.Text, point, 50, Colour.White);
         }
 
         public void onVillainCharacter(VillainCharacter character, ScreenManager screenmanager, float dt, int index)

@@ -40,61 +40,143 @@ namespace RobotParty
                 // 2. At least one PickupCharacter
                 // 3. One MainCharacter
                 case 0:
-                    //elements.Add(new FollowEnemyCharacter(new Tuple<float, float>(10, 10), 50, 30, this, mainCharacter));
-                    //elements.Add(new CircleEnemyCharacter(new Tuple<float, float>(300, 300), 50, 30, this, 100));
-                    //elements.Add(new VillainCharacter(new Tuple<float, float>(400, 300), 50, 1, this));
-
                     elements = new List<Ielement>();
-                    
-                    elements.Add(new FollowEnemyCharacter(new Tuple<float, float>(100, 10), 50, 30, this, mainCharacter));
-                    elements.Add(new FollowEnemyCharacter(new Tuple<float, float>(10, 100), 50, 30, this, mainCharacter));
-                    elements.Add(new FollowEnemyCharacter(new Tuple<float, float>(50, 10), 50, 30, this, mainCharacter));
-                    elements.Add(new FollowEnemyCharacter(new Tuple<float, float>(10, 50), 50, 30, this, mainCharacter));
-                    elements.Add(new FollowEnemyCharacter(new Tuple<float, float>(100, 300), 50, 30, this, mainCharacter));
-                    elements.Add(new FollowEnemyCharacter(new Tuple<float, float>(150, 10), 50, 30, this, mainCharacter));
-                    elements.Add(new FollowEnemyCharacter(new Tuple<float, float>(10, 102), 50, 30, this, mainCharacter));
-                    elements.Add(new FollowEnemyCharacter(new Tuple<float, float>(300, 300), 50, 30, this, mainCharacter));
-                    elements.Add(new FollowEnemyCharacter(new Tuple<float, float>(10, 250), 50, 30, this, mainCharacter));
-                    elements.Add(new FollowEnemyCharacter(new Tuple<float, float>(50, 150), 50, 30, this, mainCharacter));
-                    elements.Add(new FollowEnemyCharacter(new Tuple<float, float>(0, 50), 50, 30, this, mainCharacter));
-                    elements.Add(new FollowEnemyCharacter(new Tuple<float, float>(500, 300), 50, 30, this, mainCharacter));
-                    elements.Add(new FollowEnemyCharacter(new Tuple<float, float>(150, 400), 50, 30, this, mainCharacter));
-                    
-                    elements.Add(new FollowEnemyCharacter(new Tuple<float, float>(250, 102), 50, 30, this, mainCharacter));
-                    
-                    elements.Add(new CircleEnemyCharacter(new Tuple<float, float>(300, 300), 50, 30, this, 100));
-                    elements.Add(new CircleEnemyCharacter(new Tuple<float, float>(310, 310), 50, 30, this, 100));
-                    elements.Add(new CircleEnemyCharacter(new Tuple<float, float>(320, 320), 50, 30, this, 100));
-                    elements.Add(new CircleEnemyCharacter(new Tuple<float, float>(330, 330), 50, 30, this, 100));
-                    elements.Add(new CircleEnemyCharacter(new Tuple<float, float>(340, 340), 50, 30, this, 100));
-                    
-                    elements.Add(new VillainCharacter(new Tuple<float, float>(300, 300), 50, 1, this));
-                    elements.Add(new VillainCharacter(new Tuple<float, float>(200, 300), 50, 1, this));
-                    elements.Add(new VillainCharacter(new Tuple<float, float>(100, 300), 50, 1, this));
-                    elements.Add(new VillainCharacter(new Tuple<float, float>(500, 300), 50, 1, this));
-                    elements.Add(new VillainCharacter(new Tuple<float, float>(400, 300), 50, 1, this));
-                    elements.Add(new VillainCharacter(new Tuple<float, float>(400, 300), 50, 1, this));
+                    elements.Add(new text(new Tuple<float, float>(375, 20), this, "Level 1"));
 
-                    elements.Add(new PickUpCharacter(new Tuple<float, float>(300, 300), 50, 1, this));
-                    //elements.Add(new PickUpCharacter(new Tuple<float, float>(400, 300), 50, 1, this));
-                    //elements.Add(new PickUpCharacter(new Tuple<float, float>(500, 300), 50, 1, this));
+                    elements.Add(new FollowEnemyCharacter(new Tuple<float, float>(618, 364), 50, 30, this, mainCharacter));
+                    elements.Add(new FollowEnemyCharacter(new Tuple<float, float>(208, 140), 50, 30, this, mainCharacter));
+                    elements.Add(new VillainCharacter(new Tuple<float, float>(635, 157), 50, 1, this));
+                    elements.Add(new VillainCharacter(new Tuple<float, float>(473, 266), 50, 1, this));
+
+
+                    elements.Add(new PickUpCharacter(new Tuple<float, float>(206, 399), 50, 1, this));
+                    elements.Add(new PickUpCharacter(new Tuple<float, float>(365, 264), 50, 1, this));
+                    elements.Add(new PickUpCharacter(new Tuple<float, float>(559, 190), 50, 1, this));
+                    elements.Add(new PickUpCharacter(new Tuple<float, float>(618, 364), 50, 1, this));
+
                     elements.Add(mainCharacter);
                     break;
                 case 1:
                     elements = new List<Ielement>();
-                    elements.Add(new PickUpCharacter(new Tuple<float, float>(100, 300), 50, 1, this));
-                    elements.Add(new CircleEnemyCharacter(new Tuple<float, float>(300, 300), 50, 30, this, 100));
+                    elements.Add(new text(new Tuple<float, float>(372, 20), this, "Level 2"));
+
+                    elements.Add(new FollowEnemyCharacter(new Tuple<float, float>(654, 220), 50, 30, this, mainCharacter));
+                    elements.Add(new FollowEnemyCharacter(new Tuple<float, float>(411, 252), 50, 30, this, mainCharacter));
+                    elements.Add(new FollowEnemyCharacter(new Tuple<float, float>(203, 266), 50, 30, this, mainCharacter));
+                    elements.Add(new CircleEnemyCharacter(new Tuple<float, float>(565, 165), 50, 30, this, 100));
+                    elements.Add(new VillainCharacter(new Tuple<float, float>(289, 356), 50, 1, this));
+                    elements.Add(new VillainCharacter(new Tuple<float, float>(452, 229), 50, 1, this));
+                    elements.Add(new CircleEnemyCharacter(new Tuple<float, float>(354, 239), 50, 30, this, 100));
+
+                    elements.Add(new PickUpCharacter(new Tuple<float, float>(520, 257), 50, 1, this));
+                    elements.Add(new PickUpCharacter(new Tuple<float, float>(644, 388), 50, 1, this));
+                    elements.Add(new PickUpCharacter(new Tuple<float, float>(95, 281), 50, 1, this));
+                    elements.Add(new PickUpCharacter(new Tuple<float, float>(695, 99), 50, 1, this));
+                    elements.Add(new PickUpCharacter(new Tuple<float, float>(170, 340), 50, 1, this));
+
+
                     elements.Add(mainCharacter);
                     break;
                 case 2:
                     elements = new List<Ielement>();
-                    elements.Add(new PickUpCharacter(new Tuple<float, float>(150, 1), 50, 1, this));
-                    elements.Add(new CircleEnemyCharacter(new Tuple<float, float>(300, 300), 50, 30, this, 100));
+                    elements.Add(new text(new Tuple<float, float>(375, 20), this, "Level 3"));
+
+                    elements.Add(new PickUpCharacter(new Tuple<float, float>(607, 118), 50, 1, this));
+                    elements.Add(new PickUpCharacter(new Tuple<float, float>(601, 289), 50, 1, this));
+                    elements.Add(new PickUpCharacter(new Tuple<float, float>(412, 212), 50, 1, this));
+                    elements.Add(new PickUpCharacter(new Tuple<float, float>(88, 13), 50, 1, this));
+                    elements.Add(new PickUpCharacter(new Tuple<float, float>(272, 258), 50, 1, this));
+                    elements.Add(new PickUpCharacter(new Tuple<float, float>(289, 409), 50, 1, this));
+
+                    elements.Add(new CircleEnemyCharacter(new Tuple<float, float>(287, 306), 50, 30, this, 100));
+                    elements.Add(new FollowEnemyCharacter(new Tuple<float, float>(649, 246), 50, 30, this, mainCharacter));
+                    elements.Add(new FollowEnemyCharacter(new Tuple<float, float>(430, 374), 50, 30, this, mainCharacter));
+                    elements.Add(new FollowEnemyCharacter(new Tuple<float, float>(660, 390), 50, 30, this, mainCharacter));
+                    elements.Add(new FollowEnemyCharacter(new Tuple<float, float>(128, 344), 50, 30, this, mainCharacter));
+                    elements.Add(new CircleEnemyCharacter(new Tuple<float, float>(599, 220), 50, 30, this, 100));
+                    elements.Add(new VillainCharacter(new Tuple<float, float>(238, 241), 50, 1, this));
+                    elements.Add(new VillainCharacter(new Tuple<float, float>(198, 103), 50, 1, this));
+                    elements.Add(new VillainCharacter(new Tuple<float, float>(426, 347), 50, 1, this));
+                    elements.Add(new CircleEnemyCharacter(new Tuple<float, float>(598, 112), 50, 30, this, 100));
+
                     elements.Add(mainCharacter);
                     break;
+                case 3:
+                    elements = new List<Ielement>();
+                    elements.Add(new text(new Tuple<float, float>(375, 20), this, "Level 4"));
+
+                    elements.Add(new FollowEnemyCharacter(new Tuple<float, float>(259, 197), 50, 30, this, mainCharacter));
+                    elements.Add(new FollowEnemyCharacter(new Tuple<float, float>(253, 318), 50, 30, this, mainCharacter));
+                    elements.Add(new FollowEnemyCharacter(new Tuple<float, float>(570, 364), 50, 30, this, mainCharacter));
+                    elements.Add(new FollowEnemyCharacter(new Tuple<float, float>(230, 200), 50, 30, this, mainCharacter));
+                    elements.Add(new FollowEnemyCharacter(new Tuple<float, float>(210, 337), 50, 30, this, mainCharacter));
+                    elements.Add(new FollowEnemyCharacter(new Tuple<float, float>(411, 78), 50, 30, this, mainCharacter));
+                    elements.Add(new FollowEnemyCharacter(new Tuple<float, float>(578, 286), 50, 30, this, mainCharacter));
+                    elements.Add(new CircleEnemyCharacter(new Tuple<float, float>(321, 173), 50, 30, this, 100));
+                    elements.Add(new CircleEnemyCharacter(new Tuple<float, float>(489, 205), 50, 30, this, 100));
+                    elements.Add(new CircleEnemyCharacter(new Tuple<float, float>(533, 256), 50, 30, this, 100));
+                    elements.Add(new CircleEnemyCharacter(new Tuple<float, float>(364, 290), 50, 30, this, 100));
+                    elements.Add(new VillainCharacter(new Tuple<float, float>(585, 124), 50, 1, this));
+                    elements.Add(new VillainCharacter(new Tuple<float, float>(586, 342), 50, 1, this));
+                    elements.Add(new VillainCharacter(new Tuple<float, float>(393, 244), 50, 1, this));
+
+
+                    elements.Add(new PickUpCharacter(new Tuple<float, float>(626, 138), 50, 1, this));
+                    elements.Add(new PickUpCharacter(new Tuple<float, float>(214, 216), 50, 1, this));
+                    elements.Add(new PickUpCharacter(new Tuple<float, float>(377, 342), 50, 1, this));
+                    elements.Add(new PickUpCharacter(new Tuple<float, float>(437, 192), 50, 1, this));
+                    elements.Add(new PickUpCharacter(new Tuple<float, float>(685, 395), 50, 1, this));
+                    elements.Add(new PickUpCharacter(new Tuple<float, float>(151, 269), 50, 1, this));
+                    elements.Add(new PickUpCharacter(new Tuple<float, float>(494, 244), 50, 1, this));
+
+
+                    elements.Add(mainCharacter);
+                    break;
+                case 4:
+                    elements = new List<Ielement>();
+                    elements.Add(new text(new Tuple<float, float>(375, 20), this, "Level 5"));
+
+                    elements.Add(new FollowEnemyCharacter(new Tuple<float, float>(576, 178), 50, 30, this, mainCharacter));
+                    elements.Add(new FollowEnemyCharacter(new Tuple<float, float>(377, 238), 50, 30, this, mainCharacter));
+                    elements.Add(new FollowEnemyCharacter(new Tuple<float, float>(170, 266), 50, 30, this, mainCharacter));
+                    elements.Add(new FollowEnemyCharacter(new Tuple<float, float>(338, 397), 50, 30, this, mainCharacter));
+                    elements.Add(new FollowEnemyCharacter(new Tuple<float, float>(622, 111), 50, 30, this, mainCharacter));
+                    elements.Add(new FollowEnemyCharacter(new Tuple<float, float>(398, 183), 50, 30, this, mainCharacter));
+                    elements.Add(new FollowEnemyCharacter(new Tuple<float, float>(387, 312), 50, 30, this, mainCharacter));
+                    elements.Add(new CircleEnemyCharacter(new Tuple<float, float>(366, 234), 50, 30, this, 100));
+                    elements.Add(new CircleEnemyCharacter(new Tuple<float, float>(551, 261), 50, 30, this, 100));
+                    elements.Add(new CircleEnemyCharacter(new Tuple<float, float>(643, 228), 50, 30, this, 100));
+                    elements.Add(new CircleEnemyCharacter(new Tuple<float, float>(342, 227), 50, 30, this, 100));
+                    elements.Add(new CircleEnemyCharacter(new Tuple<float, float>(666, 224), 50, 30, this, 100));
+                    elements.Add(new CircleEnemyCharacter(new Tuple<float, float>(382, 290), 50, 30, this, 100));
+                    elements.Add(new CircleEnemyCharacter(new Tuple<float, float>(491, 250), 50, 30, this, 100));
+                    elements.Add(new CircleEnemyCharacter(new Tuple<float, float>(556, 206), 50, 30, this, 100));
+                    elements.Add(new VillainCharacter(new Tuple<float, float>(458, 278), 50, 1, this));
+                    elements.Add(new VillainCharacter(new Tuple<float, float>(172, 314), 50, 1, this));
+                    elements.Add(new VillainCharacter(new Tuple<float, float>(659, 399), 50, 1, this));
+                    elements.Add(new VillainCharacter(new Tuple<float, float>(538, 225), 50, 1, this));
+                    elements.Add(new VillainCharacter(new Tuple<float, float>(213, 237), 50, 1, this));
+
+
+                    elements.Add(new PickUpCharacter(new Tuple<float, float>(599, 191), 50, 1, this));
+                    elements.Add(new PickUpCharacter(new Tuple<float, float>(486, 345), 50, 1, this));
+                    elements.Add(new PickUpCharacter(new Tuple<float, float>(291, 345), 50, 1, this));
+                    elements.Add(new PickUpCharacter(new Tuple<float, float>(384, 891), 50, 1, this));
+                    elements.Add(new PickUpCharacter(new Tuple<float, float>(675, 397), 50, 1, this));
+                    elements.Add(new PickUpCharacter(new Tuple<float, float>(122, 293), 50, 1, this));
+                    elements.Add(new PickUpCharacter(new Tuple<float, float>(414, 345), 50, 1, this));
+                    elements.Add(new PickUpCharacter(new Tuple<float, float>(516, 92), 50, 1, this));
+                    elements.Add(new PickUpCharacter(new Tuple<float, float>(737, 256), 50, 1, this));
+                    elements.Add(new PickUpCharacter(new Tuple<float, float>(54, 283), 50, 1, this));
+
+
+                    elements.Add(mainCharacter);
+                    break;
+
                 case 10:
                     elements = new List<Ielement>();
-                    elements.Add(new text(new Tuple<float, float>(350, 200), this, "press ESC to quit."));
+                    elements.Add(new text(new Tuple<float, float>(365, 100), this, "GAME OVER"));
+                    elements.Add(new text(new Tuple<float, float>(355, 150), this, "Top 5 Highscores"));
                     break;
                     // todo add more characters when finished making those
             }
